@@ -105,6 +105,7 @@ async function main() {
                   { property: 'la`A', visible: true },
                   { property: 'a`af', visible: true },
                   { property: 'ijjk', visible: true },
+                  { property: 'f9Vj', visible: true },
                 ],
                 table_wrap: true,
               },
@@ -130,6 +131,7 @@ async function main() {
                 'la`A': { name: 'Published', type: 'checkbox' },
                 'a`af': { name: 'Date', type: 'date' },
                 ijjk: { name: 'Authors', type: 'person' },
+                f9Vj: { name: 'Tags', type: 'multi_select' },
               },
               format: {
                 collection_page_properties: [
@@ -137,6 +139,7 @@ async function main() {
                   { property: 'la`A', visible: true },
                   { property: 'a`af', visible: true },
                   { property: 'ijjk', visible: true },
+                  { property: 'f9Vj', visible: true },
                 ],
               },
               parent_id: collectionId,
