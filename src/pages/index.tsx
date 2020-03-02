@@ -11,7 +11,7 @@ export default () => (
     <div className={sharedStyles.layout}>
       <div className="explanation">
         <p>
-          Get started by creating a new page in Notion and clicking the deploy
+          started by creating a new page in Notion and clicking the deploy
           button below. After you supply your token and the blog index id (the
           page's id in Notion) we will automatically create the table for you!
           See{' '}
