@@ -10,13 +10,15 @@ export default () => (
   <>
     <Header titlePre="Home" />
     <div className="container mx-auto grid">
-      <div className="col-gap-3 masonry">
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+      <div className="gap-3 masonry m-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="table-view.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">1. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
@@ -37,12 +39,14 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="avatar.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">2. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
@@ -62,12 +66,14 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="avatar.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">3. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
@@ -104,12 +110,14 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="avatar.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">4. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
@@ -130,12 +138,14 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="avatar.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">5. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
@@ -156,12 +166,14 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="avatar.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">6. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
@@ -181,12 +193,14 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="avatar.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">7. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
@@ -207,12 +221,14 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
-          <img
-            className="w-full"
-            src="avatar.png"
-            alt="Sunset in the mountains"
-          />
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+          <div className="p-3">
+            <img
+              className="w-full rounded-lg"
+              src="avatar.png"
+              alt="Sunset in the mountains"
+            />
+          </div>
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">8. The Coldest Sunset</div>
             <p className="text-gray-700 text-base">
