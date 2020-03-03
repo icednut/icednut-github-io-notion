@@ -4,25 +4,235 @@ import ExtLink from '../components/ext-link'
 import Features from '../components/features'
 import GitHub from '../components/svgs/github'
 import sharedStyles from '../styles/shared.module.css'
+import { CSSGrid, layout } from 'react-stonecutter'
 
 export default () => (
   <>
     <Header titlePre="Home" />
-    <div className={sharedStyles.layout}>
-      <div className="explanation">
-        <p>
-          started by creating a new page in Notion and clicking the deploy
-          button below. After you supply your token and the blog index id (the
-          page's id in Notion) we will automatically create the table for you!
-          See{' '}
-          <ExtLink href="https://github.com/ijjk/notion-blog#getting-blog-index-and-token">
-            here in the readme
-          </ExtLink>{' '}
-          for finding the new page's id. To get your token from Notion, login
-          and look for a cookie under www.notion.so with the name `token_v2`.
-          After finding your token and your blog's page id you should be good to
-          go!
-        </p>
+    <div className="container mx-auto grid">
+      <div className="col-gap-3 masonry">
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">1. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">2. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla!
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">3. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+              perferendis eaque, exercitationem praesentium nihil.Lorem ipsum
+              dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
+              nulla! Maiores et perferendis eaque, exercitationem praesentium
+              nihil.Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+              perferendis eaque, exercitationem praesentium nihil.Lorem ipsum
+              dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
+              nulla! Maiores et perferendis eaque, exercitationem praesentium
+              nihil.Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+              perferendis eaque, exercitationem praesentium nihil.
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">4. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">5. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">6. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla!
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">7. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
+        <div className="rounded overflow-hidden shadow-lg inline-block mb-4">
+          <img
+            className="w-full"
+            src="avatar.png"
+            alt="Sunset in the mountains"
+          />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">8. The Coldest Sunset</div>
+            <p className="text-gray-700 text-base">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptatibus quia, nulla! Maiores et perferendis eaque,
+              exercitationem praesentium nihil.
+            </p>
+          </div>
+          <div className="px-6 py-4">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #photography
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+              #travel
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+              #winter
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </>
