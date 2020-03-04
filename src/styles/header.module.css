@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
+
+.logo {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.header_menu {
+  font-family: 'Changa', sans-serif;
+}

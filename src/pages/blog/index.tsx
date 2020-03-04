@@ -47,7 +47,6 @@ export default ({ posts = [] }) => {
     <>
       <Header titlePre="Blog" />
       <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-        <h1>블로그 글 목록</h1>
         {posts.length === 0 && (
           <p className={blogStyles.noPosts}>There are no posts yet</p>
         )}
