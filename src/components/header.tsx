@@ -29,22 +29,33 @@ export default ({ titlePre = '' }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
-      <div className="container mx-auto pt-12">
+      <div className="container mx-auto pt-12 mb-20">
         <img
-          src="wglee2.png"
+          src="/wglee2.png"
           alt="wglee"
           className="rounded-full mx-auto shadow"
           style={{ width: '142px' }}
         />
         <div className="flex justify-center my-3">
-          <span className="text-center text-2xl capitalize">
+          <span
+            className={
+              'text-center text-2xl font-bold capitalize ' + styles.logo
+            }
+          >
             Icednut's Space
           </span>
         </div>
         <div className="flex justify-center mt-3 mb-8">
           {navItems.map(({ label, page }) => (
             <Link href={page}>
-              <a className="px-5 hover:font-bold">{label}</a>
+              <a
+                className={
+                  'text-gray-700 px-5 text-sm font-light hover:font-bold ' +
+                  styles.header_menu
+                }
+              >
+                {label}
+              </a>
             </Link>
           ))}
         </div>

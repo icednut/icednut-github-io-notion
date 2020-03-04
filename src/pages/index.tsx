@@ -10,8 +10,8 @@ export default () => (
   <>
     <Header titlePre="Home" />
     <div className="container mx-auto grid">
-      <div className="gap-3 masonry m-4">
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+      <div className="gap-8 masonry">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"
@@ -39,7 +39,7 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"
@@ -66,7 +66,7 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"
@@ -110,7 +110,7 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"
@@ -138,7 +138,7 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"
@@ -166,7 +166,7 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"
@@ -193,7 +193,7 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"
@@ -221,7 +221,7 @@ export default () => (
             </span>
           </div>
         </div>
-        <div className="bg-gray-200 rounded-lg overflow-hidden shadow-md inline-block mb-4">
+        <div className="bg-gray-200 rounded-lg overflow-hidden shadow inline-block mb-4">
           <div className="p-3">
             <img
               className="w-full rounded-lg"

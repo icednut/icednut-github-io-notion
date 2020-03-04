@@ -1,11 +1,13 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css?family=Poor+Story&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap');
 
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
   .masonry {
-    column-count: 4;
+    column-count: 3;
   }
 }
 
@@ -21,4 +23,9 @@
   .masonry {
     column-count: 2;
   }
+}
+
+body {
+  /* font-family: 'Poor Story', cursive; */
+  font-family: 'Noto Serif KR', serif;
 }
