@@ -8,6 +8,7 @@ import { getBlogLink, getDateStr, postIsReady } from '../../lib/blog-helpers'
 import { textBlock } from '../../lib/notion/renderers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
+import { url } from 'inspector'
 
 export async function unstable_getStaticProps() {
   const postsTable = await getBlogIndex()
@@ -47,42 +48,92 @@ export default ({ posts = [] }) => {
   return (
     <>
       <Header titlePre="Blog" />
-      <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-        {posts.length === 0 && (
-          <p className={blogStyles.noPosts}>There are no posts yet</p>
-        )}
-        {posts.map(post => {
-          return (
-            <div className={blogStyles.postPreview} key={post.Slug}>
-              <h3>
-                <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                  <a>{post.Page}</a>
-                </Link>
-              </h3>
-              {post.Authors.length > 0 && (
-                <div className="authors">By: {post.Authors.join(' ')}</div>
-              )}
-              {post.Date && (
-                <div className="posted">Posted: {getDateStr(post.Date)}</div>
-              )}
-              <p>
-                {(!post.preview || post.preview.length === 0) &&
-                  'No preview available'}
-                {(post.preview || []).map((block, idx) =>
-                  textBlock(block, true, `${post.Slug}${idx}`)
-                )}
-              </p>
-              <div>
-                {post.Tags &&
-                  post.Tags.split(',').map(tag => (
-                    <div className="inline-block rounded-full py-2 px-4 mr-1 mt-1 bg-gray-400">
-                      #{tag}
+      <div className="container mx-auto grid grid-flow-col-dense">
+        <div className="gap-4 masonry">
+          {posts.length === 0 && (
+            <p className={blogStyles.noPosts}>There are no posts yet</p>
+          )}
+          {posts.map(post => {
+            return (
+              <div
+                className="relative rounded-lg overflow-hidden shadow inline-block mb-4"
+                key={post.Slug}
+              >
+                <>
+                  <div className="relative overflow-hidden">
+                    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
+                      <a className="group">
+                        <img
+                          className={
+                            'w-full rounded-t-lg transition-transform duration-500 transform hover:scale-125 ' +
+                            blogStyles.darkenImage
+                          }
+                          src="3.jpg"
+                          alt="Sunset in the mountains"
+                        />
+                        {/* <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-75 transition-color duration-500">
+                                    </div> */}
+                      </a>
+                    </Link>
+                  </div>
+                  <div className="px-6 py-4">
+                    <div className="text-center">
+                      <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
+                        <a
+                          className={
+                            'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white hover:border-teal-400 pb-px transition-colors duration-500'
+                          }
+                        >
+                          {post.Page}
+                        </a>
+                      </Link>
                     </div>
-                  ))}
+                    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
+                      <a>
+                        <p
+                          className={
+                            'text-gray-600 text-xs pt-2 pb-5 text-center'
+                          }
+                        >
+                          {post.Authors.length > 0 && (
+                            <span>{post.Authors.join(' ')}</span>
+                          )}
+                          <span> / </span>
+                          {post.Date && <span>{getDateStr(post.Date)}</span>}
+                        </p>
+                        <div>
+                          {(!post.preview || post.preview.length === 0) && (
+                            <p className="text-gray-400">
+                              No preview available
+                            </p>
+                          )}
+                          {(post.preview || []).map((block, idx) => (
+                            <p>
+                              textBlock(block, true, `${post.Slug}${idx}`)
+                            </p>
+                          ))}
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
+                  <div className="px-6 py-4">
+                    {post.Tags &&
+                      post.Tags.split(',').map(tag => (
+                        <span
+                          className={
+                            'inline-block rounded-full py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                            blogStyles.blogTag
+                          }
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                  </div>
+                </>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </>
   )

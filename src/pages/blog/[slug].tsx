@@ -74,7 +74,7 @@ const RenderPost = ({ post, redirect }) => {
   return (
     <>
       <Header titlePre={post.Page} />
-      <div className={blogStyles.post}>
+      <div className="container mx-auto">
         <h1>{post.Page || ''}</h1>
         {post.Authors.length > 0 && (
           <div className="authors">By: {post.Authors.join(' ')}</div>
@@ -255,7 +255,12 @@ const RenderPost = ({ post, redirect }) => {
         <div>
           {post.Tags &&
             post.Tags.split(',').map(tag => (
-              <div className="inline-block rounded-full py-2 px-4 mr-1 bg-gray-400">
+              <div
+                className={
+                  'inline-block rounded-full py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                  blogStyles.blogTag
+                }
+              >
                 #{tag}
               </div>
             ))}

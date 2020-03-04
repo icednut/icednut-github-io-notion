@@ -39,25 +39,30 @@ export default ({ titlePre = '' }) => {
         <div className="flex justify-center my-3">
           <span
             className={
-              'text-center text-2xl font-bold capitalize ' + styles.logo
+              'text-center text-2xl font-bold uppercase ' + styles.logo
             }
           >
             Icednut's Space
           </span>
         </div>
         <div className="flex justify-center mt-3 mb-8">
-          {navItems.map(({ label, page }) => (
-            <Link href={page}>
-              <a
-                className={
-                  'text-gray-700 px-5 text-sm font-light hover:font-bold ' +
-                  styles.header_menu
-                }
-              >
-                {label}
-              </a>
-            </Link>
-          ))}
+          {navItems.map(({ label, page }) => {
+            const menuColor =
+              page === pathname ? ' text-teal-400 ' : ' text-gray-700'
+            return (
+              <Link href={page}>
+                <a
+                  className={
+                    'hover:text-teal-400 px-5 text-sm font-light hover:font-bold ' +
+                    styles.header_menu +
+                    menuColor
+                  }
+                >
+                  {label}
+                </a>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </header>

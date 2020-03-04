@@ -1,8 +1,8 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import url('https://fonts.googleapis.com/css?family=Poor+Story&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR:400,700&display=swap&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
 
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
@@ -26,6 +26,5 @@
 }
 
 body {
-  /* font-family: 'Poor Story', cursive; */
   font-family: 'Noto Serif KR', serif;
 }
