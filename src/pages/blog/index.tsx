@@ -24,6 +24,7 @@ export async function unstable_getStaticProps() {
       for (const author of post.Authors) {
         authorsToGet.add(author)
       }
+      console.log('post', post)
       return post
     })
     .filter(Boolean)
@@ -71,6 +72,14 @@ export default ({ posts = [] }) => {
                   textBlock(block, true, `${post.Slug}${idx}`)
                 )}
               </p>
+              <div>
+                {post.Tags &&
+                  post.Tags.split(',').map(tag => (
+                    <div className="inline-block rounded-full py-2 px-4 mr-1 mt-1 bg-gray-400">
+                      #{tag}
+                    </div>
+                  ))}
+              </div>
             </div>
           )
         })}

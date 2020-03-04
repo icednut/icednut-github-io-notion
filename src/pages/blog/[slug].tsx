@@ -252,6 +252,14 @@ const RenderPost = ({ post, redirect }) => {
           }
           return toRender
         })}
+        <div>
+          {post.Tags &&
+            post.Tags.split(',').map(tag => (
+              <div className="inline-block rounded-full py-2 px-4 mr-1 bg-gray-400">
+                #{tag}
+              </div>
+            ))}
+        </div>
       </div>
     </>
   )
