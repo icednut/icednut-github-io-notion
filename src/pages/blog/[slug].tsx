@@ -78,25 +78,67 @@ const RenderPost = ({ post, redirect }) => {
         <div className="sticky top-0" style={{ zIndex: 9999 }}>
           <div
             className={
-              'absolute p-4 bg-gray-600 text-white ' +
+              'absolute p-2 bg-gray-600 text-white overflow-scroll ' +
               blogStyles.postPreviewList
             }
           >
-            목차
+            <svg
+              className="fill-current text-white w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
+            </svg>
+            <div className="pt-4">
+              {(post.content || []).map((block, blockIdx) => {
+                const { value } = block
+                const { type, properties, id, parent_id } = value
+                let toRender = []
+
+                const renderHeading = (additionalClass: string) => {
+                  toRender.push(
+                    <Heading key={id}>
+                      <div key={id} className={additionalClass}>
+                        {textBlock(properties.title, true, id)}
+                      </div>
+                    </Heading>
+                  )
+                }
+
+                switch (type) {
+                  case 'header':
+                    renderHeading('text-red-200 pl-2')
+                    break
+                  case 'sub_header':
+                    renderHeading('text-teal-200 pl-6')
+                    break
+                  case 'sub_sub_header':
+                    renderHeading('text-yellow-200 pl-10')
+                    break
+                }
+                return toRender
+              })}
+            </div>
           </div>
         </div>
         <div
           className="fixed shadow-2xl p-4 rounded-full text-xs"
           style={{ right: '26px', bottom: '29px' }}
         >
-          Top
+          <svg
+            className="cursor-pointer fill-current text-gray-600 w-6 h-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
+          </svg>
         </div>
 
-        <div className="bg-white shadow">
+        <div className="bg-white shadow m-3">
           <div id="post-title" className="relative">
             <div
               id="title-info"
-              className="absolute w-full text-center"
+              className="absolute w-full px-3 text-center"
               style={{
                 zIndex: 9998,
                 top: '50%',
@@ -117,7 +159,7 @@ const RenderPost = ({ post, redirect }) => {
             </div>
             <div
               id="title-info__dim"
-              className="absolute w-full h-full text-center bg-black opacity-50"
+              className="absolute w-full h-full text-center bg-black opacity-75"
             ></div>
             <img src="/3.jpg" className="w-full" />
           </div>
