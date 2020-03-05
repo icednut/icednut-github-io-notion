@@ -48,7 +48,7 @@ export default ({ posts = [] }) => {
   return (
     <>
       <Header titlePre="Blog" />
-      <div className="container mx-auto grid grid-flow-col-dense">
+      <div className="container mx-auto max-w-screen-lg grid grid-flow-col-dense">
         <div className="gap-4 masonry">
           {posts.length === 0 && (
             <p className={blogStyles.noPosts}>There are no posts yet</p>
@@ -56,15 +56,15 @@ export default ({ posts = [] }) => {
           {posts.map(post => {
             return (
               <div
-                className="relative rounded-lg bg-white shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 inline-block m-3"
+                className="relative bg-white shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 inline-block m-3"
                 key={post.Slug}
               >
-                <div className="relative overflow-hidden rounded-t-lg">
+                <div className="relative overflow-hidden">
                   <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
                     <a className="group">
                       <img
                         className={
-                          'w-full rounded-t-lg transition-transform duration-500 transform hover:scale-125 ' +
+                          'w-full transition-transform duration-500 transform hover:scale-125 ' +
                           blogStyles.darkenImage
                         }
                         src="3.jpg"
