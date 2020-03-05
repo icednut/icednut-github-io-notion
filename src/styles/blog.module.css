@@ -5,9 +5,9 @@
 }
 
 .postPreviewList {
-  left: -4rem;
-  @apply w-16;
-  @apply h-16;
+  left: -1.75rem;
+  @apply w-10;
+  @apply h-10;
   transition: width 0.5s, height 0.5s;
   -webkit-transition: width 0.5s, height 0.5s;
 }

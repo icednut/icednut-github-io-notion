@@ -49,14 +49,14 @@ export default ({ posts = [] }) => {
     <>
       <Header titlePre="Blog" />
       <div className="container mx-auto max-w-screen-lg grid grid-flow-col-dense">
-        <div className="gap-4 masonry">
+        <div className="gap-4 masonry my-4">
           {posts.length === 0 && (
             <p className={blogStyles.noPosts}>There are no posts yet</p>
           )}
           {posts.map(post => {
             return (
               <div
-                className="relative bg-white shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 inline-block m-3"
+                className="relative bg-white shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 inline-block my-3"
                 key={post.Slug}
               >
                 <div className="relative overflow-hidden">
@@ -70,8 +70,6 @@ export default ({ posts = [] }) => {
                         src="3.jpg"
                         alt="Sunset in the mountains"
                       />
-                      {/* <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-75 transition-color duration-500">
-                                    </div> */}
                     </a>
                   </Link>
                 </div>
