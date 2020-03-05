@@ -56,7 +56,7 @@ export default ({ posts = [] }) => {
           {posts.map(post => {
             return (
               <div
-                className="relative rounded-lg shadow hover:shadow-xl transition-all duration-500 transform hover:scale-105 inline-block mb-12"
+                className="relative rounded-lg shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 inline-block mb-5"
                 key={post.Slug}
               >
                 <div className="relative overflow-hidden rounded-t-lg">
