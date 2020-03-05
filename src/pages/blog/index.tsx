@@ -80,7 +80,7 @@ export default ({ posts = [] }) => {
                     <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
                       <a
                         className={
-                          'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white hover:border-teal-400 pb-px transition-colors duration-300'
+                          'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white border-dashed hover:border-teal-400 pb-px transition-colors duration-300'
                         }
                       >
                         {post.Page}
