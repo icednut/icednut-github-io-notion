@@ -29,7 +29,7 @@ export default ({ titlePre = '' }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
-      <div className="container mx-auto pt-12 mb-20">
+      <div className="w-screen pt-12 mb-20 bg-white">
         <img
           src="/wglee2.png"
           alt="wglee"
@@ -39,21 +39,23 @@ export default ({ titlePre = '' }) => {
         <div className="flex justify-center my-3">
           <span
             className={
-              'text-center text-2xl font-bold uppercase ' + styles.logo
+              'text-center text-3xl font-bold capitalize ' + styles.logo
             }
           >
             Icednut's Space
           </span>
         </div>
-        <div className="flex justify-center mt-3 mb-8">
+        <div className="flex justify-center mb-8 border-b border-gray-300 -pb-3">
           {navItems.map(({ label, page }) => {
             const menuColor =
-              page === pathname ? ' text-teal-400 ' : ' text-gray-700'
+              page === pathname
+                ? ' text-teal-400 border-b-2 border-teal-400'
+                : ' text-gray-700'
             return (
               <Link href={page}>
                 <a
                   className={
-                    'hover:text-teal-400 px-5 text-sm font-light hover:font-bold ' +
+                    'hover:text-teal-400 px-5 pb-3 text-base font-light hover:font-bold ' +
                     styles.header_menu +
                     menuColor
                   }

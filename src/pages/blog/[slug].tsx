@@ -74,196 +74,197 @@ const RenderPost = ({ post, redirect }) => {
   return (
     <>
       <Header titlePre={post.Page} />
-      <div className="container mx-auto">
-        <h1>{post.Page || ''}</h1>
-        {post.Authors.length > 0 && (
-          <div className="authors">By: {post.Authors.join(' ')}</div>
-        )}
-        {post.Date && (
-          <div className="posted">Posted: {getDateStr(post.Date)}</div>
-        )}
+      <div className="container mx-auto p-2">
+        <div className="rounded-lg bg-white p-6 shadow">
+          <div id="title-info" className="pb-6">
+            <div className="text-2xl font-extrabold">{post.Page || ''}</div>
+            <div className="text-gray-600 text-base">
+              {post.Authors.length > 0 && <span>{post.Authors.join(' ')}</span>}
+              <span> / </span>
+              {post.Date && <span>{getDateStr(post.Date)}</span>}
+            </div>
+          </div>
 
-        <hr />
+          {(!post.content || post.content.length === 0) && (
+            <p>This post has no content</p>
+          )}
 
-        {(!post.content || post.content.length === 0) && (
-          <p>This post has no content</p>
-        )}
+          {(post.content || []).map((block, blockIdx) => {
+            const { value } = block
+            const { type, properties, id, parent_id } = value
+            const isLast = blockIdx === post.content.length - 1
+            const isList = listTypes.has(type)
+            let toRender = []
 
-        {(post.content || []).map((block, blockIdx) => {
-          const { value } = block
-          const { type, properties, id, parent_id } = value
-          const isLast = blockIdx === post.content.length - 1
-          const isList = listTypes.has(type)
-          let toRender = []
+            if (isList) {
+              listTagName = components[type === 'bulleted_list' ? 'ul' : 'ol']
+              listLastId = `list${id}`
 
-          if (isList) {
-            listTagName = components[type === 'bulleted_list' ? 'ul' : 'ol']
-            listLastId = `list${id}`
-
-            listMap[id] = {
-              key: id,
-              nested: [],
-              children: textBlock(properties.title, true, id),
-            }
-
-            if (listMap[parent_id]) {
-              listMap[id].isNested = true
-              listMap[parent_id].nested.push(id)
-            }
-          }
-
-          if (listTagName && (isLast || !isList)) {
-            toRender.push(
-              React.createElement(
-                listTagName,
-                { key: listLastId! },
-                Object.keys(listMap).map(itemId => {
-                  if (listMap[itemId].isNested) return null
-
-                  const createEl = item =>
-                    React.createElement(
-                      components.li || 'ul',
-                      { key: item.key },
-                      item.children,
-                      item.nested.length > 0
-                        ? React.createElement(
-                            components.ul || 'ul',
-                            { key: item + 'sub-list' },
-                            item.nested.map(nestedId =>
-                              createEl(listMap[nestedId])
-                            )
-                          )
-                        : null
-                    )
-                  return createEl(listMap[itemId])
-                })
-              )
-            )
-            listMap = {}
-            listLastId = null
-            listTagName = null
-          }
-
-          const renderHeading = (Type: string | React.ComponentType) => {
-            toRender.push(
-              <Heading key={id}>
-                <Type key={id}>{textBlock(properties.title, true, id)}</Type>
-              </Heading>
-            )
-          }
-
-          switch (type) {
-            case 'page':
-            case 'divider':
-              break
-            case 'text':
-              if (properties) {
-                toRender.push(textBlock(properties.title, false, id))
+              listMap[id] = {
+                key: id,
+                nested: [],
+                children: textBlock(properties.title, true, id),
               }
-              break
-            case 'image':
-            case 'video': {
-              const { format = {} } = value
-              const { block_width } = format
-              const baseBlockWidth = 768
-              const roundFactor = Math.pow(10, 2)
-              // calculate percentages
-              const width = block_width
-                ? `${Math.round(
-                    (block_width / baseBlockWidth) * 100 * roundFactor
-                  ) / roundFactor}%`
-                : '100%'
 
-              const isImage = type === 'image'
-              const Comp = isImage ? 'img' : 'video'
+              if (listMap[parent_id]) {
+                listMap[id].isNested = true
+                listMap[parent_id].nested.push(id)
+              }
+            }
 
+            if (listTagName && (isLast || !isList)) {
               toRender.push(
-                <Comp
-                  key={id}
-                  src={`/api/asset?assetUrl=${encodeURIComponent(
-                    format.display_source as any
-                  )}&blockId=${id}`}
-                  controls={!isImage}
-                  alt={isImage ? 'An image from Notion' : undefined}
-                  loop={!isImage}
-                  muted={!isImage}
-                  autoPlay={!isImage}
-                  style={{ width }}
-                />
-              )
-              break
-            }
-            case 'header':
-              renderHeading('h1')
-              break
-            case 'sub_header':
-              renderHeading('h2')
-              break
-            case 'sub_sub_header':
-              renderHeading('h3')
-              break
-            case 'code': {
-              if (properties.title) {
-                const content = properties.title[0][0]
-                const language = properties.language[0][0]
+                React.createElement(
+                  listTagName,
+                  { key: listLastId! },
+                  Object.keys(listMap).map(itemId => {
+                    if (listMap[itemId].isNested) return null
 
-                if (language === 'LiveScript') {
-                  // this requires the DOM for now
-                  toRender.push(
-                    <ReactJSXParser
-                      key={id}
-                      jsx={content}
-                      components={components}
-                      componentsOnly={false}
-                      renderInpost={false}
-                      allowUnknownElements={true}
-                      blacklistedTags={['script', 'style']}
-                    />
-                  )
-                } else {
-                  toRender.push(
-                    <components.Code key={id} language={language || ''}>
-                      {content}
-                    </components.Code>
-                  )
-                }
-              }
-              break
-            }
-            case 'quote':
-              if (properties.title) {
-                toRender.push(
-                  React.createElement(
-                    components.blockquote,
-                    { key: id },
-                    properties.title
-                  )
+                    const createEl = item =>
+                      React.createElement(
+                        components.li || 'ul',
+                        { key: item.key },
+                        item.children,
+                        item.nested.length > 0
+                          ? React.createElement(
+                              components.ul || 'ul',
+                              { key: item + 'sub-list' },
+                              item.nested.map(nestedId =>
+                                createEl(listMap[nestedId])
+                              )
+                            )
+                          : null
+                      )
+                    return createEl(listMap[itemId])
+                  })
                 )
-              }
-              break
-            default:
-              if (
-                process.env.NODE_ENV !== 'production' &&
-                !listTypes.has(type)
-              ) {
-                console.log('unknown type', type)
-              }
-              break
-          }
-          return toRender
-        })}
-        <div>
-          {post.Tags &&
-            post.Tags.split(',').map(tag => (
-              <div
-                className={
-                  'inline-block rounded-full py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
-                  blogStyles.blogTag
+              )
+              listMap = {}
+              listLastId = null
+              listTagName = null
+            }
+
+            const renderHeading = (Type: string | React.ComponentType) => {
+              toRender.push(
+                <Heading key={id}>
+                  <Type key={id}>{textBlock(properties.title, true, id)}</Type>
+                </Heading>
+              )
+            }
+
+            switch (type) {
+              case 'page':
+              case 'divider':
+                break
+              case 'text':
+                if (properties) {
+                  toRender.push(textBlock(properties.title, false, id))
                 }
-              >
-                #{tag}
-              </div>
-            ))}
+                break
+              case 'image':
+              case 'video': {
+                const { format = {} } = value
+                const { block_width } = format
+                const baseBlockWidth = 768
+                const roundFactor = Math.pow(10, 2)
+                // calculate percentages
+                const width = block_width
+                  ? `${Math.round(
+                      (block_width / baseBlockWidth) * 100 * roundFactor
+                    ) / roundFactor}%`
+                  : '100%'
+
+                const isImage = type === 'image'
+                const Comp = isImage ? 'img' : 'video'
+
+                toRender.push(
+                  <Comp
+                    key={id}
+                    src={`/api/asset?assetUrl=${encodeURIComponent(
+                      format.display_source as any
+                    )}&blockId=${id}`}
+                    controls={!isImage}
+                    alt={isImage ? 'An image from Notion' : undefined}
+                    loop={!isImage}
+                    muted={!isImage}
+                    autoPlay={!isImage}
+                    style={{ width }}
+                  />
+                )
+                break
+              }
+              case 'header':
+                renderHeading('h1')
+                break
+              case 'sub_header':
+                renderHeading('h2')
+                break
+              case 'sub_sub_header':
+                renderHeading('h3')
+                break
+              case 'code': {
+                if (properties.title) {
+                  const content = properties.title[0][0]
+                  const language = properties.language[0][0]
+
+                  if (language === 'LiveScript') {
+                    // this requires the DOM for now
+                    toRender.push(
+                      <ReactJSXParser
+                        key={id}
+                        jsx={content}
+                        components={components}
+                        componentsOnly={false}
+                        renderInpost={false}
+                        allowUnknownElements={true}
+                        blacklistedTags={['script', 'style']}
+                      />
+                    )
+                  } else {
+                    toRender.push(
+                      <components.Code key={id} language={language || ''}>
+                        {content}
+                      </components.Code>
+                    )
+                  }
+                }
+                break
+              }
+              case 'quote':
+                if (properties.title) {
+                  toRender.push(
+                    React.createElement(
+                      components.blockquote,
+                      { key: id },
+                      properties.title
+                    )
+                  )
+                }
+                break
+              default:
+                if (
+                  process.env.NODE_ENV !== 'production' &&
+                  !listTypes.has(type)
+                ) {
+                  console.log('unknown type', type)
+                }
+                break
+            }
+            return toRender
+          })}
+          <div className="pt-6">
+            {post.Tags &&
+              post.Tags.split(',').map(tag => (
+                <div
+                  className={
+                    'inline-block rounded-full py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                    blogStyles.blogTag
+                  }
+                >
+                  #{tag}
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </>
