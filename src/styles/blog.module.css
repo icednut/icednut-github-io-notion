@@ -4,6 +4,19 @@
   -webkit-transition: transform 0.5s, filter 0.5s;
 }
 
+.postPreviewList {
+  left: -4rem;
+  @apply w-16;
+  @apply h-16;
+  transition: width 0.5s, height 0.5s;
+  -webkit-transition: width 0.5s, height 0.5s;
+}
+
+.postPreviewList:hover {
+  width: 50%;
+  height: 486px;
+}
+
 .darkenImage:hover {
   filter: brightness(50%);
 }
