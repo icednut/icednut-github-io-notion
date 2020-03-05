@@ -56,80 +56,76 @@ export default ({ posts = [] }) => {
           {posts.map(post => {
             return (
               <div
-                className="relative rounded-lg overflow-hidden shadow inline-block mb-4"
+                className="relative rounded-lg shadow hover:shadow-xl transition-all duration-500 transform hover:scale-105 inline-block mb-12"
                 key={post.Slug}
               >
-                <>
-                  <div className="relative overflow-hidden">
-                    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                      <a className="group">
-                        <img
-                          className={
-                            'w-full rounded-t-lg transition-transform duration-500 transform hover:scale-125 ' +
-                            blogStyles.darkenImage
-                          }
-                          src="3.jpg"
-                          alt="Sunset in the mountains"
-                        />
-                        {/* <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-75 transition-color duration-500">
+                <div className="relative overflow-hidden rounded-t-lg">
+                  <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
+                    <a className="group">
+                      <img
+                        className={
+                          'w-full rounded-t-lg transition-transform duration-500 transform hover:scale-125 ' +
+                          blogStyles.darkenImage
+                        }
+                        src="3.jpg"
+                        alt="Sunset in the mountains"
+                      />
+                      {/* <div className="absolute w-full h-full bg-black opacity-0 hover:opacity-75 transition-color duration-500">
                                     </div> */}
-                      </a>
-                    </Link>
-                  </div>
-                  <div className="px-6 py-4">
-                    <div className="text-center">
-                      <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                        <a
-                          className={
-                            'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white hover:border-teal-400 pb-px transition-colors duration-500'
-                          }
-                        >
-                          {post.Page}
-                        </a>
-                      </Link>
-                    </div>
+                    </a>
+                  </Link>
+                </div>
+                <div className="px-6 py-4">
+                  <div className="text-center">
                     <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                      <a>
-                        <p
-                          className={
-                            'text-gray-600 text-xs pt-2 pb-5 text-center'
-                          }
-                        >
-                          {post.Authors.length > 0 && (
-                            <span>{post.Authors.join(' ')}</span>
-                          )}
-                          <span> / </span>
-                          {post.Date && <span>{getDateStr(post.Date)}</span>}
-                        </p>
-                        <div>
-                          {(!post.preview || post.preview.length === 0) && (
-                            <p className="text-gray-400">
-                              No preview available
-                            </p>
-                          )}
-                          {(post.preview || []).map((block, idx) => (
-                            <p>
-                              textBlock(block, true, `${post.Slug}${idx}`)
-                            </p>
-                          ))}
-                        </div>
+                      <a
+                        className={
+                          'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white hover:border-teal-400 pb-px transition-colors duration-300'
+                        }
+                      >
+                        {post.Page}
                       </a>
                     </Link>
                   </div>
-                  <div className="px-6 py-4">
-                    {post.Tags &&
-                      post.Tags.split(',').map(tag => (
-                        <span
-                          className={
-                            'inline-block rounded-full py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
-                            blogStyles.blogTag
-                          }
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                  </div>
-                </>
+                  <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
+                    <a>
+                      <p
+                        className={
+                          'text-gray-600 text-xs pt-2 pb-5 text-center'
+                        }
+                      >
+                        {post.Authors.length > 0 && (
+                          <span>{post.Authors.join(' ')}</span>
+                        )}
+                        <span> / </span>
+                        {post.Date && <span>{getDateStr(post.Date)}</span>}
+                      </p>
+                      <div>
+                        {(!post.preview || post.preview.length === 0) && (
+                          <p className="text-gray-400">No preview available</p>
+                        )}
+                        {(post.preview || []).map((block, idx) => (
+                          <p>
+                            textBlock(block, true, `${post.Slug}${idx}`)
+                          </p>
+                        ))}
+                      </div>
+                    </a>
+                  </Link>
+                </div>
+                <div className="px-6 py-4">
+                  {post.Tags &&
+                    post.Tags.split(',').map(tag => (
+                      <span
+                        className={
+                          'inline-block rounded-full py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                          blogStyles.blogTag
+                        }
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                </div>
               </div>
             )
           })}
