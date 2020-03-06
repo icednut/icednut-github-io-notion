@@ -56,12 +56,22 @@ export default ({ posts = [] }) => {
           {posts.map(post => {
             return (
               <div
-                className="relative bg-white shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 inline-block my-3"
+                className="bg-white shadow hover:shadow-xl transition-all duration-300 inline-block my-3"
                 key={post.Slug}
               >
                 <div className="relative overflow-hidden">
+                  {/* <div 
+                    className="absolute w-full px-3" 
+                    style={{
+                      zIndex:2,
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)'
+                    }}>
+                    <svg className="fill-current text-white w-6 h-6 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M.2 10a11 11 0 0 1 19.6 0A11 11 0 0 1 .2 10zm9.8 4a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                  </div> */}
                   <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                    <a className="group">
+                    <a>
                       <img
                         className={
                           'w-full transition-transform duration-500 transform hover:scale-125 ' +

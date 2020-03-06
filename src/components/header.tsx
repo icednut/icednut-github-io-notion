@@ -29,7 +29,7 @@ export default ({ titlePre = '' }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
-      <div className="w-screen pt-12 mb-20 bg-white">
+      <div className="relative w-screen pt-12 mb-20 bg-white">
         <img
           src="/wglee2.png"
           alt="wglee"
@@ -65,6 +65,18 @@ export default ({ titlePre = '' }) => {
               </Link>
             )
           })}
+        </div>
+        <div
+          className="absolute w-6 h-6 cursor-pointer"
+          style={{ top: '24px', left: '24px' }}
+        >
+          <svg
+            className="fill-current text-black"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
         </div>
       </div>
     </header>

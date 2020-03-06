@@ -25,6 +25,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Noto Serif KR', serif;
   background-color: #f6f6f6;

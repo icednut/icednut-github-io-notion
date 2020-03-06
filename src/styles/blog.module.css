@@ -14,7 +14,8 @@
 
 .postPreviewList:hover {
   width: 50%;
-  height: 486px;
+  height: 400px;
+  max-height: 50vh;
 }
 
 .darkenImage:hover {
