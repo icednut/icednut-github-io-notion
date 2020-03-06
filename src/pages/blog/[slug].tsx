@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import Header from '../../components/header'
 import Heading from '../../components/heading'
+import TargetHeading from '../../components/target-heading'
 import components from '../../components/dynamic'
 import ReactJSXParser from '@zeit/react-jsx-parser'
 import blogStyles from '../../styles/blog.module.css'
@@ -78,7 +79,7 @@ const RenderPost = ({ post, redirect }) => {
         <div className="sticky top-0" style={{ zIndex: 9999 }}>
           <div
             className={
-              'absolute p-2 bg-gray-600 text-white overflow-scroll ' +
+              'absolute p-2 bg-gray-500 text-white overflow-scroll ' +
               blogStyles.postPreviewList
             }
           >
@@ -89,7 +90,10 @@ const RenderPost = ({ post, redirect }) => {
             >
               <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
             </svg>
-            <div className="pt-4">
+            <div className="font-bold text-base text-gray-700 pt-4 pl-4 mb-4">
+              Table of Contents
+            </div>
+            <div className="text-xs px-4">
               {(post.content || []).map((block, blockIdx) => {
                 const { value } = block
                 const { type, properties, id, parent_id } = value
@@ -107,13 +111,13 @@ const RenderPost = ({ post, redirect }) => {
 
                 switch (type) {
                   case 'header':
-                    renderHeading('text-red-200 pl-2')
+                    renderHeading('text-sm pl-2 mb-2')
                     break
                   case 'sub_header':
-                    renderHeading('text-teal-200 pl-6')
+                    renderHeading('text-sm pl-6 mb-2')
                     break
                   case 'sub_sub_header':
-                    renderHeading('text-yellow-200 pl-10')
+                    renderHeading('text-sm pl-10 mb-2')
                     break
                 }
                 return toRender
@@ -121,17 +125,20 @@ const RenderPost = ({ post, redirect }) => {
             </div>
           </div>
         </div>
+
         <div
           className="fixed shadow-2xl p-4 rounded-full text-xs"
           style={{ right: '26px', bottom: '29px' }}
         >
-          <svg
-            className="cursor-pointer fill-current text-gray-600 w-6 h-6"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
-          </svg>
+          <a href="#">
+            <svg
+              className="fill-current text-gray-600 w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
+            </svg>
+          </a>
         </div>
 
         <div className="bg-white shadow m-3">
@@ -226,11 +233,11 @@ const RenderPost = ({ post, redirect }) => {
 
               const renderHeading = (Type: string | React.ComponentType) => {
                 toRender.push(
-                  <Heading key={id}>
+                  <TargetHeading key={id}>
                     <Type key={id}>
                       {textBlock(properties.title, true, id)}
                     </Type>
-                  </Heading>
+                  </TargetHeading>
                 )
               }
 
