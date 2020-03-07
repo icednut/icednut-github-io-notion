@@ -66,7 +66,7 @@ export default ({ titlePre = '' }) => {
             )
           })}
         </div>
-        <div
+        {/* <div
           className="absolute w-6 h-6 cursor-pointer"
           style={{ top: '24px', left: '24px' }}
         >
@@ -77,7 +77,7 @@ export default ({ titlePre = '' }) => {
           >
             <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
           </svg>
-        </div>
+        </div> */}
       </div>
     </header>
   )

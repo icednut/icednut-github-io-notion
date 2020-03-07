@@ -78,7 +78,7 @@ const RenderPost = ({ post, redirect }) => {
   return (
     <>
       <Header titlePre={post.Page} />
-      <div className="container mx-auto max-w-4xl">
+      <div className="container mx-auto max-w-screen-lg">
         <div className={blogStyles.nextPrevPostContainer}>
           <div className={blogStyles.nextPrevPostIconContainer}>
             <svg
