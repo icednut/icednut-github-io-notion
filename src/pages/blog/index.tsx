@@ -25,7 +25,7 @@ export async function unstable_getStaticProps() {
       for (const author of post.Authors) {
         authorsToGet.add(author)
       }
-      console.log('post', post)
+      //   console.log('post', post)
       return post
     })
     .filter(Boolean)

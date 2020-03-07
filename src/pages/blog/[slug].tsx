@@ -11,6 +11,7 @@ import getPageData from '../../lib/notion/getPageData'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import { getBlogLink, getDateStr } from '../../lib/blog-helpers'
+import { Z_DEFAULT_COMPRESSION } from 'zlib'
 
 // Get the data for each blog post
 export async function unstable_getStaticProps({ params: { slug } }) {
@@ -72,62 +73,95 @@ const RenderPost = ({ post, redirect }) => {
     )
   }
 
+  console.log(post)
+
   return (
     <>
       <Header titlePre={post.Page} />
       <div className="container mx-auto max-w-4xl">
-        <div className="sticky top-0" style={{ zIndex: 9999 }}>
-          <div
-            className={
-              'absolute p-2 bg-gray-500 text-white overflow-scroll ' +
-              blogStyles.postPreviewList
-            }
-          >
+        <div className={blogStyles.nextPrevPostContainer}>
+          <div className={blogStyles.nextPrevPostIconContainer}>
             <svg
-              className="fill-current text-white w-6 h-6"
+              className={blogStyles.nextPrevPostIcon}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
-              <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
+              <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
             </svg>
-            <div className="font-bold text-base text-gray-700 pt-4 pl-4 mb-4">
-              Table of Contents
+          </div>
+          <div className={blogStyles.nextPrevPostText}>previous post</div>
+          <div className={blogStyles.nextPrevPostTitle}>adfas</div>
+        </div>
+
+        <div className="sticky top-0" style={{ zIndex: 9999 }}>
+          <div
+            className={'absolute overflow-hidden ' + blogStyles.postPreviewList}
+          >
+            <div className="p-2 bg-teal-400 w-10">
+              <svg
+                className="fill-current text-white w-6 h-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
+              </svg>
             </div>
-            <div className="text-xs px-4">
-              {(post.content || []).map((block, blockIdx) => {
-                const { value } = block
-                const { type, properties, id, parent_id } = value
-                let toRender = []
+            <div
+              className={'p-3 bg-white border-2 border-gray-400 ml-10 text-sm'}
+            >
+              <div className="font-bold text-gray-800 text-white mb-4">
+                Table of Contents
+              </div>
+              <div>
+                {(post.content || []).map((block, blockIdx) => {
+                  const { value } = block
+                  const { type, properties, id, parent_id } = value
+                  let toRender = []
 
-                const renderHeading = (additionalClass: string) => {
-                  toRender.push(
-                    <Heading key={id}>
-                      <div key={id} className={additionalClass}>
-                        {textBlock(properties.title, true, id)}
-                      </div>
-                    </Heading>
-                  )
-                }
+                  const renderHeading = (
+                    isSubtitle: boolean,
+                    additionalClass: string
+                  ) => {
+                    toRender.push(
+                      <Heading key={id}>
+                        <div key={id} className={additionalClass}>
+                          {isSubtitle && (
+                            <span>
+                              <svg
+                                className="fill-current inline mr-2 text-gray-400 w-3 h-3"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M3.5 13H12v5l6-6-6-6v5H4V2H2v11z" />
+                              </svg>
+                            </span>
+                          )}
+                          <span>{textBlock(properties.title, true, id)}</span>
+                        </div>
+                      </Heading>
+                    )
+                  }
 
-                switch (type) {
-                  case 'header':
-                    renderHeading('text-sm pl-2 mb-2')
-                    break
-                  case 'sub_header':
-                    renderHeading('text-sm pl-6 mb-2')
-                    break
-                  case 'sub_sub_header':
-                    renderHeading('text-sm pl-10 mb-2')
-                    break
-                }
-                return toRender
-              })}
+                  switch (type) {
+                    case 'header':
+                      renderHeading(false, 'mb-2 text-gray-800')
+                      break
+                    case 'sub_header':
+                      renderHeading(true, 'pl-4 mb-2 text-gray-700')
+                      break
+                    case 'sub_sub_header':
+                      renderHeading(true, 'pl-8 mb-2 text-gray-600')
+                      break
+                  }
+                  return toRender
+                })}
+              </div>
             </div>
           </div>
         </div>
 
         <div
-          className="fixed shadow-2xl p-4 rounded-full text-xs"
+          className="fixed shadow-2xl p-4 bg-white rounded-full text-xs"
           style={{ right: '26px', bottom: '29px' }}
         >
           <a href="#">
@@ -153,12 +187,13 @@ const RenderPost = ({ post, redirect }) => {
                 transform: 'translate(-50%, -50%)',
               }}
             >
-              <div className="text-2xl font-extrabold text-white">
+              <div className="text-4xl font-extrabold text-white">
                 {post.Page || ''}
               </div>
               <div className="text-gray-400 text-sm">
                 {post.Authors.length > 0 && (
-                  <span>{post.Authors.join(' ')}</span>
+                  // <span>{post.Authors.join(' ')}</span>
+                  <span>Will Lee</span>
                 )}
                 <span> / </span>
                 {post.Date && <span>{getDateStr(post.Date)}</span>}
@@ -171,7 +206,7 @@ const RenderPost = ({ post, redirect }) => {
             <img src="/3.jpg" className="w-full" />
           </div>
 
-          <div className="p-12">
+          <div className="px-12 py-6">
             {(!post.content || post.content.length === 0) && (
               <p>This post has no content</p>
             )}
@@ -200,29 +235,48 @@ const RenderPost = ({ post, redirect }) => {
               }
 
               if (listTagName && (isLast || !isList)) {
+                let additionalListClassName = ''
+                switch (listTagName) {
+                  case 'ul':
+                    additionalListClassName = 'list-disc list-inside'
+                    break
+                  case 'ol':
+                    additionalListClassName = 'list-decimal list-inside'
+                    break
+                  case 'li':
+                    additionalListClassName = 'leading-loose'
+                    break
+                }
                 toRender.push(
                   React.createElement(
                     listTagName,
-                    { key: listLastId! },
+                    { key: listLastId!, className: additionalListClassName },
                     Object.keys(listMap).map(itemId => {
                       if (listMap[itemId].isNested) return null
 
-                      const createEl = item =>
+                      const createEl = (item, additionalMarginClass) =>
                         React.createElement(
                           components.li || 'ul',
-                          { key: item.key },
+                          {
+                            key: item.key,
+                            className:
+                              additionalMarginClass + ' pl-2 leading-loose',
+                          },
                           item.children,
                           item.nested.length > 0
                             ? React.createElement(
                                 components.ul || 'ul',
-                                { key: item + 'sub-list' },
+                                {
+                                  key: item + 'sub-list',
+                                  className: 'list-disc list-inside',
+                                },
                                 item.nested.map(nestedId =>
-                                  createEl(listMap[nestedId])
+                                  createEl(listMap[nestedId], 'ml-6')
                                 )
                               )
                             : null
                         )
-                      return createEl(listMap[itemId])
+                      return createEl(listMap[itemId], '')
                     })
                   )
                 )
@@ -231,16 +285,35 @@ const RenderPost = ({ post, redirect }) => {
                 listTagName = null
               }
 
-              const renderHeading = (Type: string | React.ComponentType) => {
-                toRender.push(
-                  <TargetHeading key={id}>
-                    <Type key={id}>
-                      {textBlock(properties.title, true, id)}
-                    </Type>
-                  </TargetHeading>
-                )
+              const collectText = (el, acc = []) => {
+                if (el) {
+                  if (typeof el === 'string') acc.push(el)
+                  if (Array.isArray(el)) el.map(item => collectText(item, acc))
+                  if (typeof el === 'object')
+                    collectText(el.props && el.props.children, acc)
+                }
+                return acc.join('').trim()
               }
 
+              const renderHeading = (
+                tagName: string,
+                additionalClassName: string = 'leading-ralxed'
+              ) => {
+                const text = properties.title
+                const children = textBlock(text, true, id)
+                const props = {
+                  key: id,
+                  className: additionalClassName,
+                  id: collectText(text)
+                    .toLowerCase()
+                    .replace(/\s/g, '-')
+                    .replace(/[?!:]/g, ''),
+                }
+
+                toRender.push(React.createElement(tagName, props, children))
+              }
+
+              //   console.log(type, properties)
               switch (type) {
                 case 'page':
                 case 'divider':
@@ -248,6 +321,12 @@ const RenderPost = ({ post, redirect }) => {
                 case 'text':
                   if (properties) {
                     toRender.push(textBlock(properties.title, false, id))
+                  } else {
+                    toRender.push(
+                      <span key={id} className="leading-ralxed mt-px">
+                        &nbsp;
+                      </span>
+                    )
                   }
                   break
                 case 'image':
@@ -283,13 +362,13 @@ const RenderPost = ({ post, redirect }) => {
                   break
                 }
                 case 'header':
-                  renderHeading('h1')
+                  renderHeading('h1', 'mt-3 leading-loose text-3xl font-bold')
                   break
                 case 'sub_header':
-                  renderHeading('h2')
+                  renderHeading('h2', 'mt-2 leading-loose text-xl font-bold')
                   break
                 case 'sub_sub_header':
-                  renderHeading('h3')
+                  renderHeading('h3', 'mt-1 leading-loose text-lg font-bold')
                   break
                 case 'code': {
                   if (properties.title) {
@@ -356,6 +435,21 @@ const RenderPost = ({ post, redirect }) => {
             </div>
           </div>
         </div>
+        <div className={blogStyles.nextPrevPostContainer}>
+          <div className={blogStyles.nextPrevPostIconContainer}>
+            <svg
+              className={blogStyles.nextPrevPostIcon}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+          <div className={blogStyles.nextPrevPostText}>next post</div>
+          <div className={blogStyles.nextPrevPostTitle}>adfas</div>
+        </div>
+
+        <div className="bg-white shadow mx-3 my-10 px-12 py-6">Comment</div>
       </div>
     </>
   )

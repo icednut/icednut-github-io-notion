@@ -1,21 +1,58 @@
-.darkenImage:hover {
-  filter: brightness(100%);
-  transition: transform 0.5s, filter 0.5s;
-  -webkit-transition: transform 0.5s, filter 0.5s;
+.nextPrevPostContainer {
+  @apply flex;
+  @apply flex-col;
+  @apply justify-center;
+  @apply text-center;
+  @apply mx-auto;
+  @apply mb-4;
+}
+
+.nextPrevPostIconContainer {
+  @apply text-center;
+}
+
+.nextPrevPostIcon {
+  @apply fill-current;
+  @apply text-gray-500;
+  @apply w-5;
+  @apply h-5;
+  @apply inline;
+}
+
+.nextPrevPostText {
+  @apply uppercase;
+  @apply text-xs;
+  @apply text-gray-500;
+  @apply text-center;
+}
+
+.nextPrevPostTitle {
+  @apply text-teal-400;
 }
 
 .postPreviewList {
   left: -1.75rem;
   @apply w-10;
   @apply h-10;
-  transition: width 0.5s, height 0.5s;
-  -webkit-transition: width 0.5s, height 0.5s;
+  transition: width 0.5s;
+  -webkit-transition: width 0.5s;
 }
 
 .postPreviewList:hover {
-  width: 50%;
-  height: 400px;
-  max-height: 50vh;
+  width: 492px;
+  height: 560px;
+  max-height: 90vh;
+}
+
+.tableOfContents {
+  left: 3rem;
+  top: -3rem;
+}
+
+.darkenImage {
+  filter: brightness(100%);
+  transition: transform 0.5s, filter 0.5s;
+  -webkit-transition: transform 0.5s, filter 0.5s;
 }
 
 .darkenImage:hover {
