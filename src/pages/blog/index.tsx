@@ -48,7 +48,7 @@ export default ({ posts = [] }) => {
   return (
     <>
       <Header titlePre="Blog" />
-      <div className="container mx-auto max-w-screen-lg grid grid-flow-col-dense">
+      <div className="container mx-auto max-w-screen-lg grid px-3">
         <div className="gap-4 masonry my-4">
           {posts.length === 0 && (
             <p className={blogStyles.noPosts}>There are no posts yet</p>
@@ -126,7 +126,7 @@ export default ({ posts = [] }) => {
                     post.Tags.split(',').map(tag => (
                       <span
                         className={
-                          'inline-block rounded-full py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                          'inline-block py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
                           blogStyles.blogTag
                         }
                       >

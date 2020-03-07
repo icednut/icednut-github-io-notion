@@ -8,6 +8,6 @@ import sharedStyles from '../styles/shared.module.css'
 export default () => (
   <>
     <Header titlePre="Home" />
-    <div className="container mx-auto grid">준비 중...</div>
+    <div className="container mx-auto max-w-screen-lg px-3">준비 중...</div>
   </>
 )
