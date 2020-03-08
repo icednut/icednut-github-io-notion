@@ -13,7 +13,8 @@ export default async function getBlogIndex(
 ) {
   let postsTable: any = null
   const useCache = process.env.USE_CACHE === 'true'
-  const cacheFile = `${BLOG_INDEX_CACHE}${previews ? '_previews' : ''}`
+  const cacheFile =
+    `${BLOG_INDEX_CACHE}${previews ? '_previews' : ''}` + '_' + category
 
   if (useCache) {
     try {
