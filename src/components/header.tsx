@@ -7,7 +7,6 @@ import styles from '../styles/header.module.css'
 const navItems: { label: string; page?: string }[] = [
   { label: 'DevLog', page: '/' },
   { label: 'StudyNote', page: '/studynote' },
-  { label: 'Life', page: '/life' },
 ]
 
 const ogImageUrl = 'https://notion-blog.now.sh/og-image.png'
@@ -58,7 +57,7 @@ export default ({ titlePre = '', category = '' }) => {
                 ? ' text-teal-400 border-b-2 border-teal-400'
                 : ' text-gray-700'
             return (
-              <Link href={page}>
+              <Link href={page} as={page}>
                 <a
                   className={
                     'hover:text-teal-400 px-5 pb-3 text-base font-light hover:font-bold ' +
@@ -72,18 +71,6 @@ export default ({ titlePre = '', category = '' }) => {
             )
           })}
         </div>
-        {/* <div
-          className="absolute w-6 h-6 cursor-pointer"
-          style={{ top: '24px', left: '24px' }}
-        >
-          <svg
-            className="fill-current text-black"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </div> */}
       </div>
     </header>
   )

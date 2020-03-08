@@ -146,7 +146,7 @@ export default ({ posts = [] }) => {
             )
           })}
         </div>
-        <div className={blogStyles.nextPrevPostContainer}>
+        {/* <div className={blogStyles.nextPrevPostContainer}>
           <div className={blogStyles.nextPrevPostIconContainer}>
             <svg
               className={blogStyles.nextPrevPostIcon}
@@ -157,7 +157,7 @@ export default ({ posts = [] }) => {
             </svg>
           </div>
           <div className={blogStyles.nextPrevPostText}>More</div>
-        </div>
+        </div> */}
       </div>
     </>
   )
