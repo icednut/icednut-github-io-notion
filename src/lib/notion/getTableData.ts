@@ -3,15 +3,24 @@ import Slugger from 'github-slugger'
 import queryCollection from './queryCollection'
 import { normalizeSlug } from '../blog-helpers'
 
-export default async function loadTable(collectionBlock: any, isPosts = false) {
+export default async function loadTable(
+  collectionBlock: any,
+  isPosts = false,
+  tag: string = '',
+  category: string = ''
+) {
   const slugger = new Slugger()
 
   const { value } = collectionBlock
   let table: any = {}
-  const col = await queryCollection({
-    collectionId: value.collection_id,
-    collectionViewId: value.view_ids[0],
-  })
+  const col = await queryCollection(
+    {
+      collectionId: value.collection_id,
+      collectionViewId: value.view_ids[0],
+    },
+    tag,
+    category
+  )
   const entries = values(col.recordMap.block).filter((block: any) => {
     return block.value && block.value.parent_id === value.collection_id
   })
