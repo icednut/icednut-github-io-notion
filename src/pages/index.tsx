@@ -79,7 +79,12 @@ export default ({ posts = [] }) => {
                           'w-full transition-transform duration-500 transform hover:scale-125 ' +
                           blogStyles.darkenImage
                         }
-                        src="3.jpg"
+                        src={
+                          '/post_thumbnail/' +
+                          (post.Thumbnail && post.Thumbnail !== ''
+                            ? post.Thumbnail
+                            : 'default.jpg')
+                        }
                         alt="Sunset in the mountains"
                       />
                     </a>

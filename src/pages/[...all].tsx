@@ -239,7 +239,15 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
               id="title-info__dim"
               className="absolute w-full h-full text-center bg-black opacity-75"
             ></div>
-            <img src="/3.jpg" className="w-full" />
+            <img
+              src={
+                '/post_thumbnail/' +
+                (post.Thumbnail && post.Thumbnail !== ''
+                  ? post.Thumbnail
+                  : 'default.jpg')
+              }
+              className="w-full"
+            />
           </div>
 
           <div className="px-12 py-6">

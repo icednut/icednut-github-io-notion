@@ -40,7 +40,7 @@ export default ({ tagOptions = [] }) => {
             <div className="mr-1">
               <div className="font-bold text-sm">About Me</div>
               <div className="py-2">
-                <img src="/3.jpg" className="w-full" />
+                <img src="/post_thumbnail/default.jpg" className="w-full" />
                 <div className="text-sm mt-2">
                   <p>Experience varies directly with equipment ruined.</p>
                   <p>경험은 망가뜨린 도구의 수에 비례한다.</p>
