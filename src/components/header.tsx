@@ -6,14 +6,20 @@ import styles from '../styles/header.module.css'
 
 const navItems: { label: string; page?: string }[] = [
   { label: 'DevLog', page: '/' },
-  { label: 'StudyNote', page: '/blog' },
+  { label: 'StudyNote', page: '/studynote' },
   { label: 'Life', page: '/contact' },
 ]
 
 const ogImageUrl = 'https://notion-blog.now.sh/og-image.png'
 
-export default ({ titlePre = '' }) => {
-  const { pathname } = useRouter()
+export default ({ titlePre = '', category = '' }) => {
+  // const { pathname } = useRouter()
+
+  // if (pathname === '/') {
+  //   category = 'DevLog'
+  // } else if (pathname === '/studynote') {
+  //   category = 'StudyNote'
+  // }
 
   return (
     <header>
@@ -48,7 +54,7 @@ export default ({ titlePre = '' }) => {
         <div className="flex justify-center mb-8 border-b border-gray-300 -pb-3">
           {navItems.map(({ label, page }) => {
             const menuColor =
-              page === pathname
+              label === category
                 ? ' text-teal-400 border-b-2 border-teal-400'
                 : ' text-gray-700'
             return (

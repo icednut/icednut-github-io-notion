@@ -1,7 +1,6 @@
 import rpc from './rpc'
 
 export default async function getNotionUsers(ids: string[]) {
-  console.log('ids = ' + ids)
   const { results = [] } = await rpc('getRecordValues', {
     requests: ids.map((id: string) => ({
       id,
@@ -10,7 +9,6 @@ export default async function getNotionUsers(ids: string[]) {
   })
 
   const users: any = {}
-  console.log(results)
 
   for (const result of results) {
     const { value } = result || { value: {} }
