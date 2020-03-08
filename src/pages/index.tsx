@@ -25,7 +25,6 @@ export async function unstable_getStaticProps() {
       for (const author of post.Authors) {
         authorsToGet.add(author)
       }
-      //   console.log('post', post)
       return post
     })
     .filter(Boolean)
@@ -122,14 +121,16 @@ export default ({ posts = [] }) => {
                 <div className="px-6 py-4">
                   {post.Tags &&
                     post.Tags.split(',').map(tag => (
-                      <span
-                        className={
-                          'inline-block py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
-                          blogStyles.blogTag
-                        }
-                      >
-                        #{tag}
-                      </span>
+                      <Link href={'/tag/' + tag} as={'/tag/' + tag}>
+                        <a
+                          className={
+                            'inline-block py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                            blogStyles.blogTag
+                          }
+                        >
+                          #{tag}
+                        </a>
+                      </Link>
                     ))}
                 </div>
               </div>

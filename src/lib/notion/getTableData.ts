@@ -21,6 +21,11 @@ export default async function loadTable(
     tag,
     category
   )
+  const recordMapCollection = col['recordMap']['collection']
+  const tagOptions = recordMapCollection[
+    Object.keys(recordMapCollection)[0]
+  ].value.schema['$!60']['options'].map(each => each.value)
+  // console.log(tagOptions)
   const entries = values(col.recordMap.block).filter((block: any) => {
     return block.value && block.value.parent_id === value.collection_id
   })

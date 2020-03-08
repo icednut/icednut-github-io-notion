@@ -39,6 +39,7 @@ export default async function getBlogIndex(
       )
 
       postsTable = await getTableData(tableBlock, true, tag, category)
+      //   postsTable = table
     } catch (err) {
       console.warn(
         `Failed to load Notion posts, attempting to auto create table`
