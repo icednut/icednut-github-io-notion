@@ -6,7 +6,11 @@ import { getPostPreview } from './getPostPreview'
 import { readFile, writeFile } from '../fs-helpers'
 import { BLOG_INDEX_ID, BLOG_INDEX_CACHE } from './server-constants'
 
-export default async function getBlogIndex(previews = true) {
+export default async function getBlogIndex(
+  previews = true,
+  tag: string = '',
+  category: string = ''
+) {
   let postsTable: any = null
   const useCache = process.env.USE_CACHE === 'true'
   const cacheFile = `${BLOG_INDEX_CACHE}${previews ? '_previews' : ''}`
@@ -34,7 +38,7 @@ export default async function getBlogIndex(previews = true) {
         (block: any) => block.value.type === 'collection_view'
       )
 
-      postsTable = await getTableData(tableBlock, true)
+      postsTable = await getTableData(tableBlock, true, tag, category)
     } catch (err) {
       console.warn(
         `Failed to load Notion posts, attempting to auto create table`

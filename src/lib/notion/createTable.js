@@ -106,6 +106,7 @@ async function main() {
                   { property: 'a`af', visible: true },
                   { property: 'ijjk', visible: true },
                   { property: 'f9Vj', visible: true },
+                  { property: 'a8b7', visible: true },
                 ],
                 table_wrap: true,
               },
@@ -132,6 +133,7 @@ async function main() {
                 'a`af': { name: 'Date', type: 'date' },
                 ijjk: { name: 'Authors', type: 'person' },
                 f9Vj: { name: 'Tags', type: 'multi_select' },
+                a8b7: { name: 'Category', type: 'select' },
               },
               format: {
                 collection_page_properties: [
@@ -140,6 +142,7 @@ async function main() {
                   { property: 'a`af', visible: true },
                   { property: 'ijjk', visible: true },
                   { property: 'f9Vj', visible: true },
+                  { property: 'a8b7', visible: true },
                 ],
               },
               parent_id: collectionId,
