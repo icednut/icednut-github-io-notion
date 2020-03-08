@@ -1,10 +1,20 @@
 import '../styles/global.css'
 import Footer from '../components/footer'
+import getTagIndex from '../lib/notion/getTagIndex'
 
-export default ({ Component, pageProps }) => (
-  <>
-    <Component {...pageProps} />
+const App = ({ Component, pageProps, tagOptions }) => {
+  return (
+    <>
+      <Component {...pageProps} />
 
-    <Footer></Footer>
-  </>
-)
+      <Footer tagOptions={tagOptions}></Footer>
+    </>
+  )
+}
+
+App.getInitialProps = async ({ req }) => {
+  const tagOptions = await getTagIndex()
+  return { tagOptions }
+}
+
+export default App

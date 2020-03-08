@@ -10,8 +10,9 @@ import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 import { url } from 'inspector'
 
-export async function unstable_getStaticProps() {
-  const postsTable = await getBlogIndex(true, '', 'StudyNote')
+export async function unstable_getStaticProps({ params }) {
+  const tag = params.slug
+  const postsTable = await getBlogIndex(true, tag)
 
   const authorsToGet: Set<string> = new Set()
   const posts: any[] = Object.keys(postsTable)
@@ -39,15 +40,16 @@ export async function unstable_getStaticProps() {
   return {
     props: {
       posts,
+      tag,
     },
     revalidate: 10,
   }
 }
 
-export default ({ posts = [] }) => {
+export default ({ posts = [], tag = '' }) => {
   return (
     <>
-      <Header titlePre="StudyNote" category="StudyNote" />
+      <Header titlePre={tag} />
       <div className="container mx-auto max-w-screen-lg grid px-3">
         <div className="gap-4 masonry my-4">
           {posts.length === 0 && (
@@ -77,7 +79,7 @@ export default ({ posts = [] }) => {
                           'w-full transition-transform duration-500 transform hover:scale-125 ' +
                           blogStyles.darkenImage
                         }
-                        src="3.jpg"
+                        src="/3.jpg"
                         alt="Sunset in the mountains"
                       />
                     </a>
