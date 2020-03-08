@@ -117,7 +117,10 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             </div>
             <div className={blogStyles.nextPrevPostText}>previous post</div>
             <div className={blogStyles.nextPrevPostTitle}>
-              <Link href={'/' + prevPost.Slug} as={'/' + prevPost.Slug}>
+              <Link
+                href={getBlogLink(prevPost.Slug)}
+                as={getBlogLink(prevPost.Slug)}
+              >
                 <a className="border-b-2 border-transparent border-dashed hover:border-teal-400">
                   {prevPost.Page}
                 </a>
@@ -481,7 +484,10 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             </div>
             <div className={blogStyles.nextPrevPostText}>next post</div>
             <div className={blogStyles.nextPrevPostTitle}>
-              <Link href={'/' + nextPost.Slug} as={'/' + nextPost.Slug}>
+              <Link
+                href={getBlogLink(nextPost.Slug)}
+                as={getBlogLink(nextPost.Slug)}
+              >
                 <a className="border-b-2 border-transparent border-dashed hover:border-teal-400">
                   {nextPost.Page}
                 </a>
