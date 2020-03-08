@@ -119,7 +119,7 @@ export default ({ posts = [] }) => {
                         <span> / </span>
                         {post.Date && <span>{getDateStr(post.Date)}</span>}
                       </p>
-                      <div>
+                      {/* <div>
                         {(!post.preview || post.preview.length === 0) && (
                           <p className="text-gray-400">No preview available</p>
                         )}
@@ -128,7 +128,7 @@ export default ({ posts = [] }) => {
                             textBlock(block, true, `${post.Slug}${idx}`)
                           </p>
                         ))}
-                      </div>
+                      </div> */}
                     </a>
                   </Link>
                 </div>
