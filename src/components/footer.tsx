@@ -31,7 +31,7 @@ const contacts = [
   },
 ]
 
-export default ({ tagOptions }) => {
+export default ({ tagOptions = [] }) => {
   return (
     <>
       <footer>
@@ -79,13 +79,14 @@ export default ({ tagOptions }) => {
             <div className="ml-1">
               <div className="font-bold text-sm">Tags</div>
               <div className="py-2">
-                {tagOptions.map(each => (
-                  <Link href={'/tag/' + each} as={'/tag/' + each}>
-                    <a className="inline-block py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm post-tag">
-                      #{each}
-                    </a>
-                  </Link>
-                ))}
+                {tagOptions &&
+                  tagOptions.map(each => (
+                    <Link href={'/tag/' + each} as={'/tag/' + each}>
+                      <a className="inline-block py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm post-tag">
+                        #{each}
+                      </a>
+                    </Link>
+                  ))}
               </div>
             </div>
           </div>
