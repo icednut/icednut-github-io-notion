@@ -22,7 +22,7 @@ const contacts = [
   {
     Comp: LinkedIn,
     alt: 'linkedin icon',
-    link: 'https://www.linkedin.com/in/jj-kasper-0b5392166/',
+    link: 'https://www.linkedin.com/in/wangeun-lee-550a93a2/',
   },
   {
     Comp: Envelope,
@@ -42,9 +42,8 @@ export default ({ tagOptions = [] }) => {
               <div className="py-2">
                 <img src="/3.jpg" className="w-full" />
                 <div className="text-sm mt-2">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua.
+                  <p>Experience varies directly with equipment ruined.</p>
+                  <p>경험은 망가뜨린 도구의 수에 비례한다.</p>
                   <div className="flex justify-start mt-3">
                     {contacts.map(({ Comp, link, alt }) => {
                       return (
@@ -53,6 +52,7 @@ export default ({ tagOptions = [] }) => {
                           href={link}
                           aria-label={alt}
                           className="px-4 text-center"
+                          target="_blank"
                         >
                           <Comp height={16} className="inline" />
                         </a>
@@ -90,7 +90,7 @@ export default ({ tagOptions = [] }) => {
               </div>
             </div>
           </div>
-          <div className="text-xs mt-3">@Copyright Wan Geun Lee</div>
+          <div className="text-xs mt-3">@2020 Wan Geun Lee</div>
         </div>
       </footer>
     </>

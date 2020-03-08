@@ -34,7 +34,7 @@ export default ({ titlePre = '', category = '' }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
-      <div className="relative w-screen pt-12 mb-20 bg-white">
+      <div className="relative pt-12 mb-20 bg-white">
         <img
           src="/wglee2.png"
           alt="wglee"
