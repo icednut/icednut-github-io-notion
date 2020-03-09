@@ -31,9 +31,8 @@
 }
 
 .postPreviewList {
-  left: -1.75rem;
-  @apply w-10;
-  @apply h-10;
+  @apply w-8;
+  @apply h-8;
   transition: width 0.5s;
   -webkit-transition: width 0.5s;
 }
@@ -45,7 +44,6 @@
 }
 
 .tableOfContents {
-  left: 3rem;
   top: -3rem;
 }
 

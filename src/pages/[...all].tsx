@@ -131,11 +131,14 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
 
         <div className="sticky top-0" style={{ zIndex: 9999 }}>
           <div
-            className={'absolute overflow-hidden ' + blogStyles.postPreviewList}
+            id="table-of-content"
+            className={
+              'absolute mx-3 overflow-hidden ' + blogStyles.postPreviewList
+            }
           >
-            <div className="p-2 bg-teal-400 w-10">
+            <div className="p-2 bg-teal-400 w-8 opacity-50">
               <svg
-                className="fill-current text-white w-6 h-6"
+                className="fill-current text-white w-4 h-4"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
@@ -143,7 +146,9 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
               </svg>
             </div>
             <div
-              className={'p-3 bg-white border-2 border-gray-400 ml-10 text-sm'}
+              className={
+                'p-2 bg-white border border-dotted border-gray-400 text-sm'
+              }
             >
               <div className="font-bold text-gray-800 text-white mb-4">
                 Table of Contents
