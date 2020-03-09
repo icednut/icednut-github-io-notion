@@ -543,7 +543,9 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
           </div>
         )}
 
-        <div className="bg-white shadow mx-3 my-10 px-12 py-6">Comment</div>
+        <div className="bg-white shadow mx-3 my-10 px-12 py-6">
+          Comment 준비 중...
+        </div>
       </div>
     </>
   )
