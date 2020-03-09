@@ -44,9 +44,10 @@ export default ({ tagOptions = [] }) => {
                 <div className="text-sm mt-2">
                   <p>
                     Hi, I'm Wan Geun Lee from Korea. If you can't pronounce my
-                    name, please call me Will. This is my web backend
+                    name, please call me Will. Icednut's Space is my web backend
                     development log, study note and life log storage. Have a
-                    nice day. Thank you.
+                    nice day. If you have question, please contact me below mail
+                    icon. Thank you.
                   </p>
                   <p>&nbsp;</p>
                   <p>
