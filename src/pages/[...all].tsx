@@ -106,7 +106,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
       <div className="container mx-auto max-w-screen-lg">
         {prevPost && prevPost.Slug && prevPost.Page && (
           <div className={blogStyles.nextPrevPostContainer}>
-            <div className={blogStyles.nextPrevPostIconContainer}>
+            <div className={blogStyles.nextPrevPostIconContainer + ' mb-3'}>
               <svg
                 className={blogStyles.nextPrevPostIcon}
                 xmlns="http://www.w3.org/2000/svg"
@@ -166,20 +166,31 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                     isSubtitle: boolean,
                     additionalClass: string
                   ) => {
+                    let titleIcon = (
+                      <svg
+                        className="fill-current inline mr-2 text-gray-400 w-3 h-3"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M12 5h-2v12H8V3h8v2h-2v12h-2V5zM8 3a4 4 0 1 0 0 8V3z" />
+                      </svg>
+                    )
+
+                    if (isSubtitle) {
+                      titleIcon = (
+                        <svg
+                          className="fill-current inline mr-2 text-gray-400 w-3 h-3"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M3.5 13H12v5l6-6-6-6v5H4V2H2v11z" />
+                        </svg>
+                      )
+                    }
                     toRender.push(
                       <Heading key={id}>
                         <div key={id} className={additionalClass}>
-                          {isSubtitle && (
-                            <span>
-                              <svg
-                                className="fill-current inline mr-2 text-gray-400 w-3 h-3"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M3.5 13H12v5l6-6-6-6v5H4V2H2v11z" />
-                              </svg>
-                            </span>
-                          )}
+                          <span>{titleIcon}</span>
                           <span>{textBlock(properties.title, true, id)}</span>
                         </div>
                       </Heading>
@@ -205,7 +216,8 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
         </div>
 
         <div
-          className="fixed shadow-2xl p-4 bg-white rounded-full text-xs"
+          id="top-button"
+          className="fixed shadow-2xl p-4 bg-white rounded-full text-xs opacity-50"
           style={{ right: '26px', bottom: '29px' }}
         >
           <a href="#">
@@ -231,7 +243,13 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 transform: 'translate(-50%, -50%)',
               }}
             >
-              <div className="text-4xl font-extrabold text-white">
+              <div
+                id="post-title"
+                className={
+                  'break-words font-extrabold text-white ' +
+                  blogStyles.postTitle
+                }
+              >
                 {post.Page || ''}
               </div>
               <div className="text-gray-400 text-sm">
@@ -258,7 +276,10 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             />
           </div>
 
-          <div className="px-12 py-6">
+          <div
+            id="post-content"
+            className={'py-6 break-all ' + blogStyles.postContent}
+          >
             {(!post.content || post.content.length === 0) && (
               <p>This post has no content</p>
             )}
@@ -499,7 +520,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
         </div>
         {nextPost && nextPost.Slug && nextPost.Page && (
           <div className={blogStyles.nextPrevPostContainer}>
-            <div className={blogStyles.nextPrevPostIconContainer}>
+            <div className={blogStyles.nextPrevPostIconContainer + ' mt-3'}>
               <svg
                 className={blogStyles.nextPrevPostIcon}
                 xmlns="http://www.w3.org/2000/svg"
