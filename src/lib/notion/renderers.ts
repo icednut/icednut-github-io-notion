@@ -15,11 +15,13 @@ function applyTags(tags = [], children, noPTag = false, key) {
     if (tagName === 'c') {
       tagName = 'code'
       props.className =
-        'leading-loose tracking-wide p-2 bg-gray-400 rounded text-xs text-red-600'
+        'leading-loose tracking-wide p-1 bg-gray-400 rounded text-xs text-red-600'
     }
 
     if (tagName === 'a') {
       props.href = tag[1]
+      props.className =
+        'leading-loose mt-px text-justify rounded text-teal-400 border-b-2 border-transparent border-dashed hover:border-teal-400'
     }
 
     child = React.createElement(components[tagName] || tagName, props, child)
