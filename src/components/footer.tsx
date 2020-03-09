@@ -42,8 +42,17 @@ export default ({ tagOptions = [] }) => {
               <div className="py-2">
                 <img src="/post_thumbnail/default.jpg" className="w-full" />
                 <div className="text-sm mt-2">
-                  <p>Experience varies directly with equipment ruined.</p>
-                  <p>경험은 망가뜨린 도구의 수에 비례한다.</p>
+                  <p>
+                    Hi, I'm Wan Geun Lee from Korea. If you can't pronounce my
+                    name, please call me Will. This is my web backend
+                    development log, study note and life log storage. Have a
+                    nice day. Thank you.
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>
+                    My Motto: Experience varies directly with equipment ruined.
+                    경험은 망가뜨린 도구의 수에 비례한다.
+                  </p>
                   <div className="flex justify-start mt-3">
                     {contacts.map(({ Comp, link, alt }) => {
                       return (
@@ -90,7 +99,7 @@ export default ({ tagOptions = [] }) => {
               </div>
             </div>
           </div>
-          <div className="text-xs mt-3">@2020 Wan Geun Lee</div>
+          <div className="text-xs mt-10">@2020 Wan Geun Lee</div>
         </div>
       </footer>
     </>
