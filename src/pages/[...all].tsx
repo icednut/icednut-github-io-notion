@@ -282,10 +282,10 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 let additionalListClassName = ''
                 switch (listTagName) {
                   case 'ul':
-                    additionalListClassName = 'list-disc list-inside'
+                    additionalListClassName = 'my-1 list-disc list-inside'
                     break
                   case 'ol':
-                    additionalListClassName = 'list-decimal list-inside'
+                    additionalListClassName = 'my-1 list-decimal list-inside'
                     break
                   case 'li':
                     additionalListClassName = 'leading-loose'
@@ -312,7 +312,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                                 components.ul || 'ul',
                                 {
                                   key: item + 'sub-list',
-                                  className: 'list-disc list-inside',
+                                  className: 'my-1 list-disc list-inside',
                                 },
                                 item.nested.map(nestedId =>
                                   createEl(listMap[nestedId], 'ml-6')
@@ -401,18 +401,28 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                       muted={!isImage}
                       autoPlay={!isImage}
                       style={{ width }}
+                      className="my-1"
                     />
                   )
                   break
                 }
                 case 'header':
-                  renderHeading('h1', 'mt-3 leading-loose text-3xl font-bold')
+                  renderHeading(
+                    'h1',
+                    'mt-4 mb-px leading-loose text-3xl font-bold'
+                  )
                   break
                 case 'sub_header':
-                  renderHeading('h2', 'mt-2 leading-loose text-xl font-bold')
+                  renderHeading(
+                    'h2',
+                    'mt-3 mb-px leading-loose text-xl font-bold'
+                  )
                   break
                 case 'sub_sub_header':
-                  renderHeading('h3', 'mt-1 leading-loose text-lg font-bold')
+                  renderHeading(
+                    'h3',
+                    'mt-2 mb-px leading-loose text-lg font-bold'
+                  )
                   break
                 case 'code': {
                   if (properties.title) {
