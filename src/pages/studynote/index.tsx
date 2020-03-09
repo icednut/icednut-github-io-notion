@@ -74,7 +74,7 @@ export default ({ posts = [] }) => {
                           '/post_thumbnail/' +
                           (post.Thumbnail && post.Thumbnail !== ''
                             ? post.Thumbnail
-                            : 'default.jpg')
+                            : 'default_studynote.jpg')
                         }
                         alt="Sunset in the mountains"
                       />
