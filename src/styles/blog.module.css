@@ -43,7 +43,7 @@
 @media only screen and (min-width: 1024px) {
   .postPreviewList:hover {
     width: 512px;
-    height: 500px;
+    height: 620px;
   }
   .postTitle {
     @apply text-4xl;
@@ -57,7 +57,7 @@
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
   .postPreviewList:hover {
     width: 512px;
-    height: 500px;
+    height: 620px;
   }
   .postTitle {
     @apply text-4xl;
@@ -71,7 +71,7 @@
 @media only screen and (max-width: 767px) and (min-width: 180px) {
   .postPreviewList:hover {
     width: 80%;
-    height: 50vh;
+    height: 80vh;
   }
   .postTitle {
     @apply text-2xl;
