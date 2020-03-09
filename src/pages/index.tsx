@@ -119,16 +119,6 @@ export default ({ posts = [] }) => {
                         <span> / </span>
                         {post.Date && <span>{getDateStr(post.Date)}</span>}
                       </p>
-                      {/* <div>
-                        {(!post.preview || post.preview.length === 0) && (
-                          <p className="text-gray-400">No preview available</p>
-                        )}
-                        {(post.preview || []).map((block, idx) => (
-                          <p>
-                            textBlock(block, true, `${post.Slug}${idx}`)
-                          </p>
-                        ))}
-                      </div> */}
                     </a>
                   </Link>
                 </div>
@@ -138,7 +128,7 @@ export default ({ posts = [] }) => {
                       <Link href={'/tag/' + tag} as={'/tag/' + tag}>
                         <a
                           className={
-                            'inline-block py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                            'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 text-white text-sm ' +
                             blogStyles.blogTag
                           }
                         >
@@ -151,18 +141,6 @@ export default ({ posts = [] }) => {
             )
           })}
         </div>
-        {/* <div className={blogStyles.nextPrevPostContainer}>
-          <div className={blogStyles.nextPrevPostIconContainer}>
-            <svg
-              className={blogStyles.nextPrevPostIcon}
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-          </div>
-          <div className={blogStyles.nextPrevPostText}>More</div>
-        </div> */}
       </div>
     </>
   )

@@ -129,14 +129,15 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
           </div>
         )}
 
-        <div className="sticky top-0" style={{ zIndex: 9999 }}>
+        <div className={'sticky top-0 px-3'} style={{ zIndex: 20 }}>
           <div
-            id="table-of-content"
-            className={
-              'absolute mx-3 overflow-hidden ' + blogStyles.postPreviewList
-            }
+            className={'absolute overflow-hidden ' + blogStyles.postPreviewList}
           >
-            <div className="p-2 bg-teal-400 w-8 opacity-50">
+            <div
+              id="table-of-content__icon"
+              className="absolute p-2 bg-teal-400 w-8 opacity-50"
+              style={{ zIndex: 22 }}
+            >
               <svg
                 className="fill-current text-white w-4 h-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -146,9 +147,11 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
               </svg>
             </div>
             <div
+              id="table-of-content__list"
               className={
-                'p-2 bg-white border border-dotted border-gray-400 text-sm'
+                'absolute overflow-hidden w-full h-full pt-10 px-3 bg-white border border-dotted border-gray-400 text-sm'
               }
+              style={{ zIndex: 21 }}
             >
               <div className="font-bold text-gray-800 text-white mb-4">
                 Table of Contents
@@ -216,13 +219,13 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
           </a>
         </div>
 
-        <div className="bg-white shadow m-3">
+        <div className="bg-white shadow mx-3">
           <div id="post-title" className="relative">
             <div
               id="title-info"
               className="absolute w-full px-3 text-center"
               style={{
-                zIndex: 9998,
+                zIndex: 10,
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
@@ -484,7 +487,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 post.Tags.split(',').map(tag => (
                   <div
                     className={
-                      'inline-block py-px px-2 mr-1 mt-1 bg-teal-400 text-white text-sm ' +
+                      'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 text-white text-sm ' +
                       blogStyles.blogTag
                     }
                   >
