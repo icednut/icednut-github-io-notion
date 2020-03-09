@@ -135,7 +135,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
           >
             <div
               id="table-of-content__icon"
-              className="absolute p-2 bg-teal-400 w-8 opacity-50"
+              className="absolute p-2 bg-teal-400 w-8"
               style={{ zIndex: 22 }}
             >
               <svg
