@@ -7,6 +7,7 @@ import styles from '../styles/header.module.css'
 const navItems: { label: string; page?: string }[] = [
   { label: 'DevLog', page: '/' },
   { label: 'StudyNote', page: '/studynote' },
+  { label: 'All', page: '/timeline' },
 ]
 
 const ogImageUrl = 'https://icednut-github-io-notion.now.sh/og-image.jpg'
