@@ -10,6 +10,14 @@ export const getDateStr = date => {
   })
 }
 
+export const getDateNumberStr = date => {
+  return new Date(date).toLocaleString('ko-KR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  })
+}
+
 export const postIsReady = (post: any) => {
   return process.env.NODE_ENV !== 'production' || post.Published === 'Yes'
 }
