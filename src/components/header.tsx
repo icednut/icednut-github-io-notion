@@ -29,7 +29,7 @@ export default ({ titlePre = '', category = '' }) => {
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
       <div className="relative pt-12 mb-20 bg-white">
-        <div className="absolute" style={{ left: '28px', top: '28px' }}>
+        <div className="absolute" style={{ left: '1.25rem', top: '1.25rem' }}>
           <Link href="/atom">
             <a target="_blank">
               <svg

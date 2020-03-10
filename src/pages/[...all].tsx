@@ -417,8 +417,29 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
 
                   const isImage = type === 'image'
                   const Comp = isImage ? 'img' : 'video'
-
-                  toRender.push(
+                  const resultDom = isImage ? (
+                    <Link
+                      href={`/api/asset?assetUrl=${encodeURIComponent(
+                        format.display_source as any
+                      )}&blockId=${id}`}
+                    >
+                      <a target="_blank">
+                        <Comp
+                          key={id}
+                          src={`/api/asset?assetUrl=${encodeURIComponent(
+                            format.display_source as any
+                          )}&blockId=${id}`}
+                          controls={!isImage}
+                          alt={isImage ? 'An image from Notion' : undefined}
+                          loop={!isImage}
+                          muted={!isImage}
+                          autoPlay={!isImage}
+                          style={{ width }}
+                          className="my-1"
+                        />
+                      </a>
+                    </Link>
+                  ) : (
                     <Comp
                       key={id}
                       src={`/api/asset?assetUrl=${encodeURIComponent(
@@ -433,6 +454,8 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                       className="my-1"
                     />
                   )
+
+                  toRender.push(resultDom)
                   break
                 }
                 case 'header':
