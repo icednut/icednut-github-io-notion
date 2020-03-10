@@ -34,6 +34,22 @@ const contacts = [
 export default ({ tagOptions = [] }) => {
   return (
     <>
+      <div
+        id="top-button"
+        className="fixed shadow-2xl p-4 bg-white rounded-full text-xs opacity-50"
+        style={{ right: '26px', bottom: '29px' }}
+      >
+        <a href="#">
+          <svg
+            className="fill-current text-gray-600 w-6 h-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
+          </svg>
+        </a>
+      </div>
+
       <footer>
         <div className="container mx-auto max-w-screen-lg mt-32 pt-16 pb-8 text-gray-600 border-t border-gray-300 px-3">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mb-3">

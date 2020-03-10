@@ -73,11 +73,8 @@ export default ({ postPerYearMap = {} }) => {
             postPerYearMap[year].length >= 0 &&
             postPerYearMap[year].map(post => {
               return (
-                <div className="ml-10 pl-3 border-l-2 border-gray-400 leading-loose">
-                  <div className="inline-block text-xs mr-3 w-32 text-gray-500 px-2 py-px">
-                    {getDateStr(post.Date)}
-                  </div>
-                  <div className="inline ml-1">
+                <div className="ml-10 pl-4 border-l-2 border-gray-400 leading-loose">
+                  <div className="inline mr-3">
                     <Link
                       href={getBlogLink(post.Slug)}
                       as={getBlogLink(post.Slug)}
@@ -86,6 +83,9 @@ export default ({ postPerYearMap = {} }) => {
                         {post.Page}
                       </a>
                     </Link>
+                    <div className="inline text-xs text-gray-500 px-2">
+                      {getDateStr(post.Date)}
+                    </div>
                   </div>
                 </div>
               )
