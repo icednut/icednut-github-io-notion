@@ -6,7 +6,8 @@ const Code = ({ children, language = 'javascript' }) => {
     <>
       <pre>
         <code
-          className="overflow-auto block bg-gray-300 mt-1 p-4 leading-normal text-xs"
+          className="overflow-auto block my-1 p-5"
+          style={{ backgroundColor: '#2d2d2d', color: '#ccc' }}
           dangerouslySetInnerHTML={{
             __html: Prism.highlight(
               children,

@@ -1,4 +1,5 @@
 import '../styles/global.css'
+import '../styles/prism.tomorrow.css'
 import Footer from '../components/footer'
 import getTagIndex from '../lib/notion/getTagIndex'
 

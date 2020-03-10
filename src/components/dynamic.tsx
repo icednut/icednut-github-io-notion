@@ -8,6 +8,7 @@ export default {
   li: 'li',
   p: 'p',
   blockquote: 'blockquote',
+  div: 'div',
   a: ExtLink,
 
   Code: dynamic(() => import('./code')),
