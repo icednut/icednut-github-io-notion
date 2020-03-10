@@ -4,12 +4,7 @@ import Header from '../../components/header'
 import blogStyles from '../../styles/blog.module.css'
 import sharedStyles from '../../styles/shared.module.css'
 
-import {
-  getBlogLink,
-  getDateStr,
-  getDateNumberStr,
-  postIsReady,
-} from '../../lib/blog-helpers'
+import { getBlogLink, getDateStr, postIsReady } from '../../lib/blog-helpers'
 import { textBlock } from '../../lib/notion/renderers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
@@ -40,9 +35,8 @@ export async function unstable_getStaticProps() {
 
   const postPerYearMap = {}
   posts.forEach(post => {
-    const postDateNums = getDateNumberStr(post.Date).split('/')
-    // const postDate = postDateNums[2] + postDateNums[0] + postDateNums[1] + ""
-    const year = parseInt(postDateNums[2])
+    const postDate = getDateStr(post.Date).split(', ')
+    const year = parseInt(postDate[1])
 
     if (!postPerYearMap[year]) {
       postPerYearMap[year] = []
