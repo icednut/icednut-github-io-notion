@@ -191,7 +191,9 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                       <Heading key={id}>
                         <div key={id} className={additionalClass}>
                           <span>{titleIcon}</span>
-                          <span>{textBlock(properties.title, true, id)}</span>
+                          <span className="border-b border-transparent border-dashed hover:border-gray-400">
+                            {textBlock(properties.title, true, id)}
+                          </span>
                         </div>
                       </Heading>
                     )
@@ -490,10 +492,24 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 }
                 case 'quote':
                   if (properties.title) {
+                    const originalContent = properties.title[0][0]
+                    const quoteContent = originalContent.replace(
+                      /\\n/g,
+                      '<br/>'
+                    )
+                    properties.title[0][0] = quoteContent
+
                     toRender.push(
                       React.createElement(
                         components.blockquote,
-                        { key: id },
+                        {
+                          key: id,
+                          className:
+                            'border-l-4 border-gray-600 bg-teal-100 p-4 text-lg leading-relaxed my-3',
+                          style: {
+                            whiteSpace: 'pre-wrap',
+                          },
+                        },
                         properties.title
                       )
                     )
