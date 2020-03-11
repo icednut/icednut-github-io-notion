@@ -1,22 +1,39 @@
 import Prism from 'prismjs'
 import 'prismjs/components/prism-jsx'
+import Clipboard from 'react-clipboard.js'
 
 const Code = ({ children, language = 'javascript' }) => {
   return (
     <>
-      <pre>
-        <code
-          className="overflow-auto block my-1 p-5"
-          style={{ backgroundColor: '#2d2d2d', color: '#ccc' }}
-          dangerouslySetInnerHTML={{
-            __html: Prism.highlight(
-              children,
-              Prism.languages[language.toLowerCase()] ||
-                Prism.languages.javascript
-            ),
-          }}
-        />
-      </pre>
+      <div className="relative">
+        <Clipboard
+          className="absolute bg-gray-600 rounded px-2 py-1 text-xs"
+          style={{ right: '0.75rem', top: '0.75rem' }}
+          data-clipboard-text={children}
+          onSuccess={() => alert('Copied!')}
+        >
+          Copy to Clipboard
+        </Clipboard>
+        <pre>
+          <code
+            className="overflow-auto block my-1 p-5 text-sm"
+            style={{ backgroundColor: '#2d2d2d', color: '#ccc' }}
+            dangerouslySetInnerHTML={{
+              __html: Prism.highlight(
+                children,
+                Prism.languages[language.toLowerCase()] ||
+                  Prism.languages.javascript
+              ),
+            }}
+          />
+        </pre>
+        <div
+          className="absolute text-gray-300 px-2 py-1 text-xs"
+          style={{ right: '0.75rem', bottom: '1rem' }}
+        >
+          {language}
+        </div>
+      </div>
 
       <style jsx>{`
         pre {
