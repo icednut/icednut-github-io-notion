@@ -4,13 +4,13 @@
     <subtitle>Icednut's Space Notion Blog</subtitle>
     <link href="/atom" rel="self" type="application/rss+xml"/>
     <link href="/" />
-    <updated>2020-03-10T00:19:39.117Z</updated>
+    <updated>2020-03-11T13:14:06.697Z</updated>
     <id>Icednut's Space Notion Blog</id>
     <entry>
       <id>/2020/03/09/20200309-start_notion_blog</id>
-      <title>노션으로 블로깅하기 위한 발걸음</title>
+      <title>노션으로 블로깅하기 위한 발걸음 (Blog with Notion)</title>
       <link href="/2020/03/09/20200309-start_notion_blog"/>
-      <updated>2020-03-09T00:00:00.676Z</updated>
+      <updated>2020-03-09T00:00:00.929Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -21,10 +21,234 @@
       <author><name>Wan Geun Lee</name></author>
     </entry>
     <entry>
+      <id>/2019/07/09/20190709-java-hbase-client-with-slf4j-logback</id>
+      <title>Java Hbase-client 디펜던시 추가 후 로그가 제대로 안나오는 이슈 (with Slf4j, Logback)</title>
+      <link href="/2019/07/09/20190709-java-hbase-client-with-slf4j-logback"/>
+      <updated>2019-07-09T00:00:00.937Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2019/07/09/20190709-java-hbase-client-with-slf4j-logback">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2019/01/31/20190131-rxjava-iterable</id>
+      <title>RxJava를 이용하여 크기를 가늠할 수 없는 Iterable에서 데이터 읽고 처리하기</title>
+      <link href="/2019/01/31/20190131-rxjava-iterable"/>
+      <updated>2019-01-31T00:00:00.938Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2019/01/31/20190131-rxjava-iterable">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2019/01/29/20190129-day07</id>
+      <title>스칼라 스터디 Day07 - 속성 기반 검사</title>
+      <link href="/2019/01/29/20190129-day07"/>
+      <updated>2019-01-29T00:00:00.939Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2019/01/29/20190129-day07">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2019/01/07/20190107-day06</id>
+      <title>스칼라 스터디 Day06 - 순수 함수적 병렬성</title>
+      <link href="/2019/01/07/20190107-day06"/>
+      <updated>2019-01-07T00:00:00.939Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2019/01/07/20190107-day06">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/12/25/20181225-day05</id>
+      <title>스칼라 스터디 Day05 - 순수 함수적 상태</title>
+      <link href="/2018/12/25/20181225-day05"/>
+      <updated>2018-12-25T00:00:00.940Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/12/25/20181225-day05">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/12/17/20181217-day04</id>
+      <title>스칼라 스터디 Day04 - 엄격성과 나태성</title>
+      <link href="/2018/12/17/20181217-day04"/>
+      <updated>2018-12-17T00:00:00.943Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/12/17/20181217-day04">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/12/10/20181210-day03</id>
+      <title>스칼라 스터디 Day03 - 예외를 이용하지 않은 오류 처리</title>
+      <link href="/2018/12/10/20181210-day03"/>
+      <updated>2018-12-10T00:00:00.944Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/12/10/20181210-day03">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/12/04/20181204-day02</id>
+      <title>스칼라 스터디 Day02 - 함수적 자료구조</title>
+      <link href="/2018/12/04/20181204-day02"/>
+      <updated>2018-12-04T00:00:00.945Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/12/04/20181204-day02">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/11/25/20181125-day01</id>
+      <title>스칼라 스터디 Day01 - 함수형 프로그래밍이란?</title>
+      <link href="/2018/11/25/20181125-day01"/>
+      <updated>2018-11-25T00:00:00.946Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/11/25/20181125-day01">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/07/04/20180704-grpc-grpc-overview</id>
+      <title>gRPC 살펴보기 (gRPC Overview)</title>
+      <link href="/2018/07/04/20180704-grpc-grpc-overview"/>
+      <updated>2018-07-04T00:00:00.946Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/07/04/20180704-grpc-grpc-overview">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/05/24/20180524-java9-stream</id>
+      <title>Java9에서의 Stream에 관한 짧은 팁</title>
+      <link href="/2018/05/24/20180524-java9-stream"/>
+      <updated>2018-05-24T00:00:00.947Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/05/24/20180524-java9-stream">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/04/12/20180412-to-do-app-observer-pattern-javascript</id>
+      <title>To-Do App 개발을 통한 Observer Pattern 이해하기 (javascript 버전)</title>
+      <link href="/2018/04/12/20180412-to-do-app-observer-pattern-javascript"/>
+      <updated>2018-04-12T00:00:00.948Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/04/12/20180412-to-do-app-observer-pattern-javascript">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/04/06/20180406-chinese-commerce-development-experience-seminar</id>
+      <title>중국커머스 서비스 개발기 세미나 후기</title>
+      <link href="/2018/04/06/20180406-chinese-commerce-development-experience-seminar"/>
+      <updated>2018-04-06T00:00:00.949Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/04/06/20180406-chinese-commerce-development-experience-seminar">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/03/29/20180329-to-do-app-visitor-pattern-javascript</id>
+      <title>To-Do App 개발을 통한 Visitor Pattern 이해하기 (javascript 버전)</title>
+      <link href="/2018/03/29/20180329-to-do-app-visitor-pattern-javascript"/>
+      <updated>2018-03-29T00:00:00.950Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/03/29/20180329-to-do-app-visitor-pattern-javascript">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/03/27/20180327-to-do-app-composite-pattern-javascript-java</id>
+      <title>To-Do App 개발을 통한 Composite Pattern 이해하기 (javascript, java 버전)</title>
+      <link href="/2018/03/27/20180327-to-do-app-composite-pattern-javascript-java"/>
+      <updated>2018-03-27T00:00:00.951Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/03/27/20180327-to-do-app-composite-pattern-javascript-java">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
+      <id>/2018/03/25/20180325-java-garbage-collector-part-1-with-g1gc-garbage-first-gc</id>
+      <title>Java Garbage Collector 이해하기 Part 1 (with G1GC, Garbage First GC)</title>
+      <link href="/2018/03/25/20180325-java-garbage-collector-part-1-with-g1gc-garbage-first-gc"/>
+      <updated>2018-03-25T00:00:00.952Z</updated>
+      <content type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p class="more">
+            <a href="/2018/03/25/20180325-java-garbage-collector-part-1-with-g1gc-garbage-first-gc">Read more</a>
+          </p>
+        </div>
+      </content>
+      <author><name>Wan Geun Lee</name></author>
+    </entry>
+    <entry>
       <id>/2018/03/05/20180305-druid</id>
       <title>Druid 파헤치기 - 입문</title>
       <link href="/2018/03/05/20180305-druid"/>
-      <updated>2018-03-05T00:00:00.698Z</updated>
+      <updated>2018-03-05T00:00:00.953Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -38,7 +262,7 @@
       <id>/2017/09/04/20170904-java-web-model-1-spring-web</id>
       <title>Java Web 개발 살펴보기 (Model 1 부터 Spring Web 까지)</title>
       <link href="/2017/09/04/20170904-java-web-model-1-spring-web"/>
-      <updated>2017-09-04T00:00:00.698Z</updated>
+      <updated>2017-09-04T00:00:00.954Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -52,7 +276,7 @@
       <id>/2017/09/02/20170902-spark-sql-avro-parquet</id>
       <title>Spark SQL을 이용하여 avro 파일과 parquet 파일 다루기</title>
       <link href="/2017/09/02/20170902-spark-sql-avro-parquet"/>
-      <updated>2017-09-02T00:00:00.699Z</updated>
+      <updated>2017-09-02T00:00:00.955Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -66,7 +290,7 @@
       <id>/2017/08/30/20170830-oracle-code-seoul</id>
       <title>Oracle Code Seoul</title>
       <link href="/2017/08/30/20170830-oracle-code-seoul"/>
-      <updated>2017-08-30T00:00:00.700Z</updated>
+      <updated>2017-08-30T00:00:00.956Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -80,7 +304,7 @@
       <id>/2017/07/22/20170722-angular-seminar-note</id>
       <title>앵귤러 첫걸음 저자 세미나 노트</title>
       <link href="/2017/07/22/20170722-angular-seminar-note"/>
-      <updated>2017-07-22T00:00:00.702Z</updated>
+      <updated>2017-07-22T00:00:00.957Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -94,7 +318,7 @@
       <id>/2017/07/19/20170719-day-01</id>
       <title>스프링 퀵 스타트 Day 01</title>
       <link href="/2017/07/19/20170719-day-01"/>
-      <updated>2017-07-19T00:00:00.703Z</updated>
+      <updated>2017-07-19T00:00:00.957Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -108,7 +332,7 @@
       <id>/2017/06/16/20170616-web-page-lecture</id>
       <title>웹페이지 실습 강의 노트</title>
       <link href="/2017/06/16/20170616-web-page-lecture"/>
-      <updated>2017-06-16T00:00:00.703Z</updated>
+      <updated>2017-06-16T00:00:00.959Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -122,7 +346,7 @@
       <id>/2017/05/30/20170530-day-4</id>
       <title>스파크 강의 노트 Day 4</title>
       <link href="/2017/05/30/20170530-day-4"/>
-      <updated>2017-05-30T00:00:00.704Z</updated>
+      <updated>2017-05-30T00:00:00.960Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -136,7 +360,7 @@
       <id>/2017/05/29/20170529-day-3</id>
       <title>스파크 강의 노트 Day 3</title>
       <link href="/2017/05/29/20170529-day-3"/>
-      <updated>2017-05-29T00:00:00.705Z</updated>
+      <updated>2017-05-29T00:00:00.961Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -150,7 +374,7 @@
       <id>/2017/05/26/20170526-day-2</id>
       <title>스파크 강의 노트 Day 2</title>
       <link href="/2017/05/26/20170526-day-2"/>
-      <updated>2017-05-26T00:00:00.706Z</updated>
+      <updated>2017-05-26T00:00:00.961Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -164,7 +388,7 @@
       <id>/2017/05/25/20170525-day-1</id>
       <title>스파크 강의 노트 Day 1</title>
       <link href="/2017/05/25/20170525-day-1"/>
-      <updated>2017-05-25T00:00:00.707Z</updated>
+      <updated>2017-05-25T00:00:00.962Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -178,7 +402,7 @@
       <id>/2017/04/23/20170423-2017</id>
       <title>스프링캠프 2017 둘째날 메모</title>
       <link href="/2017/04/23/20170423-2017"/>
-      <updated>2017-04-23T00:00:00.708Z</updated>
+      <updated>2017-04-23T00:00:00.963Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -192,7 +416,7 @@
       <id>/2017/04/22/20170422-2017</id>
       <title>스프링캠프 2017 첫째날 메모</title>
       <link href="/2017/04/22/20170422-2017"/>
-      <updated>2017-04-22T00:00:00.709Z</updated>
+      <updated>2017-04-22T00:00:00.964Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -206,7 +430,7 @@
       <id>/2017/04/19/20170419-scala</id>
       <title>Scala 강의 요약</title>
       <link href="/2017/04/19/20170419-scala"/>
-      <updated>2017-04-19T00:00:00.710Z</updated>
+      <updated>2017-04-19T00:00:00.965Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -220,7 +444,7 @@
       <id>/2017/02/20/20170220-spring-transaction-part1-trasaction-aop-java-configuration</id>
       <title>Spring Transaction의 이해 Part1 - Trasaction AOP 설정과 Java Configuration</title>
       <link href="/2017/02/20/20170220-spring-transaction-part1-trasaction-aop-java-configuration"/>
-      <updated>2017-02-20T00:00:00.710Z</updated>
+      <updated>2017-02-20T00:00:00.966Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -234,7 +458,7 @@
       <id>/2017/02/01/20170201-machine-learning-study-01</id>
       <title>Machine Learning Study 01 - 머신러닝의 정의 및 기초 용어 정리</title>
       <link href="/2017/02/01/20170201-machine-learning-study-01"/>
-      <updated>2017-02-01T00:00:00.711Z</updated>
+      <updated>2017-02-01T00:00:00.967Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -248,7 +472,7 @@
       <id>/2017/01/20/20170120-introduce_machine_learning</id>
       <title>머신러닝 소개 자료</title>
       <link href="/2017/01/20/20170120-introduce_machine_learning"/>
-      <updated>2017-01-20T00:00:00.712Z</updated>
+      <updated>2017-01-20T00:00:00.968Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -262,7 +486,7 @@
       <id>/2016/12/15/20161215-java_generics</id>
       <title>Java Generics</title>
       <link href="/2016/12/15/20161215-java_generics"/>
-      <updated>2016-12-15T00:00:00.713Z</updated>
+      <updated>2016-12-15T00:00:00.969Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -276,7 +500,7 @@
       <id>/2016/12/09/20161209-d3_table_and_barchart</id>
       <title>D3로 Table과 Bar Chart 표현하기</title>
       <link href="/2016/12/09/20161209-d3_table_and_barchart"/>
-      <updated>2016-12-09T00:00:00.714Z</updated>
+      <updated>2016-12-09T00:00:00.970Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -290,7 +514,7 @@
       <id>/2016/12/09/20161209-about_angular2_input_output2</id>
       <title>Angular 2 - 사례로 살펴보는 @Input과 @Output의 이해 2</title>
       <link href="/2016/12/09/20161209-about_angular2_input_output2"/>
-      <updated>2016-12-09T00:00:00.715Z</updated>
+      <updated>2016-12-09T00:00:00.971Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -304,7 +528,7 @@
       <id>/2016/12/09/20161209-about_angular2_input_output</id>
       <title>Angular 2 - 사례로 살펴보는 @Input과 @Output의 이해 1</title>
       <link href="/2016/12/09/20161209-about_angular2_input_output"/>
-      <updated>2016-12-08T00:00:00.716Z</updated>
+      <updated>2016-12-08T00:00:00.972Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -318,7 +542,7 @@
       <id>/2016/12/01/20161201-front_end_themes</id>
       <title>개인적으로 마음에 드는 웹 테마들</title>
       <link href="/2016/12/01/20161201-front_end_themes"/>
-      <updated>2016-12-01T00:00:00.717Z</updated>
+      <updated>2016-12-01T00:00:00.972Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -332,7 +556,7 @@
       <id>/2016/08/06/20160806-about_deadlock</id>
       <title>Deadlock이 뭐지? (Java Thread와 Deadlock에 대한 고찰)</title>
       <link href="/2016/08/06/20160806-about_deadlock"/>
-      <updated>2016-08-08T00:00:00.718Z</updated>
+      <updated>2016-08-08T00:00:00.973Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -346,7 +570,7 @@
       <id>/2016/08/03/20160803-ddd_reading_memo</id>
       <title>나만의 책속 한 줄 - 책 &apos;DDD Start!&apos;를 읽으면서...</title>
       <link href="/2016/08/03/20160803-ddd_reading_memo"/>
-      <updated>2016-08-03T00:00:00.718Z</updated>
+      <updated>2016-08-03T00:00:00.975Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
@@ -360,7 +584,7 @@
       <id>/2016/07/15/20160715-logback_and_slf4j</id>
       <title>Logback &amp; SLF4J를 쓰면서 만났던 문제</title>
       <link href="/2016/07/15/20160715-logback_and_slf4j"/>
-      <updated>2016-07-15T00:00:00.719Z</updated>
+      <updated>2016-07-15T00:00:00.976Z</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
