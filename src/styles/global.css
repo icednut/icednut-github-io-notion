@@ -3,6 +3,7 @@
 @import 'tailwindcss/utilities';
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR:400,700&display=swap&subset=korean');
 @import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fira+Code&display=swap');
 
 /* Masonry on large screens */
 @media only screen and (min-width: 1024px) {
@@ -36,4 +37,8 @@ body {
 
 .post-tag {
   font-family: 'Changa', sans-serif;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
 }
