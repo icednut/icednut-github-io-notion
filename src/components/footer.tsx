@@ -62,8 +62,8 @@ export default ({ tagOptions = [] }) => {
                     Hi, I'm Wan Geun Lee from Korea. If you can't pronounce my
                     name, please call me Will. Icednut's Space is my web backend
                     development log, study note and life log storage. Have a
-                    nice day. If you have question, please contact me below mail
-                    icon. Thank you.
+                    nice day. If you have a question, please contact me by mail
+                    icon below. Thank you.
                   </p>
                   <p>&nbsp;</p>
                   <p>
