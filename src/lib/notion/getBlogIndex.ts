@@ -5,6 +5,7 @@ import getTableData from './getTableData'
 import { getPostPreview } from './getPostPreview'
 import { readFile, writeFile } from '../fs-helpers'
 import { BLOG_INDEX_ID, BLOG_INDEX_CACHE } from './server-constants'
+import { filteringPublishedPost } from '../blog-helpers'
 
 export default async function getBlogIndex(
   previews = true,
@@ -40,6 +41,7 @@ export default async function getBlogIndex(
       )
 
       postsTable = await getTableData(tableBlock, true, tag, category)
+      postsTable = filteringPublishedPost(postsTable)
     } catch (err) {
       console.warn(
         `Failed to load Notion posts, attempting to auto create table`

@@ -6,8 +6,8 @@ import { BLOG_INDEX_ID, BLOG_INDEX_CACHE } from './server-constants'
 
 export default async function getTagIndex() {
   let tagOptions: any = null
-  // const useCache = process.env.USE_CACHE === 'true'
-  // const cacheFile = `${BLOG_INDEX_CACHE}_tags}`
+  const useCache = process.env.USE_CACHE === 'true'
+  const cacheFile = `${BLOG_INDEX_CACHE}_tags}`
 
   // if (useCache) {
   //   try {
@@ -33,6 +33,9 @@ export default async function getTagIndex() {
       )
 
       tagOptions = await getTags(tableBlock)
+      tagOptions.sort((a, b) => {
+        return a.toLowerCase().localeCompare(b.toLowerCase())
+      })
     } catch (err) {
       console.warn(
         `Failed to load Notion posts, attempting to auto create table`

@@ -22,6 +22,21 @@ export const postIsReady = (post: any) => {
   return process.env.NODE_ENV !== 'production' || post.Published === 'Yes'
 }
 
+export const filteringPublishedPost = (postsTable: any) => {
+  return Object.keys(postsTable)
+    .filter(key => postIsReady(postsTable[key]))
+    .map(key => {
+      const element = {}
+      element[key] = postsTable[key]
+      return element
+    })
+    .reduce((total, currentElement) => {
+      const currentElementKey = Object.keys(currentElement)[0]
+      total[currentElementKey] = currentElement[currentElementKey]
+      return total
+    })
+}
+
 export const normalizeSlug = slug => {
   if (typeof slug !== 'string') return slug
 

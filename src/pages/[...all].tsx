@@ -10,7 +10,7 @@ import { textBlock } from '../lib/notion/renderers'
 import getPageData from '../lib/notion/getPageData'
 import getBlogIndex from '../lib/notion/getBlogIndex'
 import getNotionUsers from '../lib/notion/getNotionUsers'
-import { getBlogLink, getDateStr } from '../lib/blog-helpers'
+import { getBlogLink, getDateStr, postIsReady } from '../lib/blog-helpers'
 import { Z_DEFAULT_COMPRESSION } from 'zlib'
 import Link from 'next/link'
 
@@ -104,7 +104,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
     <>
       <Header titlePre={post.Page} category={post.Category} />
       <div className="container mx-auto max-w-screen-lg">
-        {prevPost && prevPost.Slug && prevPost.Page && (
+        {prevPost && prevPost.Slug && prevPost.Page && postIsReady(prevPost) && (
           <div className={blogStyles.nextPrevPostContainer}>
             <div className={blogStyles.nextPrevPostIconContainer + ' mb-3'}>
               <svg
@@ -541,7 +541,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             </div>
           </div>
         </div>
-        {nextPost && nextPost.Slug && nextPost.Page && (
+        {nextPost && nextPost.Slug && nextPost.Page && postIsReady(nextPost) && (
           <div className={blogStyles.nextPrevPostContainer}>
             <div className={blogStyles.nextPrevPostIconContainer + ' mt-3'}>
               <svg
