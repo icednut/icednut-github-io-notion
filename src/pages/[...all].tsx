@@ -236,7 +236,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                   blogStyles.postTitle
                 }
               >
-                {post.Page || ''}
+                <h1>{post.Page || ''}</h1>
               </div>
               <div className="text-gray-400 text-sm">
                 {post.Authors.length > 0 && (
@@ -446,19 +446,19 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 }
                 case 'header':
                   renderHeading(
-                    'h1',
+                    'h2',
                     'mt-4 mb-px leading-loose text-3xl font-bold'
                   )
                   break
                 case 'sub_header':
                   renderHeading(
-                    'h2',
+                    'h3',
                     'mt-3 mb-px leading-loose text-xl font-bold'
                   )
                   break
                 case 'sub_sub_header':
                   renderHeading(
-                    'h3',
+                    'h4',
                     'mt-2 mb-px leading-loose text-lg font-bold'
                   )
                   break
