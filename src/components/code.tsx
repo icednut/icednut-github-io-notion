@@ -7,7 +7,7 @@ const Code = ({ children, language = 'javascript' }) => {
     <>
       <div className="relative">
         <Clipboard
-          className="absolute bg-gray-600 rounded px-2 py-1 text-xs"
+          className="absolute bg-gray-600 rounded px-2 py-1 text-xs opacity-50 hover:opacity-100"
           style={{ right: '0.75rem', top: '0.75rem' }}
           data-clipboard-text={children}
           onSuccess={() => alert('Copied!')}
@@ -28,7 +28,7 @@ const Code = ({ children, language = 'javascript' }) => {
           />
         </pre>
         <div
-          className="absolute text-gray-300 px-2 py-1 text-xs"
+          className="absolute text-gray-500 px-2 py-1 text-xs font-bold"
           style={{ right: '0.75rem', bottom: '1rem' }}
         >
           {language}

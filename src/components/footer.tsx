@@ -2,6 +2,7 @@ import { TwitterTimelineEmbed } from 'react-twitter-embed'
 import Link from 'next/link'
 import ExtLink from '../components/ext-link'
 
+import Facebook from '../components/svgs/facebook'
 import GitHub from '../components/svgs/github'
 import Twitter from '../components/svgs/twitter'
 import LinkedIn from '../components/svgs/linkedin'
@@ -9,6 +10,11 @@ import Envelope from '../components/svgs/envelope'
 import contactStyles from '../styles/contact.module.css'
 
 const contacts = [
+  {
+    Comp: Facebook,
+    alt: 'facebook icon',
+    link: 'https://www.facebook.com/wangeunl',
+  },
   {
     Comp: Twitter,
     alt: 'twitter icon',
@@ -59,11 +65,11 @@ export default ({ tagOptions = [] }) => {
                 <img src="/post_thumbnail/default.jpg" className="w-full" />
                 <div className="text-sm mt-2">
                   <p>
-                    Hi, I'm Wan Geun Lee from Korea. If you can't pronounce my
-                    name, please call me Will. Icednut's Space is my web backend
-                    development log, study note and life log storage. Have a
-                    nice day. If you have a question, please contact me by mail
-                    icon below. Thank you.
+                    Hi, I'm Wan Geun Lee from Korea and working at Kakaopay. If
+                    you can't pronounce my name, please call me Will. Icednut's
+                    Space is my web backend development log, study note and life
+                    log storage. Have a nice day. If you have a question, please
+                    contact me by mail icon below. Thank you.
                   </p>
                   <p>&nbsp;</p>
                   <p>
@@ -108,7 +114,7 @@ export default ({ tagOptions = [] }) => {
                 {tagOptions &&
                   tagOptions.map(each => (
                     <Link href={'/tag/' + each} as={'/tag/' + each}>
-                      <a className="inline-block py-px px-2 mr-2 mt-2 bg-teal-400 text-white text-sm post-tag">
+                      <a className="inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-xs post-tag">
                         #{each}
                       </a>
                     </Link>
