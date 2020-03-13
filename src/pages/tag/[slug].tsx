@@ -10,7 +10,7 @@ import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 import { url } from 'inspector'
 
-export async function unstable_getStaticProps({ params }) {
+export async function getStaticProps({ params }) {
   const tag = params.slug
   const postsTable = await getBlogIndex(true, tag)
 

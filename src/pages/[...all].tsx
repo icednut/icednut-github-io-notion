@@ -27,7 +27,7 @@ function getSlug(params) {
 }
 
 // Get the data for each blog post
-export async function unstable_getStaticProps({ params }) {
+export async function getStaticProps({ params }) {
   const slug = getSlug(params)
   // load the postsTable so that we can get the page's ID
   const postsTable = await getBlogIndex()
@@ -70,9 +70,13 @@ export async function unstable_getStaticProps({ params }) {
 }
 
 // Return our list of blog posts to prerender
-export async function unstable_getStaticPaths() {
+export async function getStaticPaths() {
   const postsTable = await getBlogIndex()
-  return Object.keys(postsTable).map(slug => getBlogLink(slug))
+  const paths = Object.keys(postsTable).map(slug => getBlogLink(slug))
+  return {
+    paths,
+    fallback: false,
+  }
 }
 
 const listTypes = new Set(['bulleted_list', 'numbered_list'])

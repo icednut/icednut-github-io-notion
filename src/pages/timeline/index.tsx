@@ -10,7 +10,7 @@ import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 import { url } from 'inspector'
 
-export async function unstable_getStaticProps() {
+export async function getStaticProps() {
   const postsTable = await getBlogIndex(true)
   const authorsToGet: Set<string> = new Set()
   const posts: any[] = Object.keys(postsTable)
