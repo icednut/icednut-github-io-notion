@@ -10,7 +10,7 @@ function applyTags(tags = [], children, noPTag = false, key) {
 
     if (noPTag && tagName === 'p') {
       tagName = React.Fragment
-      props.className = 'leading-loose tracking-wide mt-px'
+      props.className = 'leading-loose tracking-wide py-2'
     }
     if (tagName === 'c') {
       tagName = 'code'
@@ -21,7 +21,7 @@ function applyTags(tags = [], children, noPTag = false, key) {
     if (tagName === 'a') {
       props.href = tag[1]
       props.className =
-        'leading-loose mt-px text-justify rounded text-teal-400 border-b-2 border-transparent border-dashed hover:border-teal-400'
+        'leading-loose py-2 text-justify rounded text-teal-500 border-b-2 border-transparent border-dashed hover:border-teal-500'
     }
 
     child = React.createElement(components[tagName] || tagName, props, child)
@@ -43,7 +43,7 @@ export function textBlock(text = [], noPTag = false, mainKey) {
   }
   let props = { key: mainKey }
   if (!noPTag) {
-    props['className'] = 'leading-loose tracking-wide'
+    props['className'] = 'leading-loose tracking-wide py-2'
   }
   return React.createElement(
     noPTag ? React.Fragment : components.p,

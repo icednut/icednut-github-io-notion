@@ -45,6 +45,12 @@ module.exports = {
   target: 'experimental-serverless-trace',
   plugins: [require('tailwindcss'), require('autoprefixer')],
   webpack(cfg, { dev, isServer }) {
+    if (!isServer) {
+      cfg.node = {
+        fs: 'empty',
+      }
+    }
+
     // only compile build-rss in production server build
     if (dev || !isServer) return cfg
 

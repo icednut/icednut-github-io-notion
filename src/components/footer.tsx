@@ -65,10 +65,11 @@ export default ({ tagOptions = [] }) => {
                 <img src="/post_thumbnail/default.jpg" className="w-full" />
                 <div className="text-sm mt-2">
                   <p>
-                    Hi, I'm Wan Geun Lee from Korea and working at Kakaopay. If
-                    you can't pronounce my name, please call me Will. Icednut's
-                    Space is my web backend development log, study note and life
-                    log storage. Have a nice day. If you have a question, please
+                    Hi, I'm Wan Geun Lee from Korea and working platform
+                    developer and data engineer at Kakaopay. If you can't
+                    pronounce my name, please call me Will. Icednut's Space is
+                    my web backend development log, study note and life log
+                    storage. Have a nice day. If you have a question, please
                     contact me by mail icon below. Thank you.
                   </p>
                   <p>&nbsp;</p>
