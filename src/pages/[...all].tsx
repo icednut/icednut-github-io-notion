@@ -505,7 +505,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                         {
                           key: id,
                           className:
-                            'border-l-4 border-gray-600 bg-teal-100 p-4 text-lg leading-relaxed my-3',
+                            'italic border-l-4 border-gray-700 p-3 text-lg leading-relaxed my-3',
                           style: {
                             whiteSpace: 'pre-wrap',
                           },

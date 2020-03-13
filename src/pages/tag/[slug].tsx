@@ -51,6 +51,7 @@ export default ({ posts = [], tag = '' }) => {
     <>
       <Header titlePre={tag} />
       <div className="container mx-auto max-w-screen-lg grid px-3">
+        <div className="text-4xl mt-6">#{tag}</div>
         <div className="gap-4 masonry my-4">
           {posts.length === 0 && (
             <p className={blogStyles.noPosts}>There are no posts yet</p>
@@ -92,7 +93,10 @@ export default ({ posts = [], tag = '' }) => {
                 </div>
                 <div className="px-6 py-4">
                   <div className="text-center">
-                    <Link href="/[slug]" as={getBlogLink(post.Slug)}>
+                    <Link
+                      href={getBlogLink(post.Slug)}
+                      as={getBlogLink(post.Slug)}
+                    >
                       <a
                         className={
                           'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white border-dashed hover:border-teal-400 pb-px transition-colors duration-300'
@@ -102,7 +106,10 @@ export default ({ posts = [], tag = '' }) => {
                       </a>
                     </Link>
                   </div>
-                  <Link href="/[slug]" as={getBlogLink(post.Slug)}>
+                  <Link
+                    href={getBlogLink(post.Slug)}
+                    as={getBlogLink(post.Slug)}
+                  >
                     <a>
                       <p
                         className={
@@ -122,7 +129,7 @@ export default ({ posts = [], tag = '' }) => {
                       <Link href={'/tag/' + tag} as={'/tag/' + tag}>
                         <a
                           className={
-                            'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 text-white text-sm ' +
+                            'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +
                             blogStyles.blogTag
                           }
                         >

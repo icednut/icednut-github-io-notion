@@ -119,7 +119,7 @@ export default ({ posts = [] }) => {
                       <Link href={'/tag/' + tag} as={'/tag/' + tag}>
                         <a
                           className={
-                            'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 text-white text-sm ' +
+                            'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +
                             blogStyles.blogTag
                           }
                         >
