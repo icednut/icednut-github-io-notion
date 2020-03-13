@@ -10,7 +10,7 @@ function applyTags(tags = [], children, noPTag = false, key) {
 
     if (noPTag && tagName === 'p') {
       tagName = React.Fragment
-      props.className = 'leading-loose tracking-wide py-2'
+      props.className = 'leading-loose tracking-wide py-1'
     }
     if (tagName === 'c') {
       tagName = 'code'
@@ -43,7 +43,7 @@ export function textBlock(text = [], noPTag = false, mainKey) {
   }
   let props = { key: mainKey }
   if (!noPTag) {
-    props['className'] = 'leading-loose tracking-wide py-2'
+    props['className'] = 'leading-loose tracking-wide py-1'
   }
   return React.createElement(
     noPTag ? React.Fragment : components.p,
