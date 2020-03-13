@@ -8,6 +8,7 @@ import { getBlogLink, getDateStr, postIsReady } from '../../lib/blog-helpers'
 import { textBlock } from '../../lib/notion/renderers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
+import getTagIndex from '../../lib/notion/getTagIndex'
 import { url } from 'inspector'
 
 export async function getStaticProps({ params }) {
@@ -26,7 +27,6 @@ export async function getStaticProps({ params }) {
       for (const author of post.Authors) {
         authorsToGet.add(author)
       }
-      //   console.log('post', post)
       return post
     })
     .filter(Boolean)
@@ -46,12 +46,11 @@ export async function getStaticProps({ params }) {
   }
 }
 
-// Return our list of blog posts to prerender
 export async function getStaticPaths() {
-  const postsTable = await getBlogIndex()
-  const paths = Object.keys(postsTable).map(slug => getBlogLink(slug))
+  const tagOptions = await getTagIndex()
+  const tags = tagOptions.map(tag => '/tag/' + tag)
   return {
-    paths,
+    paths: tags,
     fallback: false,
   }
 }
@@ -136,7 +135,7 @@ export default ({ posts = [], tag = '' }) => {
                 <div className="px-6 py-4">
                   {post.Tags &&
                     post.Tags.split(',').map(tag => (
-                      <Link href={'/tag/' + tag} as={'/tag/' + tag}>
+                      <Link href={'/tag/[slug]'} as={'/tag/' + tag}>
                         <a
                           className={
                             'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +
