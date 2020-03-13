@@ -509,7 +509,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                         {
                           key: id,
                           className:
-                            'italic border-l-4 border-gray-700 p-3 text-lg leading-relaxed my-3',
+                            'italic border-l-4 border-gray-700 px-3 py-1 text-lg leading-relaxed my-3',
                           style: {
                             whiteSpace: 'pre-wrap',
                           },
@@ -535,11 +535,13 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 post.Tags.split(',').map(tag => (
                   <div
                     className={
-                      'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 text-white text-sm ' +
+                      'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +
                       blogStyles.blogTag
                     }
                   >
-                    #{tag}
+                    <Link href="/tag/[slug]" as={'/tag/' + tag}>
+                      <a>#{tag}</a>
+                    </Link>
                   </div>
                 ))}
             </div>
