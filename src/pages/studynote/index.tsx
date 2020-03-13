@@ -116,7 +116,7 @@ export default ({ posts = [] }) => {
                 <div className="px-6 py-4">
                   {post.Tags &&
                     post.Tags.split(',').map(tag => (
-                      <Link href={'/tag/' + tag} as={'/tag/' + tag}>
+                      <Link href={'/tag/[slug]'} as={'/tag/' + tag}>
                         <a
                           className={
                             'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +

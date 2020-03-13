@@ -114,7 +114,7 @@ export default ({ tagOptions = [] }) => {
               <div className="py-2">
                 {tagOptions &&
                   tagOptions.map(each => (
-                    <Link href={'/tag/' + each} as={'/tag/' + each}>
+                    <Link href={'/tag/[slug]'} as={'/tag/' + each}>
                       <a className="inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-xs post-tag">
                         #{each}
                       </a>
