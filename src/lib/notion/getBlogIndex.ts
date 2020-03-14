@@ -17,13 +17,13 @@ export default async function getBlogIndex(
   const cacheFile =
     `${BLOG_INDEX_CACHE}${previews ? '_previews' : ''}` + '_' + category
 
-  if (useCache) {
-    try {
-      postsTable = JSON.parse(await readFile(cacheFile, 'utf8'))
-    } catch (_) {
-      /* not fatal */
-    }
-  }
+  //   if (useCache) {
+  //     try {
+  //       postsTable = JSON.parse(await readFile(cacheFile, 'utf8'))
+  //     } catch (_) {
+  //       /* not fatal */
+  //     }
+  //   }
 
   if (!postsTable) {
     try {
@@ -84,9 +84,9 @@ export default async function getBlogIndex(
     //   )
     // }
 
-    if (useCache) {
-      writeFile(cacheFile, JSON.stringify(postsTable), 'utf8').catch(() => {})
-    }
+    // if (useCache) {
+    //   writeFile(cacheFile, JSON.stringify(postsTable), 'utf8').catch(() => {})
+    // }
   }
 
   return postsTable
