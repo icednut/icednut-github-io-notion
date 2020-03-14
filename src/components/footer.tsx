@@ -62,7 +62,11 @@ export default ({ tagOptions = [] }) => {
             <div className="mr-1">
               <div className="font-bold text-sm">About Me</div>
               <div className="py-2">
-                <img src="/post_thumbnail/default.jpg" className="w-full" />
+                <img
+                  src="/post_thumbnail/default.jpg"
+                  className="w-full"
+                  alt="wglee-thumbnail"
+                />
                 <div className="text-sm mt-2">
                   <p>
                     Hi, I'm Wan Geun Lee from Korea and working platform
@@ -86,6 +90,7 @@ export default ({ tagOptions = [] }) => {
                           aria-label={alt}
                           className="px-4 text-center"
                           target="_blank"
+                          rel="noopener"
                         >
                           <Comp height={16} className="inline" />
                         </a>

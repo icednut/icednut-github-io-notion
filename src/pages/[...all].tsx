@@ -413,7 +413,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                         format.display_source as any
                       )}&blockId=${id}`}
                     >
-                      <a target="_blank">
+                      <a target="_blank" rel="noopener">
                         <Comp
                           key={id}
                           src={`/api/asset?assetUrl=${encodeURIComponent(

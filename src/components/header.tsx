@@ -46,7 +46,7 @@ const header = ({ titlePre = '', category = '' }) => {
       <div className="relative pt-12 mb-20 bg-white">
         <div className="absolute" style={{ left: '1.25rem', top: '1.25rem' }}>
           <Link href="/atom">
-            <a target="_blank">
+            <a target="_blank" rel="noopener">
               <svg
                 id="Bold"
                 height="14"
