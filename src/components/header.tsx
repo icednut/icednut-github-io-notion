@@ -3,6 +3,8 @@ import Head from 'next/head'
 import ExtLink from './ext-link'
 import { useRouter } from 'next/router'
 import styles from '../styles/header.module.css'
+import ReactGA from 'react-ga'
+import React, { useEffect, useState } from 'react'
 
 const navItems: { label: string; page?: string }[] = [
   { label: 'DevLog', page: '/' },
@@ -12,7 +14,19 @@ const navItems: { label: string; page?: string }[] = [
 
 const ogImageUrl = 'https://icednut-github-io-notion.now.sh/og-image.jpg'
 
-export default ({ titlePre = '', category = '' }) => {
+const header = ({ titlePre = '', category = '' }) => {
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => setIsMounted(true), [])
+
+  if (!isMounted) {
+    return null
+  }
+
+  if (typeof window !== 'undefined') {
+    const url = window.location.pathname + window.location.search
+    ReactGA.initialize('UA-91631073-2')
+    ReactGA.pageview(url)
+  }
   return (
     <header>
       <Head>
@@ -28,17 +42,6 @@ export default ({ titlePre = '', category = '' }) => {
         <meta name="twitter:site" content="@crazybnn" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-91631073-2"
-        ></script>
-        <script>
-          window.dataLayer = window.dataLayer || []
-          function gtag() {
-            dataLayer.push(arguments)
-          }
-          gtag('js', new Date()) gtag('config', 'UA-91631073-2')
-        </script>
       </Head>
       <div className="relative pt-12 mb-20 bg-white">
         <div className="absolute" style={{ left: '1.25rem', top: '1.25rem' }}>
@@ -98,3 +101,5 @@ export default ({ titlePre = '', category = '' }) => {
     </header>
   )
 }
+
+export default header
