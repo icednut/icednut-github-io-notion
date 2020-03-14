@@ -28,13 +28,14 @@ export default ({ titlePre = '', category = '' }) => {
         <meta name="twitter:site" content="@crazybnn" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91631073-2"></script>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-91631073-2"
+        ></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-91631073-2');
+          window.dataLayer = window.dataLayer || [] function gtag()
+          {dataLayer.push(arguments)}
+          gtag('js', new Date()) gtag('config', 'UA-91631073-2')
         </script>
       </Head>
       <div className="relative pt-12 mb-20 bg-white">
