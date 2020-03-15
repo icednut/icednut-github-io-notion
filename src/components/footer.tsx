@@ -63,14 +63,14 @@ export default ({ tagOptions = [] }) => {
               <div className="font-bold text-sm">About Me</div>
               <div className="py-2">
                 <img
-                  src="/post_thumbnail/default.jpg"
+                  src="/wglee.jpg"
                   className="w-full"
                   alt="wglee-thumbnail"
                 />
                 <div className="text-sm mt-2">
                   <p>
-                    Hi, I'm Wan Geun Lee from Korea and working platform
-                    developer and data engineer at Kakaopay. If you can't
+                    Hi, I'm Wan Geun Lee from Korea and working Data Platform
+                    Developer and Data Engineer at Kakaopay. If you can't
                     pronounce my name, please call me Will. Icednut's Space is
                     my web backend development log, study note and life log
                     storage. Have a nice day. If you have a question, please
