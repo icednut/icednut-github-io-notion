@@ -39,12 +39,12 @@ function mapToEntry(post) {
     <entry>
       <id>${post.link}</id>
       <title>${decode(post.title)}</title>
-      <link href="${post.link}"/>
+      <link href="https://icednut.space/${post.link}"/>
       <updated>${new Date(post.date).toJSON()}</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
-            <a href="${post.link}">Read more</a>
+            <a href="https://icednut.space/${post.link}">Read more</a>
           </p>
         </div>
       </content>
@@ -63,8 +63,8 @@ function createRSS(blogPosts = []) {
   <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Icednut's Space</title>
     <subtitle>Icednut's Space Notion Blog</subtitle>
-    <link href="/atom" rel="self" type="application/rss+xml"/>
-    <link href="/" />
+    <link href="https://icednut.space/atom" rel="self" type="application/rss+xml"/>
+    <link href="https://icednut.space/" />
     <updated>${NOW}</updated>
     <id>Icednut's Space Notion Blog</id>${postsString}
   </feed>`
