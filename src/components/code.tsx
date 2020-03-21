@@ -16,7 +16,7 @@ const Code = ({ children, language = 'javascript' }) => {
         </Clipboard>
         <pre>
           <code
-            className="overflow-auto block my-1 p-5 text-sm"
+            className="overflow-auto block my-1 px-5 py-10 text-sm"
             style={{ backgroundColor: '#2d2d2d', color: '#ccc' }}
             dangerouslySetInnerHTML={{
               __html: Prism.highlight(
