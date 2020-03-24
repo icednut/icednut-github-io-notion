@@ -60,7 +60,11 @@ export default ({ tagOptions = [] }) => {
         <div className="container mx-auto max-w-screen-lg mt-32 pt-16 pb-8 text-gray-600 border-t border-gray-300 px-3">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mb-3">
             <div className="mr-1">
-              <div className="font-bold text-sm">About Me</div>
+              <div className="font-bold text-sm pb-px">About Me</div>
+              <div
+                className="border-b-4 border-teal-400"
+                style={{ width: '1rem' }}
+              ></div>
               <div className="py-2">
                 <img
                   src="/wglee.jpg"
@@ -101,7 +105,11 @@ export default ({ tagOptions = [] }) => {
               </div>
             </div>
             <div className="mx-1">
-              <div className="font-bold text-sm">Twitter</div>
+              <div className="font-bold text-sm pb-px">Twitter</div>
+              <div
+                className="border-b-4 border-teal-400"
+                style={{ width: '1rem' }}
+              ></div>
               <div className="py-2">
                 <TwitterTimelineEmbed
                   sourceType="profile"
@@ -115,7 +123,11 @@ export default ({ tagOptions = [] }) => {
               </div>
             </div>
             <div className="ml-1">
-              <div className="font-bold text-sm">Tags</div>
+              <div className="font-bold text-sm pb-px">Tags</div>
+              <div
+                className="border-b-4 border-teal-400"
+                style={{ width: '1rem' }}
+              ></div>
               <div className="py-2">
                 {tagOptions &&
                   tagOptions.map(each => (

@@ -48,7 +48,6 @@ const header = ({ titlePre = '', category = '' }) => {
           <Link href="/atom">
             <a target="_blank" rel="noopener">
               <svg
-                id="Bold"
                 height="14"
                 viewBox="0 0 24 24"
                 width="14"
@@ -80,13 +79,13 @@ const header = ({ titlePre = '', category = '' }) => {
           {navItems.map(({ label, page }) => {
             const menuColor =
               label === category
-                ? ' text-teal-400 border-b-2 border-teal-400'
+                ? ' text-teal-400 border-b-4 border-teal-400'
                 : ' text-gray-700'
             return (
               <Link href={page} as={page}>
                 <a
                   className={
-                    'hover:text-teal-400 px-5 pb-3 text-base font-light hover:font-bold ' +
+                    'hover:text-teal-400 mx-5 pb-2 text-base font-light hover:font-bold ' +
                     styles.header_menu +
                     menuColor
                   }
