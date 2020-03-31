@@ -26,6 +26,311 @@ function getSlug(params) {
   }
 }
 
+function renderPostContent(contentMap, contentElements) {
+  let listTagName: string | null = null
+  let listLastId: string | null = null
+  let listMap: {
+    [id: string]: {
+      key: string
+      isNested?: boolean
+      nested: string[]
+      children: React.ReactFragment
+    }
+  } = {}
+
+  return (
+    <>
+      {contentElements.map((value, blockIdx) => {
+        // const { value } = block
+        const { type, properties, id, parent_id } = value
+        const isLast = blockIdx === contentElements.length - 1
+        const isList = listTypes.has(type)
+        let toRender = []
+
+        if (isList) {
+          listTagName = components[type === 'bulleted_list' ? 'ul' : 'ol']
+          listLastId = `list${id}`
+
+          listMap[id] = {
+            key: id,
+            nested: [],
+            children: textBlock(properties.title, true, id),
+          }
+
+          if (listMap[parent_id]) {
+            listMap[id].isNested = true
+            listMap[parent_id].nested.push(id)
+          }
+        }
+
+        if (listTagName && (isLast || !isList)) {
+          let additionalListClassName = ''
+          switch (listTagName) {
+            case 'ul':
+              additionalListClassName = 'my-1 list-disc list-inside'
+              break
+            case 'ol':
+              additionalListClassName = 'my-1 list-decimal list-inside'
+              break
+            case 'li':
+              additionalListClassName = 'leading-loose'
+              break
+          }
+          toRender.push(
+            React.createElement(
+              listTagName,
+              { key: listLastId!, className: additionalListClassName },
+              Object.keys(listMap).map(itemId => {
+                if (listMap[itemId].isNested) return null
+
+                const createEl = (item, additionalMarginClass) =>
+                  React.createElement(
+                    components.li || 'ul',
+                    {
+                      key: item.key,
+                      className: additionalMarginClass + ' pl-2 leading-loose',
+                    },
+                    item.children,
+                    item.nested.length > 0
+                      ? React.createElement(
+                          components.ul || 'ul',
+                          {
+                            key: item + 'sub-list',
+                            className: 'my-1 list-disc list-inside',
+                          },
+                          item.nested.map(nestedId =>
+                            createEl(listMap[nestedId], 'ml-6')
+                          )
+                        )
+                      : null
+                  )
+                return createEl(listMap[itemId], '')
+              })
+            )
+          )
+          listMap = {}
+          listLastId = null
+          listTagName = null
+        }
+
+        const collectText = (el, acc = []) => {
+          if (el) {
+            if (typeof el === 'string') acc.push(el)
+            if (Array.isArray(el)) el.map(item => collectText(item, acc))
+            if (typeof el === 'object')
+              collectText(el.props && el.props.children, acc)
+          }
+          return acc.join('').trim()
+        }
+
+        const renderHeading = (
+          tagName: string,
+          additionalClassName: string = 'leading-ralxed'
+        ) => {
+          const text = properties.title
+          const children = textBlock(text, true, id)
+          const props = {
+            key: id,
+            className: additionalClassName,
+            id: collectText(text)
+              .toLowerCase()
+              .replace(/\s/g, '-')
+              .replace(/[?!:]/g, ''),
+          }
+
+          toRender.push(React.createElement(tagName, props, children))
+        }
+
+        switch (type) {
+          case 'column_list':
+            const columnCount =
+              contentMap[value.id].length >= 12
+                ? 12
+                : contentMap[value.id].length
+            toRender.push(
+              <div
+                className={
+                  'grid lg:grid-cols-' +
+                  columnCount +
+                  ' xl:grid-cols-' +
+                  columnCount +
+                  ' md:grid-cols-2 sm:grid-cols-1'
+                }
+              >
+                {renderPostContent(contentMap, contentMap[value.id])}
+              </div>
+            )
+            break
+          case 'column':
+            toRender.push(
+              <div>{renderPostContent(contentMap, contentMap[value.id])}</div>
+            )
+            break
+          case 'page':
+          case 'divider':
+            break
+          case 'text':
+            if (properties) {
+              toRender.push(textBlock(properties.title, false, id))
+            } else {
+              toRender.push(
+                <span key={id} className="leading-ralxed mt-px">
+                  &nbsp;
+                </span>
+              )
+            }
+            break
+          case 'image':
+          case 'video': {
+            const { format = {} } = value
+            // const { block_width } = format
+            // const baseBlockWidth = 768
+            // const roundFactor = Math.pow(10, 2)
+            // calculate percentages
+            // const width = block_width
+            //   ? `${Math.round(
+            //       (block_width / baseBlockWidth) * 100 * roundFactor
+            //     ) / roundFactor}%`
+            //   : '100%'
+            const width = '100%'
+
+            const isImage = type === 'image'
+            const Comp = isImage ? 'img' : 'video'
+            const resultDom = isImage ? (
+              <Link
+                href={`/api/asset?assetUrl=${encodeURIComponent(
+                  format.display_source as any
+                )}&blockId=${id}`}
+              >
+                <a target="_blank" rel="noopener">
+                  <Comp
+                    key={id}
+                    src={`/api/asset?assetUrl=${encodeURIComponent(
+                      format.display_source as any
+                    )}&blockId=${id}`}
+                    controls={!isImage}
+                    alt={isImage ? 'An image from Notion' : undefined}
+                    loop={!isImage}
+                    muted={!isImage}
+                    autoPlay={!isImage}
+                    style={{ width }}
+                    className="my-1"
+                  />
+                </a>
+              </Link>
+            ) : (
+              <Comp
+                key={id}
+                src={`/api/asset?assetUrl=${encodeURIComponent(
+                  format.display_source as any
+                )}&blockId=${id}`}
+                controls={!isImage}
+                alt={isImage ? 'An image from Notion' : undefined}
+                loop={!isImage}
+                muted={!isImage}
+                autoPlay={!isImage}
+                style={{ width }}
+                className="my-1"
+              />
+            )
+
+            toRender.push(resultDom)
+            break
+          }
+          case 'header':
+            renderHeading('h2', 'mt-4 mb-px leading-loose text-3xl font-bold')
+            break
+          case 'sub_header':
+            renderHeading('h3', 'mt-3 mb-px leading-loose text-xl font-bold')
+            break
+          case 'sub_sub_header':
+            renderHeading('h4', 'mt-2 mb-px leading-loose text-lg font-bold')
+            break
+          case 'code': {
+            if (properties.title) {
+              const content = properties.title[0][0]
+              const language = properties.language[0][0]
+
+              if (language === 'LiveScript') {
+                // this requires the DOM for now
+                toRender.push(
+                  <ReactJSXParser
+                    key={id}
+                    jsx={content}
+                    components={components}
+                    componentsOnly={false}
+                    renderInpost={false}
+                    allowUnknownElements={true}
+                    blacklistedTags={['script', 'style']}
+                  />
+                )
+              } else {
+                toRender.push(
+                  <components.Code key={id} language={language || ''}>
+                    {content}
+                  </components.Code>
+                )
+              }
+            }
+            break
+          }
+          case 'callout':
+            if (properties.title) {
+              const blockFormat = value.format
+              const originalContent = properties.title[0][0]
+              const quoteContent = originalContent.replace(/\\n/g, '<br/>')
+
+              toRender.push(
+                React.createElement(
+                  components.div,
+                  {
+                    key: id,
+                    className:
+                      'bg-gray-700 p-6 text-lg leading-relaxed my-3 text-gray-200 flex',
+                    style: {
+                      whiteSpace: 'pre-wrap',
+                    },
+                  },
+                  <div className="mr-3">{blockFormat['page_icon']}</div>,
+                  <div>{quoteContent}</div>
+                )
+              )
+            }
+            break
+          case 'quote':
+            if (properties.title) {
+              const originalContent = properties.title[0][0]
+              const quoteContent = originalContent.replace(/\\n/g, '<br/>')
+              properties.title[0][0] = quoteContent
+
+              toRender.push(
+                React.createElement(
+                  components.blockquote,
+                  {
+                    key: id,
+                    className:
+                      'italic border-l-4 border-gray-700 px-3 py-1 text-lg leading-relaxed my-3',
+                    style: {
+                      whiteSpace: 'pre-wrap',
+                    },
+                  },
+                  properties.title
+                )
+              )
+            }
+            break
+          default:
+            if (process.env.NODE_ENV !== 'production' && !listTypes.has(type)) {
+              console.log('unknown type', type)
+            }
+            break
+        }
+        return toRender
+      })}
+    </>
+  )
+}
+
 // Get the data for each blog post
 export async function getStaticProps({ params }) {
   const slug = getSlug(params)
@@ -82,17 +387,6 @@ export async function getStaticPaths() {
 const listTypes = new Set(['bulleted_list', 'numbered_list'])
 
 const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
-  let listTagName: string | null = null
-  let listLastId: string | null = null
-  let listMap: {
-    [id: string]: {
-      key: string
-      isNested?: boolean
-      nested: string[]
-      children: React.ReactFragment
-    }
-  } = {}
-
   if (redirect) {
     return (
       <>
@@ -103,6 +397,18 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
       </>
     )
   }
+
+  const contentMap = {}
+  const contents = post.content || []
+  contents.forEach(each => {
+    const parentId = each.value['parent_id']
+    if (contentMap[parentId] == null) {
+      contentMap[parentId] = []
+    }
+    contentMap[parentId].push(each.value)
+  })
+
+  const mainContentId = Object.keys(contentMap)[0]
 
   return (
     <>
@@ -273,289 +579,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             {(!post.content || post.content.length === 0) && (
               <p>This post has no content</p>
             )}
-
-            {(post.content || []).map((block, blockIdx) => {
-              const { value } = block
-              const { type, properties, id, parent_id } = value
-              const isLast = blockIdx === post.content.length - 1
-              const isList = listTypes.has(type)
-              let toRender = []
-
-              if (isList) {
-                listTagName = components[type === 'bulleted_list' ? 'ul' : 'ol']
-                listLastId = `list${id}`
-
-                listMap[id] = {
-                  key: id,
-                  nested: [],
-                  children: textBlock(properties.title, true, id),
-                }
-
-                if (listMap[parent_id]) {
-                  listMap[id].isNested = true
-                  listMap[parent_id].nested.push(id)
-                }
-              }
-
-              if (listTagName && (isLast || !isList)) {
-                let additionalListClassName = ''
-                switch (listTagName) {
-                  case 'ul':
-                    additionalListClassName = 'my-1 list-disc list-inside'
-                    break
-                  case 'ol':
-                    additionalListClassName = 'my-1 list-decimal list-inside'
-                    break
-                  case 'li':
-                    additionalListClassName = 'leading-loose'
-                    break
-                }
-                toRender.push(
-                  React.createElement(
-                    listTagName,
-                    { key: listLastId!, className: additionalListClassName },
-                    Object.keys(listMap).map(itemId => {
-                      if (listMap[itemId].isNested) return null
-
-                      const createEl = (item, additionalMarginClass) =>
-                        React.createElement(
-                          components.li || 'ul',
-                          {
-                            key: item.key,
-                            className:
-                              additionalMarginClass + ' pl-2 leading-loose',
-                          },
-                          item.children,
-                          item.nested.length > 0
-                            ? React.createElement(
-                                components.ul || 'ul',
-                                {
-                                  key: item + 'sub-list',
-                                  className: 'my-1 list-disc list-inside',
-                                },
-                                item.nested.map(nestedId =>
-                                  createEl(listMap[nestedId], 'ml-6')
-                                )
-                              )
-                            : null
-                        )
-                      return createEl(listMap[itemId], '')
-                    })
-                  )
-                )
-                listMap = {}
-                listLastId = null
-                listTagName = null
-              }
-
-              const collectText = (el, acc = []) => {
-                if (el) {
-                  if (typeof el === 'string') acc.push(el)
-                  if (Array.isArray(el)) el.map(item => collectText(item, acc))
-                  if (typeof el === 'object')
-                    collectText(el.props && el.props.children, acc)
-                }
-                return acc.join('').trim()
-              }
-
-              const renderHeading = (
-                tagName: string,
-                additionalClassName: string = 'leading-ralxed'
-              ) => {
-                const text = properties.title
-                const children = textBlock(text, true, id)
-                const props = {
-                  key: id,
-                  className: additionalClassName,
-                  id: collectText(text)
-                    .toLowerCase()
-                    .replace(/\s/g, '-')
-                    .replace(/[?!:]/g, ''),
-                }
-
-                toRender.push(React.createElement(tagName, props, children))
-              }
-
-              //   console.log(type, properties)
-              switch (type) {
-                case 'page':
-                case 'divider':
-                  break
-                case 'text':
-                  if (properties) {
-                    toRender.push(textBlock(properties.title, false, id))
-                  } else {
-                    toRender.push(
-                      <span key={id} className="leading-ralxed mt-px">
-                        &nbsp;
-                      </span>
-                    )
-                  }
-                  break
-                case 'image':
-                case 'video': {
-                  const { format = {} } = value
-                  const { block_width } = format
-                  const baseBlockWidth = 768
-                  const roundFactor = Math.pow(10, 2)
-                  // calculate percentages
-                  const width = block_width
-                    ? `${Math.round(
-                        (block_width / baseBlockWidth) * 100 * roundFactor
-                      ) / roundFactor}%`
-                    : '100%'
-
-                  const isImage = type === 'image'
-                  const Comp = isImage ? 'img' : 'video'
-                  const resultDom = isImage ? (
-                    <Link
-                      href={`/api/asset?assetUrl=${encodeURIComponent(
-                        format.display_source as any
-                      )}&blockId=${id}`}
-                    >
-                      <a target="_blank" rel="noopener">
-                        <Comp
-                          key={id}
-                          src={`/api/asset?assetUrl=${encodeURIComponent(
-                            format.display_source as any
-                          )}&blockId=${id}`}
-                          controls={!isImage}
-                          alt={isImage ? 'An image from Notion' : undefined}
-                          loop={!isImage}
-                          muted={!isImage}
-                          autoPlay={!isImage}
-                          style={{ width }}
-                          className="my-1"
-                        />
-                      </a>
-                    </Link>
-                  ) : (
-                    <Comp
-                      key={id}
-                      src={`/api/asset?assetUrl=${encodeURIComponent(
-                        format.display_source as any
-                      )}&blockId=${id}`}
-                      controls={!isImage}
-                      alt={isImage ? 'An image from Notion' : undefined}
-                      loop={!isImage}
-                      muted={!isImage}
-                      autoPlay={!isImage}
-                      style={{ width }}
-                      className="my-1"
-                    />
-                  )
-
-                  toRender.push(resultDom)
-                  break
-                }
-                case 'header':
-                  renderHeading(
-                    'h2',
-                    'mt-4 mb-px leading-loose text-3xl font-bold'
-                  )
-                  break
-                case 'sub_header':
-                  renderHeading(
-                    'h3',
-                    'mt-3 mb-px leading-loose text-xl font-bold'
-                  )
-                  break
-                case 'sub_sub_header':
-                  renderHeading(
-                    'h4',
-                    'mt-2 mb-px leading-loose text-lg font-bold'
-                  )
-                  break
-                case 'code': {
-                  if (properties.title) {
-                    const content = properties.title[0][0]
-                    const language = properties.language[0][0]
-
-                    if (language === 'LiveScript') {
-                      // this requires the DOM for now
-                      toRender.push(
-                        <ReactJSXParser
-                          key={id}
-                          jsx={content}
-                          components={components}
-                          componentsOnly={false}
-                          renderInpost={false}
-                          allowUnknownElements={true}
-                          blacklistedTags={['script', 'style']}
-                        />
-                      )
-                    } else {
-                      toRender.push(
-                        <components.Code key={id} language={language || ''}>
-                          {content}
-                        </components.Code>
-                      )
-                    }
-                  }
-                  break
-                }
-                case 'callout':
-                  if (properties.title) {
-                    const blockFormat = value.format
-                    const originalContent = properties.title[0][0]
-                    const quoteContent = originalContent.replace(
-                      /\\n/g,
-                      '<br/>'
-                    )
-
-                    toRender.push(
-                      React.createElement(
-                        components.div,
-                        {
-                          key: id,
-                          className:
-                            'bg-gray-700 p-6 text-lg leading-relaxed my-3 text-gray-200 flex',
-                          style: {
-                            whiteSpace: 'pre-wrap',
-                          },
-                        },
-                        <div className="mr-3">{blockFormat['page_icon']}</div>,
-                        <div>{quoteContent}</div>
-                      )
-                    )
-                  }
-                  break
-                case 'quote':
-                  if (properties.title) {
-                    const originalContent = properties.title[0][0]
-                    const quoteContent = originalContent.replace(
-                      /\\n/g,
-                      '<br/>'
-                    )
-                    properties.title[0][0] = quoteContent
-
-                    toRender.push(
-                      React.createElement(
-                        components.blockquote,
-                        {
-                          key: id,
-                          className:
-                            'italic border-l-4 border-gray-700 px-3 py-1 text-lg leading-relaxed my-3',
-                          style: {
-                            whiteSpace: 'pre-wrap',
-                          },
-                        },
-                        properties.title
-                      )
-                    )
-                  }
-                  break
-                default:
-                  if (
-                    process.env.NODE_ENV !== 'production' &&
-                    !listTypes.has(type)
-                  ) {
-                    console.log('unknown type', type)
-                  }
-                  break
-              }
-              return toRender
-            })}
+            {renderPostContent(contentMap, contentMap[mainContentId] || [])}
             <div className="pt-16">
               {post.Tags &&
                 post.Tags.split(',').map(tag => (
