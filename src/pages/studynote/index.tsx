@@ -48,6 +48,7 @@ export default ({ posts = [] }) => {
   return (
     <>
       <Header titlePre="StudyNote" category="StudyNote" />
+
       <div className="container mx-auto max-w-screen-lg grid px-3">
         <div className="gap-4 masonry my-4">
           {posts.length === 0 && (

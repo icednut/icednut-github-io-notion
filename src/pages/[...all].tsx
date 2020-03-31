@@ -494,6 +494,32 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                   }
                   break
                 }
+                case 'callout':
+                  if (properties.title) {
+                    const blockFormat = value.format
+                    const originalContent = properties.title[0][0]
+                    const quoteContent = originalContent.replace(
+                      /\\n/g,
+                      '<br/>'
+                    )
+
+                    toRender.push(
+                      React.createElement(
+                        components.div,
+                        {
+                          key: id,
+                          className:
+                            'bg-gray-700 p-6 text-lg leading-relaxed my-3 text-gray-200 flex',
+                          style: {
+                            whiteSpace: 'pre-wrap',
+                          },
+                        },
+                        <div className="mr-3">{blockFormat['page_icon']}</div>,
+                        <div>{quoteContent}</div>
+                      )
+                    )
+                  }
+                  break
                 case 'quote':
                   if (properties.title) {
                     const originalContent = properties.title[0][0]
