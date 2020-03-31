@@ -163,7 +163,9 @@ function renderPostContent(contentMap, contentElements) {
             break
           case 'column':
             toRender.push(
-              <div>{renderPostContent(contentMap, contentMap[value.id])}</div>
+              <div className="px-1">
+                {renderPostContent(contentMap, contentMap[value.id])}
+              </div>
             )
             break
           case 'page':
