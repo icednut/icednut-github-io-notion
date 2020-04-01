@@ -503,7 +503,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                       <Heading key={id}>
                         <div key={id} className={additionalClass}>
                           <span>{titleIcon}</span>
-                          <span className="border-b border-transparent border-dashed hover:border-gray-400">
+                          <span className="border-b-2 border-transparent border-dashed hover:border-gray-400">
                             {textBlock(properties.title, true, id)}
                           </span>
                         </div>
