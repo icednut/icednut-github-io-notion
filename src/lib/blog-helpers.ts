@@ -34,7 +34,7 @@ export const filteringPublishedPost = (postsTable: any) => {
       const currentElementKey = Object.keys(currentElement)[0]
       total[currentElementKey] = currentElement[currentElementKey]
       return total
-    })
+    }, {})
 }
 
 export const normalizeSlug = slug => {
