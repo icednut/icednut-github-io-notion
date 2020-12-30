@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Header from '../components/header'
 import Heading from '../components/heading'
@@ -26,7 +26,7 @@ function getSlug(params) {
   }
 }
 
-function renderPostContent(contentMap, contentElements) {
+function renderPostContent(contentMap, contentElements, allContentMap) {
   let listTagName: string | null = null
   let listLastId: string | null = null
   let listMap: {
@@ -38,10 +38,11 @@ function renderPostContent(contentMap, contentElements) {
     }
   } = {}
 
+  // console.log('contentElements', contentElements)
+
   return (
     <>
       {contentElements.map((value, blockIdx) => {
-        // const { value } = block
         const { type, properties, id, parent_id } = value
         const isLast = blockIdx === contentElements.length - 1
         const isList = listTypes.has(type)
@@ -61,6 +62,15 @@ function renderPostContent(contentMap, contentElements) {
             listMap[id].isNested = true
             listMap[parent_id].nested.push(id)
           }
+          if (contentMap[id]) {
+            listMap[id].isNested = true
+            listMap[id].nested = contentMap[id].map(each => each.id)
+            // console.log('contentMap[id]', contentMap[id], 'id', id, 'listMap[id]', listMap[id], 'listMap[parent_id]', listMap[parent_id], 'parent_id', parent_id)
+          }
+
+          // if (listMap[id].isNested) {
+          //   console.log(listMap)
+          // }
         }
 
         if (listTagName && (isLast || !isList)) {
@@ -76,34 +86,76 @@ function renderPostContent(contentMap, contentElements) {
               additionalListClassName = 'leading-loose'
               break
           }
+
           toRender.push(
             React.createElement(
               listTagName,
               { key: listLastId!, className: additionalListClassName },
               Object.keys(listMap).map(itemId => {
-                if (listMap[itemId].isNested) return null
+                // if (listMap[itemId].isNested) {
+                //   console.log(listMap[itemId])
+                //   return null
+                // }
 
-                const createEl = (item, additionalMarginClass) =>
-                  React.createElement(
-                    components.li || 'ul',
-                    {
-                      key: item.key,
-                      className: additionalMarginClass + ' pl-2 leading-loose',
-                    },
-                    item.children,
-                    item.nested.length > 0
+                // console.log('listMap[itemId]', listMap[itemId])
+
+                const createEl = (item, additionalMarginClass) => {
+                  // console.log('item', item)
+                  if (item) {
+                    const nestedItemElements =
+                      item.nested && item.nested.length > 0
+                        ? item.nested.map(nestedId => {
+                            const nestedElement = {
+                              key: nestedId,
+                              nested: [],
+                              children: textBlock(
+                                allContentMap[nestedId].properties.title,
+                                true,
+                                nestedId
+                              ),
+                            }
+                            return createEl(nestedElement, 'ml-5')
+                          })
+                        : null
+                    const nestedItemList = nestedItemElements
                       ? React.createElement(
                           components.ul || 'ul',
                           {
                             key: item + 'sub-list',
                             className: 'my-1 list-disc list-inside',
                           },
-                          item.nested.map(nestedId =>
-                            createEl(listMap[nestedId], 'ml-6')
-                          )
+                          nestedItemElements
                         )
                       : null
-                  )
+
+                    // console.log(nestedItemList)
+
+                    if (nestedItemList) {
+                      return React.createElement(
+                        components.li || 'ul',
+                        {
+                          key: item.key,
+                          className:
+                            additionalMarginClass + ' pl-2 leading-loose',
+                        },
+                        item.children,
+                        nestedItemList
+                      )
+                    } else {
+                      return React.createElement(
+                        components.li || 'ul',
+                        {
+                          key: item.key,
+                          className:
+                            additionalMarginClass + ' pl-2 leading-loose',
+                        },
+                        item.children
+                      )
+                    }
+                  } else {
+                    null
+                  }
+                }
                 return createEl(listMap[itemId], '')
               })
             )
@@ -157,14 +209,22 @@ function renderPostContent(contentMap, contentElements) {
                   ' md:grid-cols-2 sm:grid-cols-1'
                 }
               >
-                {renderPostContent(contentMap, contentMap[value.id])}
+                {renderPostContent(
+                  contentMap,
+                  contentMap[value.id],
+                  allContentMap
+                )}
               </div>
             )
             break
           case 'column':
             toRender.push(
               <div className="px-1">
-                {renderPostContent(contentMap, contentMap[value.id])}
+                {renderPostContent(
+                  contentMap,
+                  contentMap[value.id],
+                  allContentMap
+                )}
               </div>
             )
             break
@@ -389,6 +449,8 @@ export async function getStaticPaths() {
 const listTypes = new Set(['bulleted_list', 'numbered_list'])
 
 const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
+  const [contentTableYn, setContentTableYn] = useState(false)
+
   if (redirect) {
     return (
       <>
@@ -401,6 +463,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
   }
 
   const contentMap = {}
+  const allContentMap = {}
   const contents = post.content || []
   contents.forEach(each => {
     const parentId = each.value['parent_id']
@@ -408,7 +471,9 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
       contentMap[parentId] = []
     }
     contentMap[parentId].push(each.value)
+    allContentMap[each.value.id] = each.value
   })
+  // console.log('allContentMap', allContentMap)
 
   const mainContentId = Object.keys(contentMap)[0]
 
@@ -433,103 +498,14 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 href={getBlogLink(prevPost.Slug)}
                 as={getBlogLink(prevPost.Slug)}
               >
-                <a className="border-b-2 border-transparent border-dashed hover:border-teal-400">
+                <a className="border-b-2 border-transparent border-dashed hover:border-purple-500">
                   {prevPost.Page}
                 </a>
               </Link>
             </div>
           </div>
         )}
-
-        <div className={'sticky top-0 px-3'} style={{ zIndex: 20 }}>
-          <div
-            className={'absolute overflow-hidden ' + blogStyles.postPreviewList}
-          >
-            <div
-              id="table-of-content__icon"
-              className="absolute p-2 bg-teal-400 w-8"
-              style={{ zIndex: 22 }}
-            >
-              <svg
-                className="fill-current text-white w-4 h-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
-              </svg>
-            </div>
-            <div
-              id="table-of-content__list"
-              className={
-                'absolute overflow-hidden w-full h-full pt-10 px-3 bg-white border border-dotted border-gray-400 text-sm'
-              }
-              style={{ zIndex: 21 }}
-            >
-              <div className="font-bold text-gray-800 text-white mb-4">
-                Table of Contents
-              </div>
-              <div>
-                {(post.content || []).map((block, blockIdx) => {
-                  const { value } = block
-                  const { type, properties, id, parent_id } = value
-                  let toRender = []
-
-                  const renderHeading = (
-                    isSubtitle: boolean,
-                    additionalClass: string
-                  ) => {
-                    let titleIcon = (
-                      <svg
-                        className="fill-current inline mr-2 text-gray-400 w-3 h-3"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M12 5h-2v12H8V3h8v2h-2v12h-2V5zM8 3a4 4 0 1 0 0 8V3z" />
-                      </svg>
-                    )
-
-                    if (isSubtitle) {
-                      titleIcon = (
-                        <svg
-                          className="fill-current inline mr-2 text-gray-400 w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M3.5 13H12v5l6-6-6-6v5H4V2H2v11z" />
-                        </svg>
-                      )
-                    }
-                    toRender.push(
-                      <Heading key={id}>
-                        <div key={id} className={additionalClass}>
-                          <span>{titleIcon}</span>
-                          <span className="border-b-2 border-transparent border-dashed hover:border-gray-400">
-                            {textBlock(properties.title, true, id)}
-                          </span>
-                        </div>
-                      </Heading>
-                    )
-                  }
-
-                  switch (type) {
-                    case 'header':
-                      renderHeading(false, 'mb-2 text-gray-800')
-                      break
-                    case 'sub_header':
-                      renderHeading(true, 'pl-4 mb-2 text-gray-700')
-                      break
-                    case 'sub_sub_header':
-                      renderHeading(true, 'pl-8 mb-2 text-gray-600')
-                      break
-                  }
-                  return toRender
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white shadow mx-3">
+        <div className="bg-white shadow-sm mx-3">
           <div id="post-title" className="relative">
             <div
               id="title-info"
@@ -581,13 +557,17 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             {(!post.content || post.content.length === 0) && (
               <p>This post has no content</p>
             )}
-            {renderPostContent(contentMap, contentMap[mainContentId] || [])}
+            {renderPostContent(
+              contentMap,
+              contentMap[mainContentId] || [],
+              allContentMap
+            )}
             <div className="pt-16">
               {post.Tags &&
                 post.Tags.split(',').map(tag => (
                   <div
                     className={
-                      'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +
+                      'inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-sm ' +
                       blogStyles.blogTag
                     }
                   >
@@ -616,7 +596,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                 href={getBlogLink(nextPost.Slug)}
                 as={getBlogLink(nextPost.Slug)}
               >
-                <a className="border-b-2 border-transparent border-dashed hover:border-teal-400">
+                <a className="border-b-2 border-transparent border-dashed hover:border-purple-600">
                   {nextPost.Page}
                 </a>
               </Link>
@@ -624,8 +604,131 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
           </div>
         )}
 
-        <div className="bg-white shadow mx-3 my-10 px-12 py-6">
+        {/* <div className="bg-white shadow mx-3 my-10 px-12 py-6">
           Comment 준비 중...
+        </div> */}
+      </div>
+      <div
+        className={'fixed'}
+        style={{ zIndex: 23, left: '14px', bottom: '34px' }}
+      >
+        {contentTableYn ? (
+          <div
+            id="table-of-content__list"
+            className={'p-4 bg-white shadow-sm text-sm'}
+            style={{ width: 372, maxHeight: 580, overflow: 'auto' }}
+          >
+            <div className="grid grid-cols-2">
+              <div
+                className="inline-block py-px px-2 mt-2 mb-6 bg-purple-500 hover:bg-purple-700 text-white text-sm text-center w-10"
+                style={{ marginRight: 'auto' }}
+              >
+                <a href="#">Top</a>
+              </div>
+              <div
+                className="inline-block py-px px-2 mt-2 mb-6 text-sm text-center w-10 cursor-pointer"
+                style={{ marginLeft: 'auto' }}
+                onClick={() => setContentTableYn(false)}
+              >
+                <a>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="stroke-current hover:stroke-2 text-purple-500 hover:text-purple-700"
+                    viewBox="0 0 20 20"
+                    style={{ width: 14, marginLeft: 'auto' }}
+                  >
+                    <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div className="font-bold text-gray-800 text-white mb-3">
+              Table of Contents
+            </div>
+            <div>
+              {(post.content || []).map((block, blockIdx) => {
+                const { value } = block
+                const { type, properties, id, parent_id } = value
+                let toRender = []
+
+                const renderHeading = (
+                  isSubtitle: boolean,
+                  additionalClass: string
+                ) => {
+                  let titleIcon = (
+                    <svg
+                      className="fill-current inline mr-2 text-gray-400 w-3 h-3"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M12 5h-2v12H8V3h8v2h-2v12h-2V5zM8 3a4 4 0 1 0 0 8V3z" />
+                    </svg>
+                  )
+
+                  if (isSubtitle) {
+                    titleIcon = (
+                      <svg
+                        className="fill-current inline mr-2 text-gray-400 w-3 h-3"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M3.5 13H12v5l6-6-6-6v5H4V2H2v11z" />
+                      </svg>
+                    )
+                  }
+                  toRender.push(
+                    <Heading key={id}>
+                      <div key={id} className={additionalClass}>
+                        <span>{titleIcon}</span>
+                        <span className="border-b-2 border-transparent border-dashed hover:border-gray-400">
+                          {textBlock(properties.title, true, id)}
+                        </span>
+                      </div>
+                    </Heading>
+                  )
+                }
+
+                switch (type) {
+                  case 'header':
+                    renderHeading(false, 'mb-2 text-gray-800')
+                    break
+                  case 'sub_header':
+                    renderHeading(true, 'pl-4 mb-2 text-gray-700')
+                    break
+                  case 'sub_sub_header':
+                    renderHeading(true, 'pl-8 mb-2 text-gray-600')
+                    break
+                }
+                return toRender
+              })}
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+      <div
+        className={'fixed p-4 opacity-50'}
+        style={{ zIndex: 20, left: '10px', bottom: '42px' }}
+      >
+        <div
+          className={blogStyles.postPreviewList}
+          onClick={() => setContentTableYn(true)}
+        >
+          <div
+            id="table-of-content__icon"
+            className="absolute p-4 bg-white rounded-full cursor-pointer"
+            style={{ zIndex: 22 }}
+          >
+            <svg
+              className="fill-current w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
+            </svg>
+          </div>
         </div>
       </div>
     </>

@@ -108,7 +108,7 @@ export default ({ posts = [], tag = '' }) => {
                     >
                       <a
                         className={
-                          'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white border-dashed hover:border-teal-400 pb-px transition-colors duration-300'
+                          'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white border-dashed hover:border-purple-500 pb-px transition-colors duration-300'
                         }
                       >
                         {post.Page}
@@ -138,7 +138,7 @@ export default ({ posts = [], tag = '' }) => {
                       <Link href={'/tag/[slug]'} as={'/tag/' + tag}>
                         <a
                           className={
-                            'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +
+                            'inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-sm ' +
                             blogStyles.blogTag
                           }
                         >

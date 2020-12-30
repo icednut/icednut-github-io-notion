@@ -12,12 +12,15 @@ function applyTags(tags = [], children, noPTag = false, key) {
       tagName = React.Fragment
       props.className = 'leading-loose tracking-wide py-1'
     }
+    if (tagName === '_') {
+      tagName = 'u'
+      props.className = 'leading-loose tracking-wide py-1'
+    }
     if (tagName === 'c') {
       tagName = 'code'
       props.className =
         'leading-loose tracking-wide p-1 bg-gray-400 rounded text-xs text-red-600'
     }
-
     if (tagName === 'a') {
       props.href = tag[1]
       props.className =

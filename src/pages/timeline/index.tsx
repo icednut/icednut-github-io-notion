@@ -73,7 +73,7 @@ export default ({ postPerYearMap = {} }) => {
                       href={getBlogLink(post.Slug)}
                       as={getBlogLink(post.Slug)}
                     >
-                      <a className="border-b-2 border-transparent hover:border-teal-400 border-dashed">
+                      <a className="border-b-2 border-transparent hover:border-purple-400 border-dashed">
                         {post.Page}
                       </a>
                     </Link>

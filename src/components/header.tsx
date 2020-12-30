@@ -79,13 +79,13 @@ const header = ({ titlePre = '', category = '' }) => {
           {navItems.map(({ label, page }) => {
             const menuColor =
               label === category
-                ? ' text-teal-400 border-b-4 border-teal-400'
+                ? ' text-purple-500 border-b-4 border-purple-500'
                 : ' text-gray-700'
             return (
               <Link href={page} as={page}>
                 <a
                   className={
-                    'hover:text-teal-400 mx-5 pb-2 text-base font-light hover:font-bold ' +
+                    'hover:text-purple-700 mx-5 pb-2 text-base font-light hover:font-bold ' +
                     styles.header_menu +
                     menuColor
                   }

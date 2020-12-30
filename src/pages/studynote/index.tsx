@@ -54,54 +54,55 @@ export default ({ posts = [] }) => {
           {posts.length === 0 && (
             <p className={blogStyles.noPosts}>There are no posts yet</p>
           )}
-          {posts.map(post => {
-            return (
-              <div
-                className="bg-white shadow hover:shadow-xl transition-all duration-300 inline-block my-3"
-                key={post.Slug}
-              >
-                <div className="relative overflow-hidden">
-                  <Link
-                    href={'/' + getBlogLink(post.Slug)}
-                    as={getBlogLink(post.Slug)}
-                  >
-                    <a>
-                      <img
-                        className={
-                          'w-full transition-transform duration-500 transform hover:scale-125 ' +
-                          blogStyles.darkenImage
-                        }
-                        src={
-                          '/post_thumbnail/' +
-                          (post.Thumbnail && post.Thumbnail !== ''
-                            ? post.Thumbnail
-                            : 'default_studynote.jpg')
-                        }
-                        alt="Sunset in the mountains"
-                      />
-                    </a>
-                  </Link>
-                </div>
-                <div className="px-6 py-4">
-                  <div className="text-center">
+          {posts
+            .filter(post => post.Slug != null && post.Slog !== '')
+            .map(post => {
+              return (
+                <div
+                  className="bg-white shadow hover:shadow-xl transition-all duration-300 inline-block my-3"
+                  key={post.Slug}
+                >
+                  <div className="relative overflow-hidden">
                     <Link
                       href={'/' + getBlogLink(post.Slug)}
                       as={getBlogLink(post.Slug)}
                     >
-                      <a
-                        className={
-                          'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white border-dashed hover:border-teal-400 pb-px transition-colors duration-300'
-                        }
-                      >
-                        {post.Page}
+                      <a>
+                        <img
+                          className={
+                            'w-full transition-transform duration-500 transform hover:scale-125 ' +
+                            blogStyles.darkenImage
+                          }
+                          src={
+                            '/post_thumbnail/' +
+                            (post.Thumbnail && post.Thumbnail !== ''
+                              ? post.Thumbnail
+                              : 'default_studynote.jpg')
+                          }
+                          alt="Sunset in the mountains"
+                        />
                       </a>
                     </Link>
                   </div>
-                  <Link
-                    href={'/' + getBlogLink(post.Slug)}
-                    as={getBlogLink(post.Slug)}
-                  >
-                    <a>
+                  <div className="px-6 py-4">
+                    <div className="text-center">
+                      <Link
+                        href={'/' + getBlogLink(post.Slug)}
+                        as={getBlogLink(post.Slug)}
+                      >
+                        <a
+                          className={
+                            'text-black font-bold text-xl text-xl mb-2 text-justify border-b-2 border-white border-dashed hover:border-purple-500 pb-px transition-colors duration-300'
+                          }
+                        >
+                          {post.Page}
+                        </a>
+                      </Link>
+                    </div>
+                    <Link
+                      href={'/' + getBlogLink(post.Slug)}
+                      as={getBlogLink(post.Slug)}
+                    >
                       <p
                         className={
                           'text-gray-600 text-xs pt-2 pb-5 text-center'
@@ -111,27 +112,26 @@ export default ({ posts = [] }) => {
                         <span> / </span>
                         {post.Date && <span>{getDateStr(post.Date)}</span>}
                       </p>
-                    </a>
-                  </Link>
+                    </Link>
+                  </div>
+                  <div className="px-6 py-4">
+                    {post.Tags &&
+                      post.Tags.split(',').map(tag => (
+                        <Link href={'/tag/[slug]'} as={'/tag/' + tag}>
+                          <a
+                            className={
+                              'inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-sm ' +
+                              blogStyles.blogTag
+                            }
+                          >
+                            #{tag}
+                          </a>
+                        </Link>
+                      ))}
+                  </div>
                 </div>
-                <div className="px-6 py-4">
-                  {post.Tags &&
-                    post.Tags.split(',').map(tag => (
-                      <Link href={'/tag/[slug]'} as={'/tag/' + tag}>
-                        <a
-                          className={
-                            'inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-sm ' +
-                            blogStyles.blogTag
-                          }
-                        >
-                          #{tag}
-                        </a>
-                      </Link>
-                    ))}
-                </div>
-              </div>
-            )
-          })}
+              )
+            })}
         </div>
       </div>
     </>

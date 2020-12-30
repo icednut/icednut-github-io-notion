@@ -28,7 +28,7 @@ const contacts = [
   {
     Comp: LinkedIn,
     alt: 'linkedin icon',
-    link: 'https://www.linkedin.com/in/wangeun-lee-550a93a2/',
+    link: 'https://www.linkedin.com/in/wan-geun-lee-550a93a2/',
   },
   {
     Comp: Envelope,
@@ -40,9 +40,9 @@ const contacts = [
 export default ({ tagOptions = [] }) => {
   return (
     <>
-      <div
+      {/* <div
         id="top-button"
-        className="fixed shadow-2xl p-4 bg-white rounded-full text-xs opacity-50"
+        className="fixed shadow-2xl p-4 bg-white rounded-full text-xs opacity-30"
         style={{ right: '26px', bottom: '29px' }}
       >
         <a href="#">
@@ -54,15 +54,17 @@ export default ({ tagOptions = [] }) => {
             <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
           </svg>
         </a>
-      </div>
+      </div> */}
 
       <footer>
         <div className="container mx-auto max-w-screen-lg mt-32 pt-16 pb-8 text-gray-600 border-t border-gray-300 px-3">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mb-3">
             <div className="mr-1">
-              <div className="font-bold text-sm pb-px">About Me</div>
+              <div className="font-bold text-sm pb-px text-purple-400">
+                About Me
+              </div>
               <div
-                className="border-b-4 border-teal-400"
+                className="border-b-4 border-purple-400"
                 style={{ width: '1rem' }}
               ></div>
               <div className="py-2">
@@ -105,9 +107,11 @@ export default ({ tagOptions = [] }) => {
               </div>
             </div>
             <div className="mx-1">
-              <div className="font-bold text-sm pb-px">Twitter</div>
+              <div className="font-bold text-sm pb-px text-purple-400">
+                Twitter
+              </div>
               <div
-                className="border-b-4 border-teal-400"
+                className="border-b-4 border-purple-400"
                 style={{ width: '1rem' }}
               ></div>
               <div className="py-2">
@@ -123,16 +127,18 @@ export default ({ tagOptions = [] }) => {
               </div>
             </div>
             <div className="ml-1">
-              <div className="font-bold text-sm pb-px">Tags</div>
+              <div className="font-bold text-sm pb-px text-purple-400">
+                Tags
+              </div>
               <div
-                className="border-b-4 border-teal-400"
+                className="border-b-4 border-purple-400"
                 style={{ width: '1rem' }}
               ></div>
               <div className="py-2">
                 {tagOptions &&
                   tagOptions.map(each => (
                     <Link href={'/tag/[slug]'} as={'/tag/' + each}>
-                      <a className="inline-block py-px px-2 mr-2 mt-2 bg-teal-400 hover:bg-teal-600 text-white text-xs post-tag">
+                      <a className="inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-xs post-tag">
                         #{each}
                       </a>
                     </Link>
