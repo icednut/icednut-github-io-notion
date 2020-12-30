@@ -24,7 +24,7 @@ function applyTags(tags = [], children, noPTag = false, key) {
     if (tagName === 'a') {
       props.href = tag[1]
       props.className =
-        'leading-loose text-justify rounded text-teal-500 border-b-2 border-transparent border-dashed hover:border-teal-500'
+        'leading-loose text-justify rounded text-purple-500 border-b-2 border-transparent border-dashed hover:border-purple-500'
     }
 
     child = React.createElement(components[tagName] || tagName, props, child)

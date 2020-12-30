@@ -1,18 +1,23 @@
+import React, { useState } from 'react'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-jsx'
 import Clipboard from 'react-clipboard.js'
 
 const Code = ({ children, language = 'javascript' }) => {
+  const [copyYn, setCopyYn] = useState(false)
   return (
     <>
       <div className="relative">
         <Clipboard
-          className="absolute bg-gray-600 rounded px-2 py-1 text-xs opacity-50 hover:opacity-100"
+          className="absolute bg-gray-600 rounded px-2 py-1 text-xs opacity-75 hover:opacity-100"
           style={{ right: '0.75rem', top: '0.75rem' }}
           data-clipboard-text={children}
-          onSuccess={() => alert('Copied!')}
+          onSuccess={() => {
+            setCopyYn(true)
+            setTimeout(() => setCopyYn(false), 2200)
+          }}
         >
-          Copy to Clipboard
+          {copyYn ? 'Copied!' : 'Copy'}
         </Clipboard>
         <pre>
           <code

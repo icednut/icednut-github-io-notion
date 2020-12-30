@@ -13,6 +13,7 @@ import getNotionUsers from '../lib/notion/getNotionUsers'
 import { getBlogLink, getDateStr, postIsReady } from '../lib/blog-helpers'
 import { Z_DEFAULT_COMPRESSION } from 'zlib'
 import Link from 'next/link'
+import { DiscussionEmbed } from 'disqus-react'
 
 function getSlug(params) {
   if (!params && !params.all && params.all.length === 0) {
@@ -477,8 +478,6 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
     contentMap[parentId].push(each.value)
     allContentMap[each.value.id] = each.value
   })
-  // console.log('allContentMap', allContentMap)
-
   const mainContentId = Object.keys(contentMap)[0]
 
   return (
@@ -581,6 +580,17 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                   </div>
                 ))}
             </div>
+
+            <div className="py-6">
+              <DiscussionEmbed
+                shortname="icednuts-space"
+                config={{
+                  url: 'https://icednut.space/' + post.Slug,
+                  identifier: post.Slug,
+                  title: post.Page,
+                }}
+              />
+            </div>
           </div>
         </div>
         {nextPost && nextPost.Slug && nextPost.Page && postIsReady(nextPost) && (
@@ -607,20 +617,16 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             </div>
           </div>
         )}
-
-        {/* <div className="bg-white shadow mx-3 my-10 px-12 py-6">
-          Comment 준비 중...
-        </div> */}
       </div>
       <div
-        className={'fixed'}
-        style={{ zIndex: 23, left: '14px', bottom: '34px' }}
+        className={'fixed ' + blogStyles.postPreviewList}
+        style={{ zIndex: 23 }}
       >
         {contentTableYn ? (
           <div
             id="table-of-content__list"
             className={'p-4 bg-white shadow-sm text-sm'}
-            style={{ width: 372, maxHeight: 580, overflow: 'auto' }}
+            style={{ maxHeight: 580, overflow: 'auto' }}
           >
             <div className="grid grid-cols-2">
               <div
@@ -713,27 +719,18 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
         )}
       </div>
       <div
-        className={'fixed p-4 opacity-50'}
-        style={{ zIndex: 20, left: '10px', bottom: '42px' }}
+        id="table-of-content__icon"
+        className="fixed p-4 opacity-50 bg-white rounded-full cursor-pointer"
+        style={{ zIndex: 20, left: '2.25rem', bottom: '2.25rem' }}
+        onClick={() => setContentTableYn(true)}
       >
-        <div
-          className={blogStyles.postPreviewList}
-          onClick={() => setContentTableYn(true)}
+        <svg
+          className="fill-current text-purple-600 w-6 h-6"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
         >
-          <div
-            id="table-of-content__icon"
-            className="absolute p-4 bg-white rounded-full cursor-pointer"
-            style={{ zIndex: 22 }}
-          >
-            <svg
-              className="fill-current w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
-            </svg>
-          </div>
-        </div>
+          <path d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z" />
+        </svg>
       </div>
     </>
   )
