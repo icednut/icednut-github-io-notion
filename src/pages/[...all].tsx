@@ -105,14 +105,18 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
                     const nestedItemElements =
                       item.nested && item.nested.length > 0
                         ? item.nested.map(nestedId => {
+                            const title =
+                              allContentMap[nestedId] &&
+                              allContentMap[nestedId].properties
+                                ? allContentMap[nestedId].properties.title
+                                : null
+                            const children = title
+                              ? textBlock(title, true, nestedId)
+                              : null
                             const nestedElement = {
                               key: nestedId,
                               nested: [],
-                              children: textBlock(
-                                allContentMap[nestedId].properties.title,
-                                true,
-                                nestedId
-                              ),
+                              children: children,
                             }
                             return createEl(nestedElement, 'ml-5')
                           })
