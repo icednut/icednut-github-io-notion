@@ -27,6 +27,228 @@ function getSlug(params) {
   }
 }
 
+function createRenderDom(
+  type,
+  contentMap,
+  allContentMap,
+  value,
+  properties,
+  id
+) {
+  let resultDom = null
+
+  if (!properties) {
+    return resultDom
+  }
+
+  const collectText = (el, acc = []) => {
+    if (el) {
+      if (typeof el === 'string') acc.push(el)
+      if (Array.isArray(el)) el.map(item => collectText(item, acc))
+      if (typeof el === 'object')
+        collectText(el.props && el.props.children, acc)
+    }
+    return acc.join('').trim()
+  }
+  const renderHeading = (
+    tagName: string,
+    additionalClassName: string = 'leading-ralxed'
+  ) => {
+    const text = properties.title
+    const children = textBlock(text, true, id)
+    const props = {
+      key: id,
+      className: additionalClassName,
+      id: collectText(text)
+        .toLowerCase()
+        .replace(/\s/g, '-')
+        .replace(/[?!:]/g, ''),
+    }
+
+    return React.createElement(tagName, props, children)
+  }
+
+  switch (type) {
+    case 'column_list':
+      const columnCount =
+        contentMap[value.id].length >= 12 ? 12 : contentMap[value.id].length
+      resultDom = (
+        <div
+          className={
+            'grid lg:grid-cols-' +
+            columnCount +
+            ' xl:grid-cols-' +
+            columnCount +
+            ' md:grid-cols-2 sm:grid-cols-1'
+          }
+        >
+          {renderPostContent(contentMap, contentMap[value.id], allContentMap)}
+        </div>
+      )
+      break
+    case 'column':
+      resultDom = (
+        <div className="px-1">
+          {renderPostContent(contentMap, contentMap[value.id], allContentMap)}
+        </div>
+      )
+      break
+    case 'page':
+    case 'divider':
+      break
+    case 'text':
+      resultDom = null
+      if (properties) {
+        resultDom = textBlock(properties.title, false, id)
+      } else {
+        resultDom = (
+          <span key={id} className="leading-ralxed mt-px">
+            &nbsp;
+          </span>
+        )
+      }
+      break
+    case 'image':
+    case 'video': {
+      const { format = {} } = value
+      const width = '100%'
+
+      const isImage = type === 'image'
+      const Comp = isImage ? 'img' : 'video'
+      resultDom = isImage ? (
+        <Link
+          href={`/api/asset?assetUrl=${encodeURIComponent(
+            format.display_source as any
+          )}&blockId=${id}`}
+        >
+          <a target="_blank" rel="noopener">
+            <Comp
+              key={id}
+              src={`/api/asset?assetUrl=${encodeURIComponent(
+                format.display_source as any
+              )}&blockId=${id}`}
+              controls={!isImage}
+              alt={isImage ? 'An image from Notion' : undefined}
+              loop={!isImage}
+              muted={!isImage}
+              autoPlay={!isImage}
+              style={{ width }}
+              className="my-1"
+            />
+          </a>
+        </Link>
+      ) : (
+        <Comp
+          key={id}
+          src={`/api/asset?assetUrl=${encodeURIComponent(
+            format.display_source as any
+          )}&blockId=${id}`}
+          controls={!isImage}
+          alt={isImage ? 'An image from Notion' : undefined}
+          loop={!isImage}
+          muted={!isImage}
+          autoPlay={!isImage}
+          style={{ width }}
+          className="my-1"
+        />
+      )
+      break
+    }
+    case 'header':
+      resultDom = renderHeading(
+        'h2',
+        'mt-4 mb-px leading-loose text-3xl font-bold'
+      )
+      break
+    case 'sub_header':
+      resultDom = renderHeading(
+        'h3',
+        'mt-3 mb-px leading-loose text-xl font-bold'
+      )
+      break
+    case 'sub_sub_header':
+      resultDom = renderHeading(
+        'h4',
+        'mt-2 mb-px leading-loose text-lg font-bold'
+      )
+      break
+    case 'code': {
+      if (properties.title) {
+        const content = properties.title[0][0]
+        const language = properties.language[0][0]
+
+        if (language === 'LiveScript') {
+          // this requires the DOM for now
+          resultDom = (
+            <ReactJSXParser
+              key={id}
+              jsx={content}
+              components={components}
+              componentsOnly={false}
+              renderInpost={false}
+              allowUnknownElements={true}
+              blacklistedTags={['script', 'style']}
+            />
+          )
+        } else {
+          resultDom = (
+            <components.Code key={id} language={language || ''}>
+              {content}
+            </components.Code>
+          )
+        }
+      }
+      break
+    }
+    case 'callout':
+      if (properties.title) {
+        const blockFormat = value.format
+        const newContent = textBlock(properties.title, true, value.id)
+
+        resultDom = React.createElement(
+          components.div,
+          {
+            key: id,
+            className:
+              'bg-gray-700 p-6 text-lg leading-relaxed my-3 text-gray-200 flex',
+            style: {
+              whiteSpace: 'pre-wrap',
+            },
+          },
+          <div className="mr-3">{blockFormat['page_icon']}</div>,
+          <div>{newContent}</div>
+        )
+      }
+      break
+    case 'quote':
+      if (properties.title) {
+        const originalContent = properties.title[0][0]
+        const quoteContent = originalContent.replace(/\\n/g, '<br/>')
+        properties.title[0][0] = quoteContent
+
+        resultDom = React.createElement(
+          components.blockquote,
+          {
+            key: id,
+            className:
+              'italic border-l-4 border-gray-700 px-3 py-1 text-lg leading-relaxed my-3',
+            style: {
+              whiteSpace: 'pre-wrap',
+            },
+          },
+          properties.title
+        )
+      }
+      break
+    default:
+      if (process.env.NODE_ENV !== 'production' && !listTypes.has(type)) {
+        console.log('unknown type', type)
+      }
+      break
+  }
+  return resultDom
+}
+
 function renderPostContent(contentMap, contentElements, allContentMap) {
   let listTagName: string | null = null
   let listLastId: string | null = null
@@ -66,12 +288,7 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
           if (contentMap[id]) {
             listMap[id].isNested = true
             listMap[id].nested = contentMap[id].map(each => each.id)
-            // console.log('contentMap[id]', contentMap[id], 'id', id, 'listMap[id]', listMap[id], 'listMap[parent_id]', listMap[parent_id], 'parent_id', parent_id)
           }
-
-          // if (listMap[id].isNested) {
-          //   console.log(listMap)
-          // }
         }
 
         if (listTagName && (isLast || !isList)) {
@@ -93,15 +310,7 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
               listTagName,
               { key: listLastId!, className: additionalListClassName },
               Object.keys(listMap).map(itemId => {
-                // if (listMap[itemId].isNested) {
-                //   console.log(listMap[itemId])
-                //   return null
-                // }
-
-                // console.log('listMap[itemId]', listMap[itemId])
-
                 const createEl = (item, additionalMarginClass) => {
-                  // console.log('item', item)
                   if (item) {
                     const nestedItemElements =
                       item.nested && item.nested.length > 0
@@ -111,15 +320,47 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
                               allContentMap[nestedId].properties
                                 ? allContentMap[nestedId].properties.title
                                 : null
-                            const children = title
-                              ? textBlock(title, true, nestedId)
+
+                            // console.log('allContentMap[nestedId].type', allContentMap[nestedId].type)
+                            const children =
+                              allContentMap[nestedId].type === 'bulleted_list'
+                                ? textBlock(
+                                    allContentMap[nestedId].properties.title,
+                                    true,
+                                    nestedId
+                                  )
+                                : createRenderDom(
+                                    allContentMap[nestedId].type,
+                                    contentMap,
+                                    allContentMap,
+                                    allContentMap[nestedId],
+                                    allContentMap[nestedId].properties,
+                                    nestedId
+                                  )
+
+                            return children
+                              ? React.createElement(
+                                  allContentMap[nestedId].type ===
+                                    'bulleted_list'
+                                    ? components.li || 'li'
+                                    : 'div',
+                                  {
+                                    key: item.key,
+                                    className:
+                                      additionalMarginClass +
+                                      ' ml-5 pl-2 leading-loose',
+                                  },
+                                  createEl(
+                                    {
+                                      key: nestedId,
+                                      nested: [],
+                                      children: children,
+                                    },
+                                    'ml-5'
+                                  )
+                                )
                               : null
-                            const nestedElement = {
-                              key: nestedId,
-                              nested: [],
-                              children: children,
-                            }
-                            return createEl(nestedElement, 'ml-5')
+                            // return children ? createEl({key: nestedId, nested: [], children: children}, 'ml-5') : null
                           })
                         : null
                     const nestedItemList = nestedItemElements
@@ -133,11 +374,9 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
                         )
                       : null
 
-                    // console.log(nestedItemList)
-
                     if (nestedItemList) {
                       return React.createElement(
-                        components.li || 'ul',
+                        components.li || 'li',
                         {
                           key: item.key,
                           className:
@@ -147,15 +386,7 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
                         nestedItemList
                       )
                     } else {
-                      return React.createElement(
-                        components.li || 'ul',
-                        {
-                          key: item.key,
-                          className:
-                            additionalMarginClass + ' pl-2 leading-loose',
-                        },
-                        item.children
-                      )
+                      return <>{item.children}</>
                     }
                   } else {
                     null
@@ -170,227 +401,17 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
           listTagName = null
         }
 
-        const collectText = (el, acc = []) => {
-          if (el) {
-            if (typeof el === 'string') acc.push(el)
-            if (Array.isArray(el)) el.map(item => collectText(item, acc))
-            if (typeof el === 'object')
-              collectText(el.props && el.props.children, acc)
-          }
-          return acc.join('').trim()
-        }
+        const resultDom = createRenderDom(
+          type,
+          contentMap,
+          allContentMap,
+          value,
+          properties,
+          id
+        )
 
-        const renderHeading = (
-          tagName: string,
-          additionalClassName: string = 'leading-ralxed'
-        ) => {
-          const text = properties.title
-          const children = textBlock(text, true, id)
-          const props = {
-            key: id,
-            className: additionalClassName,
-            id: collectText(text)
-              .toLowerCase()
-              .replace(/\s/g, '-')
-              .replace(/[?!:]/g, ''),
-          }
-
-          toRender.push(React.createElement(tagName, props, children))
-        }
-
-        switch (type) {
-          case 'column_list':
-            const columnCount =
-              contentMap[value.id].length >= 12
-                ? 12
-                : contentMap[value.id].length
-            toRender.push(
-              <div
-                className={
-                  'grid lg:grid-cols-' +
-                  columnCount +
-                  ' xl:grid-cols-' +
-                  columnCount +
-                  ' md:grid-cols-2 sm:grid-cols-1'
-                }
-              >
-                {renderPostContent(
-                  contentMap,
-                  contentMap[value.id],
-                  allContentMap
-                )}
-              </div>
-            )
-            break
-          case 'column':
-            toRender.push(
-              <div className="px-1">
-                {renderPostContent(
-                  contentMap,
-                  contentMap[value.id],
-                  allContentMap
-                )}
-              </div>
-            )
-            break
-          case 'page':
-          case 'divider':
-            break
-          case 'text':
-            if (properties) {
-              toRender.push(textBlock(properties.title, false, id))
-            } else {
-              toRender.push(
-                <span key={id} className="leading-ralxed mt-px">
-                  &nbsp;
-                </span>
-              )
-            }
-            break
-          case 'image':
-          case 'video': {
-            const { format = {} } = value
-            // const { block_width } = format
-            // const baseBlockWidth = 768
-            // const roundFactor = Math.pow(10, 2)
-            // calculate percentages
-            // const width = block_width
-            //   ? `${Math.round(
-            //       (block_width / baseBlockWidth) * 100 * roundFactor
-            //     ) / roundFactor}%`
-            //   : '100%'
-            const width = '100%'
-
-            const isImage = type === 'image'
-            const Comp = isImage ? 'img' : 'video'
-            const resultDom = isImage ? (
-              <Link
-                href={`/api/asset?assetUrl=${encodeURIComponent(
-                  format.display_source as any
-                )}&blockId=${id}`}
-              >
-                <a target="_blank" rel="noopener">
-                  <Comp
-                    key={id}
-                    src={`/api/asset?assetUrl=${encodeURIComponent(
-                      format.display_source as any
-                    )}&blockId=${id}`}
-                    controls={!isImage}
-                    alt={isImage ? 'An image from Notion' : undefined}
-                    loop={!isImage}
-                    muted={!isImage}
-                    autoPlay={!isImage}
-                    style={{ width }}
-                    className="my-1"
-                  />
-                </a>
-              </Link>
-            ) : (
-              <Comp
-                key={id}
-                src={`/api/asset?assetUrl=${encodeURIComponent(
-                  format.display_source as any
-                )}&blockId=${id}`}
-                controls={!isImage}
-                alt={isImage ? 'An image from Notion' : undefined}
-                loop={!isImage}
-                muted={!isImage}
-                autoPlay={!isImage}
-                style={{ width }}
-                className="my-1"
-              />
-            )
-
-            toRender.push(resultDom)
-            break
-          }
-          case 'header':
-            renderHeading('h2', 'mt-4 mb-px leading-loose text-3xl font-bold')
-            break
-          case 'sub_header':
-            renderHeading('h3', 'mt-3 mb-px leading-loose text-xl font-bold')
-            break
-          case 'sub_sub_header':
-            renderHeading('h4', 'mt-2 mb-px leading-loose text-lg font-bold')
-            break
-          case 'code': {
-            if (properties.title) {
-              const content = properties.title[0][0]
-              const language = properties.language[0][0]
-
-              if (language === 'LiveScript') {
-                // this requires the DOM for now
-                toRender.push(
-                  <ReactJSXParser
-                    key={id}
-                    jsx={content}
-                    components={components}
-                    componentsOnly={false}
-                    renderInpost={false}
-                    allowUnknownElements={true}
-                    blacklistedTags={['script', 'style']}
-                  />
-                )
-              } else {
-                toRender.push(
-                  <components.Code key={id} language={language || ''}>
-                    {content}
-                  </components.Code>
-                )
-              }
-            }
-            break
-          }
-          case 'callout':
-            if (properties.title) {
-              const blockFormat = value.format
-              const originalContent = properties.title[0][0]
-              const quoteContent = originalContent.replace(/\\n/g, '<br/>')
-
-              toRender.push(
-                React.createElement(
-                  components.div,
-                  {
-                    key: id,
-                    className:
-                      'bg-gray-700 p-6 text-lg leading-relaxed my-3 text-gray-200 flex',
-                    style: {
-                      whiteSpace: 'pre-wrap',
-                    },
-                  },
-                  <div className="mr-3">{blockFormat['page_icon']}</div>,
-                  <div>{quoteContent}</div>
-                )
-              )
-            }
-            break
-          case 'quote':
-            if (properties.title) {
-              const originalContent = properties.title[0][0]
-              const quoteContent = originalContent.replace(/\\n/g, '<br/>')
-              properties.title[0][0] = quoteContent
-
-              toRender.push(
-                React.createElement(
-                  components.blockquote,
-                  {
-                    key: id,
-                    className:
-                      'italic border-l-4 border-gray-700 px-3 py-1 text-lg leading-relaxed my-3',
-                    style: {
-                      whiteSpace: 'pre-wrap',
-                    },
-                  },
-                  properties.title
-                )
-              )
-            }
-            break
-          default:
-            if (process.env.NODE_ENV !== 'production' && !listTypes.has(type)) {
-              console.log('unknown type', type)
-            }
-            break
+        if (resultDom) {
+          toRender.push(resultDom)
         }
         return toRender
       })}
