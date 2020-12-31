@@ -46,7 +46,7 @@ export function textBlock(text = [], noPTag = false, mainKey) {
   }
   let props = { key: mainKey }
   if (!noPTag) {
-    props['className'] = 'leading-loose tracking-wide py-1'
+    props['className'] = 'leading-loose tracking-wide pb-1'
   }
   return React.createElement(
     noPTag ? React.Fragment : components.p,

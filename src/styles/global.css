@@ -49,3 +49,18 @@ body {
 code {
   font-family: 'Fira Code', monospace;
 }
+
+ul {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+ul li:before {
+  content: '\25fc';
+  color: #a78bfa;
+  font-size: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0px 5px 5px 0px;
+}

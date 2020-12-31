@@ -310,7 +310,11 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
               listTagName,
               { key: listLastId!, className: additionalListClassName },
               Object.keys(listMap).map(itemId => {
-                const createEl = (item, additionalMarginClass) => {
+                const createEl = (
+                  item,
+                  additionalMarginClass,
+                  nestedYn = false
+                ) => {
                   if (item) {
                     const nestedItemElements =
                       item.nested && item.nested.length > 0
@@ -322,33 +326,33 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
                                 : null
 
                             // console.log('allContentMap[nestedId].type', allContentMap[nestedId].type)
-                            const children =
-                              allContentMap[nestedId].type === 'bulleted_list'
-                                ? textBlock(
-                                    allContentMap[nestedId].properties.title,
-                                    true,
-                                    nestedId
-                                  )
-                                : createRenderDom(
-                                    allContentMap[nestedId].type,
-                                    contentMap,
-                                    allContentMap,
-                                    allContentMap[nestedId],
-                                    allContentMap[nestedId].properties,
-                                    nestedId
-                                  )
+                            const children = listTypes.has(
+                              allContentMap[nestedId].type
+                            )
+                              ? textBlock(
+                                  allContentMap[nestedId].properties.title,
+                                  true,
+                                  nestedId
+                                )
+                              : createRenderDom(
+                                  allContentMap[nestedId].type,
+                                  contentMap,
+                                  allContentMap,
+                                  allContentMap[nestedId],
+                                  allContentMap[nestedId].properties,
+                                  nestedId
+                                )
 
                             return children
                               ? React.createElement(
-                                  allContentMap[nestedId].type ===
-                                    'bulleted_list'
+                                  listTypes.has(allContentMap[nestedId].type)
                                     ? components.li || 'li'
                                     : 'div',
                                   {
                                     key: item.key,
                                     className:
                                       additionalMarginClass +
-                                      ' ml-5 pl-2 leading-loose',
+                                      ' ml-5 pl-1 leading-loose',
                                   },
                                   createEl(
                                     {
@@ -356,7 +360,8 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
                                       nested: [],
                                       children: children,
                                     },
-                                    'ml-5'
+                                    'ml-5',
+                                    true
                                   )
                                 )
                               : null
@@ -380,16 +385,24 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
                         {
                           key: item.key,
                           className:
-                            additionalMarginClass + ' pl-2 leading-loose',
+                            additionalMarginClass + ' pl-1 leading-loose',
                         },
                         item.children,
                         nestedItemList
                       )
+                      // return <>
+                      //   <li>{item.children}</li>
+                      //   {nestedItemList}
+                      // </>
                     } else {
-                      return <>{item.children}</>
+                      return !nestedYn ? (
+                        <li className="leading-loose">{item.children}</li>
+                      ) : (
+                        item.children
+                      )
                     }
                   } else {
-                    null
+                    return null
                   }
                 }
                 return createEl(listMap[itemId], '')
@@ -644,20 +657,16 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
         style={{ zIndex: 23 }}
       >
         {contentTableYn ? (
-          <div
-            id="table-of-content__list"
-            className={'p-4 bg-white shadow-sm text-sm'}
-            style={{ maxHeight: 580, overflow: 'auto' }}
-          >
-            <div className="grid grid-cols-2">
+          <>
+            <div className="grid grid-cols-2 px-2 pt-2 bg-white">
               <div
-                className="inline-block py-px px-2 mt-2 mb-6 bg-purple-500 hover:bg-purple-700 text-white text-sm text-center w-10"
+                className="inline-block py-px px-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-sm text-center w-10"
                 style={{ marginRight: 'auto' }}
               >
                 <a href="#">Top</a>
               </div>
               <div
-                className="inline-block py-px px-2 mt-2 mb-6 text-sm text-center w-10 cursor-pointer"
+                className="inline-block py-px px-2 mt-2 text-sm text-center w-10 cursor-pointer"
                 style={{ marginLeft: 'auto' }}
                 onClick={() => setContentTableYn(false)}
               >
@@ -672,69 +681,74 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
                   </svg>
                 </a>
               </div>
+              <div className="col-span-2 text-xs pt-2 font-black">
+                {post.Page}
+              </div>
             </div>
+            <div
+              id="table-of-content__list"
+              className={'p-4 bg-white shadow-sm text-sm'}
+              style={{ maxHeight: 580, overflow: 'auto' }}
+            >
+              <div>
+                {(post.content || []).map((block, blockIdx) => {
+                  const { value } = block
+                  const { type, properties, id, parent_id } = value
+                  let toRender = []
 
-            <div className="font-bold text-gray-800 text-white mb-3">
-              Table of Contents
-            </div>
-            <div>
-              {(post.content || []).map((block, blockIdx) => {
-                const { value } = block
-                const { type, properties, id, parent_id } = value
-                let toRender = []
-
-                const renderHeading = (
-                  isSubtitle: boolean,
-                  additionalClass: string
-                ) => {
-                  let titleIcon = (
-                    <svg
-                      className="fill-current inline mr-2 text-gray-400 w-3 h-3"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M12 5h-2v12H8V3h8v2h-2v12h-2V5zM8 3a4 4 0 1 0 0 8V3z" />
-                    </svg>
-                  )
-
-                  if (isSubtitle) {
-                    titleIcon = (
+                  const renderHeading = (
+                    isSubtitle: boolean,
+                    additionalClass: string
+                  ) => {
+                    let titleIcon = (
                       <svg
                         className="fill-current inline mr-2 text-gray-400 w-3 h-3"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
-                        <path d="M3.5 13H12v5l6-6-6-6v5H4V2H2v11z" />
+                        <path d="M12 5h-2v12H8V3h8v2h-2v12h-2V5zM8 3a4 4 0 1 0 0 8V3z" />
                       </svg>
                     )
-                  }
-                  toRender.push(
-                    <Heading key={id}>
-                      <div key={id} className={additionalClass}>
-                        <span>{titleIcon}</span>
-                        <span className="border-b-2 border-transparent border-dashed hover:border-gray-400">
-                          {textBlock(properties.title, true, id)}
-                        </span>
-                      </div>
-                    </Heading>
-                  )
-                }
 
-                switch (type) {
-                  case 'header':
-                    renderHeading(false, 'mb-2 text-gray-800')
-                    break
-                  case 'sub_header':
-                    renderHeading(true, 'pl-4 mb-2 text-gray-700')
-                    break
-                  case 'sub_sub_header':
-                    renderHeading(true, 'pl-8 mb-2 text-gray-600')
-                    break
-                }
-                return toRender
-              })}
+                    if (isSubtitle) {
+                      titleIcon = (
+                        <svg
+                          className="fill-current inline mr-2 text-gray-400 w-3 h-3"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M3.5 13H12v5l6-6-6-6v5H4V2H2v11z" />
+                        </svg>
+                      )
+                    }
+                    toRender.push(
+                      <Heading key={id}>
+                        <div key={id} className={additionalClass}>
+                          <span>{titleIcon}</span>
+                          <span className="border-b-2 border-transparent border-dashed hover:border-gray-400">
+                            {textBlock(properties.title, true, id)}
+                          </span>
+                        </div>
+                      </Heading>
+                    )
+                  }
+
+                  switch (type) {
+                    case 'header':
+                      renderHeading(false, 'mb-2 text-gray-800')
+                      break
+                    case 'sub_header':
+                      renderHeading(true, 'pl-4 mb-2 text-gray-700')
+                      break
+                    case 'sub_sub_header':
+                      renderHeading(true, 'pl-8 mb-2 text-gray-600')
+                      break
+                  }
+                  return toRender
+                })}
+              </div>
             </div>
-          </div>
+          </>
         ) : (
           <></>
         )}
