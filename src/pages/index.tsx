@@ -59,7 +59,7 @@ export default ({ posts = [] }) => {
             >
               <a
                 className={
-                  'text-black font-bold text-base mb-2 text-justify border-b-2 border-white border-dashed hover:border-purple-400 pb-px transition-colors duration-300'
+                  'text-black font-bold text-base mb-2 text-justify border-b-2 border-transparent border-dashed hover:border-purple-400 pb-px transition-colors duration-300'
                 }
               >
                 {featuredPost.Page}
