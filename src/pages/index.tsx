@@ -48,7 +48,7 @@ export default ({ posts = [] }) => {
     .map(featuredPost => {
       return (
         <div
-          className="py-4 pl-2 border-b border-gray-300"
+          className="py-3 border-b border-gray-300"
           key={featuredPost.Slug}
           style={{ width: '100%' }}
         >
@@ -59,17 +59,13 @@ export default ({ posts = [] }) => {
             >
               <a
                 className={
-                  'text-black font-bold text-base mb-2 text-justify border-b-2 border-transparent border-dashed hover:border-purple-400 pb-px transition-colors duration-300'
+                  'text-black font-bold text-sm mb-2 text-justify border-b-2 border-transparent border-dashed hover:border-purple-400 pb-px transition-colors duration-300'
                 }
               >
-                {featuredPost.Page}
-                <p className={'text-gray-600 text-xs pt-1'}>
-                  <span>Wan Geun Lee</span>
-                  <span> / </span>
-                  {featuredPost.Date && (
-                    <span>{getDateStr(featuredPost.Date)}</span>
-                  )}
-                </p>
+                <span className="mr-2">{featuredPost.Page}</span>
+                <span className={'text-gray-600 text-xs pt-1'}>
+                  {featuredPost.Date && getDateStr(featuredPost.Date)}
+                </span>
               </a>
             </Link>
             <div>
@@ -97,10 +93,14 @@ export default ({ posts = [] }) => {
     <>
       <Header titlePre="DevLog" category="DevLog" />
       <div className="container mx-auto max-w-screen-lg grid px-3">
-        <div className="text-sm mt-6 mb-1 text-purple-500">Featured</div>
+        <div className="text-sm mt-6 mb-1 text-purple-500">
+          Featured ({featuredPosts.length})
+        </div>
         <div id="featured-posts">{featuredPosts}</div>
 
-        <div className="text-sm mt-12 mb-1 text-purple-500">Posts</div>
+        <div className="text-sm mt-12 mb-1 text-purple-500">
+          Posts ({posts.length})
+        </div>
         <div className="gap-4 masonry mb-6">
           {posts.length === 0 && (
             <p className={blogStyles.noPosts}>There are no posts yet</p>

@@ -687,7 +687,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
             </div>
             <div
               id="table-of-content__list"
-              className={'p-4 bg-white shadow-sm text-sm'}
+              className={'px-4 pb-4 pt-2 bg-white shadow-sm text-sm'}
               style={{ maxHeight: 580, overflow: 'auto' }}
             >
               <div>
