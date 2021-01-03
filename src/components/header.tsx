@@ -7,7 +7,7 @@ import ReactGA from 'react-ga'
 import React, { useEffect, useState } from 'react'
 
 const navItems: { label: string; page?: string }[] = [
-  // { label: 'About Me', page: '/about-me' },
+  { label: 'About Me', page: '/about' },
   { label: 'DevLog', page: '/' },
   { label: 'StudyNote', page: '/studynote' },
   // { label: 'Code Snippet', page: '/code-snippet' },

@@ -47,11 +47,7 @@ export default ({ posts = [] }) => {
     .filter(post => post['Featured'] === 'Yes')
     .map(featuredPost => {
       return (
-        <div
-          className="py-3 border-b border-gray-300"
-          key={featuredPost.Slug}
-          style={{ width: '100%' }}
-        >
+        <div className="py-3 border-b border-gray-300" key={featuredPost.Slug}>
           <div>
             <Link
               href={getBlogLink(featuredPost.Slug)}
@@ -96,7 +92,9 @@ export default ({ posts = [] }) => {
         <div className="text-sm mt-6 mb-1 text-purple-500">
           Featured ({featuredPosts.length})
         </div>
-        <div id="featured-posts">{featuredPosts}</div>
+        <div id="featured-posts" className="grid grid-cols-1">
+          {featuredPosts}
+        </div>
 
         <div className="text-sm mt-12 mb-1 text-purple-500">
           Posts ({posts.length})

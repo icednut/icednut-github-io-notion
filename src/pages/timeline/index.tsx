@@ -1,14 +1,9 @@
 import Link from 'next/link'
 import Header from '../../components/header'
-
 import blogStyles from '../../styles/blog.module.css'
-import sharedStyles from '../../styles/shared.module.css'
-
 import { getBlogLink, getDateStr, postIsReady } from '../../lib/blog-helpers'
-import { textBlock } from '../../lib/notion/renderers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
-import { url } from 'inspector'
 
 export async function getStaticProps() {
   const postsTable = await getBlogIndex(true)

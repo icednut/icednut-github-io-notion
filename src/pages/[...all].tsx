@@ -231,7 +231,7 @@ function createRenderDom(
           {
             key: id,
             className:
-              'italic border-l-4 border-gray-700 px-3 py-1 text-lg leading-relaxed my-3',
+              'border-l-4 border-gray-700 p-8 bg-gray-200 text-base leading-loose my-3',
             style: {
               whiteSpace: 'pre-wrap',
             },

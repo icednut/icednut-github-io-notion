@@ -38,24 +38,19 @@ const contacts = [
 ]
 
 export default ({ tagOptions = [] }) => {
+  let tagDoms = []
+
+  if (tagOptions && tagOptions.length && tagOptions.length > 0) {
+    tagDoms = tagOptions.map(each => (
+      <Link href={'/tag/[slug]'} as={'/tag/' + each}>
+        <a className="inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-xs post-tag">
+          #{each}
+        </a>
+      </Link>
+    ))
+  }
   return (
     <>
-      {/* <div
-        id="top-button"
-        className="fixed shadow-2xl p-4 bg-white rounded-full text-xs opacity-30"
-        style={{ right: '26px', bottom: '29px' }}
-      >
-        <a href="#">
-          <svg
-            className="fill-current text-gray-600 w-6 h-6"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path d="M10.707 7.05L10 6.343 4.343 12l1.414 1.414L10 9.172l4.243 4.242L15.657 12z" />
-          </svg>
-        </a>
-      </div> */}
-
       <footer>
         <div className="container mx-auto max-w-screen-lg mt-32 pt-16 pb-8 text-gray-600 border-t border-gray-300 px-3">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mb-3">
@@ -75,17 +70,21 @@ export default ({ tagOptions = [] }) => {
                 />
                 <div className="text-sm mt-2">
                   <p>
-                    Hi, I'm Wan Geun Lee from Korea and working Data Platform
-                    Developer and Data Engineer at Kakaopay. If you can't
+                    Hi, I'm Wan Geun Lee from Korea and working as a Software
+                    Engineer and Data Engineer at Kakaopay. If you can't
                     pronounce my name, please call me Will. Icednut's Space is
                     my web backend development log, study note and life log
-                    storage. Have a nice day. If you have a question, please
-                    contact me by mail icon below. Thank you.
+                    storage. Have a nice day.{' '}
+                    <Link href="/about">
+                      <span className="cursor-pointer text-purple-600 border-b-2 border-gray-400 border-dashed hover:border-purple-400">
+                        Read More
+                      </span>
+                    </Link>
                   </p>
                   <p>&nbsp;</p>
                   <p>
-                    My Motto: Experience varies directly with equipment ruined.
-                    경험은 망가뜨린 도구의 수에 비례한다.
+                    Favorite Phrase: Experience varies directly with equipment
+                    ruined. 경험은 망가뜨린 도구의 수에 비례한다.
                   </p>
                   <div className="flex justify-start mt-3">
                     {contacts.map(({ Comp, link, alt }) => {
@@ -134,16 +133,7 @@ export default ({ tagOptions = [] }) => {
                 className="border-b-4 border-purple-400"
                 style={{ width: '1rem' }}
               ></div>
-              <div className="py-2">
-                {tagOptions &&
-                  tagOptions.map(each => (
-                    <Link href={'/tag/[slug]'} as={'/tag/' + each}>
-                      <a className="inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-xs post-tag">
-                        #{each}
-                      </a>
-                    </Link>
-                  ))}
-              </div>
+              <div className="py-2">{tagDoms}</div>
             </div>
           </div>
           <div className="text-xs mt-10">@2020 Wan Geun Lee</div>
