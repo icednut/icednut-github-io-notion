@@ -209,7 +209,7 @@ export default () => {
           </div>
 
           <div className="flex gap-6 p-10">
-            <div className="text-right leading-loose xl:block lg:block md:hidden sm:hidden">
+            <div className="text-right leading-loose xl:block lg:block md:hidden sm_hidden">
               <StickyBox>
                 <div
                   className={`cursor-pointer ${
