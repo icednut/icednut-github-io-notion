@@ -131,8 +131,8 @@ export default () => {
     <>
       <Header titlePre="About Me" category="About Me" />
 
-      <div className="container mx-auto max-w-screen-lg px-3">
-        <div className="bg-white shadow-sm">
+      <div className="container mx-auto max-w-screen-lg">
+        <div className="bg-white shadow-sm" style={{ minWidth: '930px' }}>
           <div className="flex gap-4 mb-3 bg-black py-10 px-20">
             <div className="flex-auto my-auto text-white">
               <div className="text-3xl font-black">이완근 Lee Wan Geun</div>
@@ -434,6 +434,16 @@ export default () => {
                           <div className="inline-block bg-purple-600 w-8 h-2"></div>
                           <div className="inline-block bg-purple-600 w-8 h-2"></div>
                           <div className="inline-block bg-purple-600 w-8 h-2"></div>
+                          <div className="inline-block bg-gray-400 w-8 h-2"></div>
+                        </div>
+                      </div>
+                      <div className="flex gap-4 items-center">
+                        <div className="w-32 text-sm">Spark Streaming</div>
+                        <div className="flex flex-wrap gap-3">
+                          <div className="inline-block bg-purple-600 w-8 h-2"></div>
+                          <div className="inline-block bg-purple-600 w-8 h-2"></div>
+                          <div className="inline-block bg-purple-600 w-8 h-2"></div>
+                          <div className="inline-block bg-gray-400 w-8 h-2"></div>
                           <div className="inline-block bg-gray-400 w-8 h-2"></div>
                         </div>
                       </div>
