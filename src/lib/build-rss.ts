@@ -39,12 +39,12 @@ function mapToEntry(post) {
     <entry>
       <id>${post.link}</id>
       <title>${decode(post.title)}</title>
-      <link href="https://icednut.space/${post.link}"/>
+      <link href="https://icednut.space${post.link}"/>
       <updated>${new Date(post.date).toJSON()}</updated>
       <content type="xhtml">
         <div xmlns="http://www.w3.org/1999/xhtml">
           <p class="more">
-            <a href="https://icednut.space/${post.link}">Read more</a>
+            <a href="https://icednut.space${post.link}">Read more</a>
           </p>
         </div>
       </content>
