@@ -51,8 +51,8 @@ export default ({ tagOptions = [] }) => {
   }
   return (
     <>
-      <footer>
-        <div className="container mx-auto max-w-screen-lg mt-32 pt-16 pb-8 text-gray-600 border-t border-gray-300 px-3">
+      <footer className="bg-white">
+        <div className="container mx-auto max-w-screen-lg mt-32 pt-16 pb-8 text-gray-600 px-3">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mb-3">
             <div className="mr-1">
               <div className="font-bold text-sm pb-px text-purple-400">

@@ -77,7 +77,7 @@ const header = ({ titlePre = '', category = '' }) => {
             Icednut's Space
           </span>
         </div>
-        <div className="flex justify-center border-b border-gray-300 -pb-3">
+        <div className="flex justify-center">
           {navItems.map(({ label, page }) => {
             const menuColor =
               label === category

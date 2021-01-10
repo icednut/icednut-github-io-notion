@@ -208,7 +208,7 @@ export default ({ postPerYearMap, snippets = [] }) => {
     <>
       <Header titlePre="Code Snippet" category="Code Snippet" />
 
-      <div className="container mx-auto max-w-screen-xl grid px-3 pt-12">
+      <div className="container mx-auto max-w-screen-xl overflow-auto grid px-3 pt-12">
         <div className="flex flex-wrap pb-8">
           {getTagListDom(publicSnippets)}
         </div>
