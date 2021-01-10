@@ -4,6 +4,10 @@ const {
   NOTION_TOKEN,
   BLOG_INDEX_ID,
 } = require('./src/lib/notion/server-constants')
+const {
+  CACHER_API_KEY,
+  CACHER_API_TOKEN,
+} = require('./src/lib/cacher/server-constants')
 
 try {
   fs.unlinkSync(path.resolve('.blog_index_data'))
@@ -37,6 +41,24 @@ if (!BLOG_INDEX_ID) {
   // NOTION_TOKEN being populated
   warnOrError(
     `\nBLOG_INDEX_ID is missing from env, this will result in an error\n` +
+      `Make sure to provide one before starting Next.js`
+  )
+}
+
+if (!CACHER_API_KEY) {
+  // We aren't able to build or serve images from Notion without the
+  // NOTION_TOKEN being populated
+  warnOrError(
+    `\nCACHER_API_KEY is missing from env, this will result in an error\n` +
+      `Make sure to provide one before starting Next.js`
+  )
+}
+
+if (!CACHER_API_TOKEN) {
+  // We aren't able to build or serve images from Notion without the
+  // NOTION_TOKEN being populated
+  warnOrError(
+    `\nCACHER_API_TOKEN is missing from env, this will result in an error\n` +
       `Make sure to provide one before starting Next.js`
   )
 }

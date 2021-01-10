@@ -87,7 +87,7 @@ export default ({ postPerYearMap = {} }) => {
   return (
     <>
       <Header titlePre="All Posts" category="All" />
-      <div className="container mx-auto max-w-screen-lg grid px-3">
+      <div className="container mx-auto max-w-screen-lg grid px-3 pt-12">
         <div className="my-4">{content}</div>
       </div>
     </>

@@ -1,7 +1,4 @@
-import { values } from './rpc'
-import Slugger from 'github-slugger'
 import queryCollection from './queryCollection'
-import { normalizeSlug } from '../blog-helpers'
 
 export default async function loadTagOptions(collectionBlock: any) {
   const { value } = collectionBlock

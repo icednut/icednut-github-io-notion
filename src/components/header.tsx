@@ -45,7 +45,7 @@ const header = ({ titlePre = '', category = '' }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
-      <div className="relative pt-12 mb-20 bg-white">
+      <div className="relative pt-12 bg-white">
         <div className="absolute" style={{ left: '1.25rem', top: '1.25rem' }}>
           <Link href="/atom">
             <a target="_blank" rel="noopener">
@@ -77,7 +77,7 @@ const header = ({ titlePre = '', category = '' }) => {
             Icednut's Space
           </span>
         </div>
-        <div className="flex justify-center mb-8 border-b border-gray-300 -pb-3">
+        <div className="flex justify-center border-b border-gray-300 -pb-3">
           {navItems.map(({ label, page }) => {
             const menuColor =
               label === category

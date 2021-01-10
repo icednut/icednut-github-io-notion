@@ -95,7 +95,7 @@ export default ({ posts = [] }) => {
     <>
       <Header titlePre="StudyNote" category="StudyNote" />
 
-      <div className="container mx-auto max-w-screen-lg grid px-3">
+      <div className="container mx-auto max-w-screen-lg grid px-3 pt-12">
         <div className="text-sm mt-6 mb-1 text-purple-500">
           Featured ({featuredPosts.length})
         </div>

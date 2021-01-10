@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import Header from '../components/header'
 import Heading from '../components/heading'
-import TargetHeading from '../components/target-heading'
 import components from '../components/dynamic'
 import ReactJSXParser from '@zeit/react-jsx-parser'
 import blogStyles from '../styles/blog.module.css'
@@ -38,7 +37,7 @@ function createRenderDom(
   let resultDom = null
 
   if (!properties) {
-    return resultDom
+    return <p className="leading-loose tracking-wide pb-1">&nbsp;</p>
   }
 
   const collectText = (el, acc = []) => {
@@ -157,19 +156,19 @@ function createRenderDom(
     case 'header':
       resultDom = renderHeading(
         'h2',
-        'mt-4 mb-px leading-loose text-3xl font-bold'
+        'mt-2 mb-px leading-loose text-3xl font-bold'
       )
       break
     case 'sub_header':
       resultDom = renderHeading(
         'h3',
-        'mt-3 mb-px leading-loose text-xl font-bold'
+        'mt-2 mb-px leading-loose text-2xl font-bold'
       )
       break
     case 'sub_sub_header':
       resultDom = renderHeading(
         'h4',
-        'mt-2 mb-px leading-loose text-lg font-bold'
+        'mt-2 mb-px leading-loose text-xl font-bold'
       )
       break
     case 'code': {
@@ -261,7 +260,7 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
     }
   } = {}
 
-  // console.log('contentElements', contentElements)
+  console.log('contentElements', contentElements)
 
   return (
     <>
@@ -517,7 +516,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
   return (
     <>
       <Header titlePre={post.Page} category={post.Category} />
-      <div className="container mx-auto max-w-screen-lg">
+      <div className="container mx-auto max-w-screen-lg mt-16">
         {prevPost && prevPost.Slug && prevPost.Page && postIsReady(prevPost) && (
           <div className={blogStyles.nextPrevPostContainer}>
             <div className={blogStyles.nextPrevPostIconContainer + ' mb-3'}>
@@ -557,7 +556,7 @@ const RenderPost = ({ post, prevPost, nextPost, redirect }) => {
               <div
                 id="post-title"
                 className={
-                  'break-words font-extrabold text-white ' +
+                  'break-words font-extrabold text-white px-6 ' +
                   blogStyles.postTitle
                 }
               >

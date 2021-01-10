@@ -131,7 +131,7 @@ export default () => {
     <>
       <Header titlePre="About Me" category="About Me" />
 
-      <div className="container mx-auto max-w-screen-lg">
+      <div className="container mx-auto max-w-screen-lg pt-12">
         <div className="bg-white shadow-sm" style={{ minWidth: '930px' }}>
           <div className="flex gap-4 mb-3 bg-black py-10 px-20">
             <div className="flex-auto my-auto text-white">

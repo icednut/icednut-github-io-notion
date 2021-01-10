@@ -88,7 +88,7 @@ export default ({ posts = [] }) => {
   return (
     <>
       <Header titlePre="DevLog" category="DevLog" />
-      <div className="container mx-auto max-w-screen-lg grid px-3">
+      <div className="container mx-auto max-w-screen-lg grid px-3 pt-16">
         <div className="text-sm mt-6 mb-1 text-purple-500">
           Featured ({featuredPosts.length})
         </div>

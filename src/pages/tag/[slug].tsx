@@ -1,15 +1,10 @@
 import Link from 'next/link'
 import Header from '../../components/header'
-
 import blogStyles from '../../styles/blog.module.css'
-import sharedStyles from '../../styles/shared.module.css'
-
 import { getBlogLink, getDateStr, postIsReady } from '../../lib/blog-helpers'
-import { textBlock } from '../../lib/notion/renderers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 import getTagIndex from '../../lib/notion/getTagIndex'
-import { url } from 'inspector'
 
 export async function getStaticProps({ params }) {
   const tag = params.slug
@@ -59,7 +54,7 @@ export default ({ posts = [], tag = '' }) => {
   return (
     <>
       <Header titlePre={tag} />
-      <div className="container mx-auto max-w-screen-lg grid px-3">
+      <div className="container mx-auto max-w-screen-lg grid px-3 pt-12">
         <div className="text-4xl mt-6">#{tag}</div>
         <div className="gap-4 masonry my-4">
           {posts.length === 0 && (
