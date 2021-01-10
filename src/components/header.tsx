@@ -10,7 +10,7 @@ const navItems: { label: string; page?: string }[] = [
   { label: 'About Me', page: '/about' },
   { label: 'DevLog', page: '/' },
   { label: 'StudyNote', page: '/studynote' },
-  // { label: 'Code Snippet', page: '/code-snippet' },
+  { label: 'Code Snippet', page: '/code-snippet' },
   { label: 'All', page: '/timeline' },
 ]
 
