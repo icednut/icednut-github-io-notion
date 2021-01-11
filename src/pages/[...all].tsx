@@ -36,7 +36,7 @@ function createRenderDom(
 ) {
   let resultDom = null
 
-  if (!properties) {
+  if (!properties && type.indexOf('column') < 0) {
     return <p className="leading-loose tracking-wide pb-1">&nbsp;</p>
   }
 
@@ -71,6 +71,7 @@ function createRenderDom(
     case 'column_list':
       const columnCount =
         contentMap[value.id].length >= 12 ? 12 : contentMap[value.id].length
+      console.log('column_list columnCount', columnCount)
       resultDom = (
         <div
           className={

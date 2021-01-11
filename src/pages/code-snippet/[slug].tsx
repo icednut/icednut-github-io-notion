@@ -119,7 +119,7 @@ export default ({ postPerYearMap, targetSnippet = [] }) => {
 
   return (
     <>
-      <Header titlePre="Code Snippet" category="Code Snippet" />
+      <Header titlePre="Snippet" category="Snippet" />
 
       <div className="container mx-auto max-w-screen-lg grid px-3 pt-12">
         <div className="bg-white shadow-sm">

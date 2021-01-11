@@ -1,16 +1,14 @@
 import Link from 'next/link'
 import Head from 'next/head'
-import ExtLink from './ext-link'
-import { useRouter } from 'next/router'
 import styles from '../styles/header.module.css'
 import ReactGA from 'react-ga'
 import React, { useEffect, useState } from 'react'
 
 const navItems: { label: string; page?: string }[] = [
   { label: 'About Me', page: '/about' },
+  { label: 'Snippet', page: '/code-snippet' },
   { label: 'DevLog', page: '/' },
   { label: 'StudyNote', page: '/studynote' },
-  { label: 'Code Snippet', page: '/code-snippet' },
   { label: 'All', page: '/timeline' },
 ]
 
