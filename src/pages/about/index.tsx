@@ -24,7 +24,7 @@ const contacts = [
 const getDimensions = ele => {
   const { height } = ele.getBoundingClientRect()
   const offsetTop = ele.offsetTop
-  const offsetBottom = offsetTop + height + 686
+  const offsetBottom = offsetTop + height
 
   return {
     height,

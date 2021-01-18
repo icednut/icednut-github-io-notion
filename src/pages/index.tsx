@@ -108,7 +108,7 @@ export default ({ posts = [] }) => {
             .map(post => {
               return (
                 <div
-                  className="bg-white shadow hover:shadow-lg transition-all duration-300 inline-block my-3"
+                  className="bg-white shadow hover:shadow-xl transition-all duration-300 inline-block my-3"
                   key={post.Slug}
                 >
                   <div className="relative overflow-hidden">

@@ -83,76 +83,120 @@ export default ({ postPerYearMap, snippets = [] }) => {
   })
   const [showTargetSnippets, setShowTargetSnippets] = useState(publicSnippets)
   const [selectedTag, setSelectedTag] = useState('')
+  const [selectedSnippet, setSelectedSnippet] = useState(null)
 
-  const getSnippetDoms = targetSnippets =>
-    targetSnippets.map(snippet => {
-      const snippetContents = (snippet.files || []).map(snippetContent => {
-        return (
-          <div>
-            <Code
-              language={snippetContent.filetype}
-              name={snippetContent.filename}
-            >
-              {snippetContent.content}
-            </Code>
-          </div>
-        )
-      })
-
-      const descriptionPreview = (snippet.description || '').split('\n')[0]
-      const tagDoms = snippet.tags.map(tag => (
-        <div
-          className={
-            'inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-sm cursor-pointer'
-          }
-          onClick={() => {
-            if (selectedTag === tag) {
-              setSelectedTag('')
-              setShowTargetSnippets(publicSnippets)
-            } else {
-              const filteredTargetSnippets = publicSnippets.filter(snippet =>
-                snippet.tags.includes(tag)
-              )
-              setShowTargetSnippets(filteredTargetSnippets)
-              setSelectedTag(tag)
-            }
-          }}
-        >
-          #{tag}
-        </div>
-      ))
-
+  const getSnippetContents = targetSnippet =>
+    (targetSnippet.files || []).map(snippetContent => {
       return (
-        <div className="bg-white shadow-sm">
-          <div
-            className="flex border-b border-gray-300 p-3 cursor-pointer"
-            onClick={() =>
-              (window.location.href = `/code-snippet/${snippet.guid}`)
-            }
+        <div>
+          <Code
+            language={snippetContent.filetype}
+            name={snippetContent.filename}
           >
-            <div className="flex-grow text-base text-bold">
-              {snippet.actualTitle}
-            </div>
-            <div className="text-xs text-gray-600">{snippet.createdAt}</div>
-          </div>
-          <div
-            className="px-6 py-3 cursor-pointer"
-            onClick={() =>
-              (window.location.href = `/code-snippet/${snippet.guid}`)
-            }
-          >
-            <div className="p-3 rounded bg-gray-100 mb-3 rounded">
-              <pre className="text-sm text-gray-700">{descriptionPreview}</pre>
-              <span className="text-xs text-gray-500">Read more</span>
-            </div>
-            <div className="overflow-auto" style={{ height: '16rem' }}>
-              {snippetContents}
-            </div>
-          </div>
-          <div className="px-6 py-3">{tagDoms}</div>
+            {snippetContent.content}
+          </Code>
         </div>
       )
     })
+
+  const getTagDoms = snippet =>
+    snippet.tags.map(tag => (
+      <div
+        className={
+          'inline-block py-px px-2 mr-2 mt-2 bg-purple-500 hover:bg-purple-700 text-white text-sm cursor-pointer'
+        }
+        onClick={() => {
+          setSelectedSnippet(null)
+
+          if (selectedTag === tag) {
+            setSelectedTag('')
+            setShowTargetSnippets(publicSnippets)
+          } else {
+            const filteredTargetSnippets = publicSnippets.filter(snippet =>
+              snippet.tags.includes(tag)
+            )
+            setShowTargetSnippets(filteredTargetSnippets)
+            setSelectedTag(tag)
+          }
+        }}
+      >
+        #{tag}
+      </div>
+    ))
+
+  const getSnippetDoms = targetSnippets =>
+    targetSnippets.map(snippet => {
+      const descriptionPreview = (snippet.description || '').split('\n')[0]
+
+      return (
+        <div className="bg-white shadow hover:shadow-xl transition-all duration-300">
+          <div
+            className="border-b border-gray-300 py-3 px-5 cursor-pointer"
+            onClick={() => setSelectedSnippet(snippet)}
+          >
+            <div className="text-lg text-bold">
+              {snippet.actualTitle}
+              <div className="text-xs text-gray-600">
+                {snippet.createdAt.split('T')[0]}
+              </div>
+            </div>
+          </div>
+          <div
+            className="px-6 py-3 cursor-pointer"
+            onClick={() => setSelectedSnippet(snippet)}
+          >
+            <div className="p-3 rounded bg-gray-100 mb-3 rounded">
+              <pre className="text-sm text-gray-700 whitespace-pre-wrap">
+                {descriptionPreview}
+              </pre>
+              <span className="text-xs text-gray-500">Read more</span>
+            </div>
+            <div className="overflow-auto" style={{ height: '16rem' }}>
+              {getSnippetContents(snippet)}
+            </div>
+          </div>
+          <div className="px-6 py-3">{getTagDoms(snippet)}</div>
+        </div>
+      )
+    })
+
+  const getSnippetDetailDoms = targetSnippet => {
+    return (
+      <div className="bg-white shadow">
+        <div className="flex border-b border-gray-300 py-3 px-5">
+          <div className="flex-grow text-lg text-bold">
+            {targetSnippet.actualTitle}
+            <div className="text-xs text-gray-600">
+              {targetSnippet.createdAt.split('T')[0]}
+            </div>
+          </div>
+          <div
+            className="cursor-pointer p-4"
+            onClick={() => setSelectedSnippet(null)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="fill-current text-purple-600 w-5 h-5"
+              viewBox="0 0 20 20"
+            >
+              <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
+            </svg>
+          </div>
+        </div>
+        <div className="px-6 py-3">
+          <div className="p-3 rounded bg-gray-100 mb-3 rounded">
+            <pre className="text-sm text-gray-700 whitespace-pre-wrap">
+              {targetSnippet.description}
+            </pre>
+          </div>
+          <div className="overflow-auto">
+            {getSnippetContents(targetSnippet)}
+          </div>
+        </div>
+        <div className="px-6 py-3">{getTagDoms(targetSnippet)}</div>
+      </div>
+    )
+  }
 
   const getTagListDom = snippets => {
     const tagMap = {}
@@ -207,14 +251,17 @@ export default ({ postPerYearMap, snippets = [] }) => {
   return (
     <>
       <Header titlePre="Snippet" category="Snippet" />
-
       <div className="container mx-auto max-w-screen-xl overflow-auto grid px-3 pt-12">
-        <div className="flex flex-wrap pb-8">
+        <div className="flex flex-nowrap pb-8 overflow-x-auto">
           {getTagListDom(publicSnippets)}
         </div>
-        <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-6">
-          {getSnippetDoms(showTargetSnippets)}
-        </div>
+        {selectedSnippet == null ? (
+          <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-6 pb-8">
+            {getSnippetDoms(showTargetSnippets)}
+          </div>
+        ) : (
+          <div className="pb-8">{getSnippetDetailDoms(selectedSnippet)}</div>
+        )}
       </div>
     </>
   )
