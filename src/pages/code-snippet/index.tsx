@@ -228,6 +228,8 @@ export default ({ postPerYearMap, snippets = [] }) => {
             : 'bg-purple-500 hover:bg-purple-700')
         }
         onClick={() => {
+          setSelectedSnippet(null)
+
           if (selectedTag === tag) {
             setSelectedTag('')
             setShowTargetSnippets(publicSnippets)
