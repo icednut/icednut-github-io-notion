@@ -63,7 +63,7 @@ const header = ({ titlePre = '', category = '' }) => {
         <img
           src="/wglee2.png"
           alt="wglee"
-          className="rounded-full mx-auto shadow"
+          className="rounded-full shadow mx-auto"
           style={{ width: '142px' }}
         />
         <div className="flex justify-center my-3">
@@ -75,7 +75,7 @@ const header = ({ titlePre = '', category = '' }) => {
             Icednut's Space
           </span>
         </div>
-        <div className="flex justify-center">
+        <div className="flex flex-nowrap gap-5 justify-center overflow-x-auto">
           {navItems.map(({ label, page }) => {
             const menuColor =
               label === category
@@ -85,10 +85,11 @@ const header = ({ titlePre = '', category = '' }) => {
               <Link href={page} as={page}>
                 <a
                   className={
-                    'hover:text-purple-700 mx-5 pb-2 text-base font-light hover:font-bold ' +
+                    'hover:text-purple-700 pb-1 text-base hover:font-bold ' +
                     styles.header_menu +
                     menuColor
                   }
+                  style={{ minWidth: 'fit-content' }}
                 >
                   {label}
                 </a>

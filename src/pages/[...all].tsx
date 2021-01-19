@@ -10,7 +10,6 @@ import getPageData from '../lib/notion/getPageData'
 import getBlogIndex from '../lib/notion/getBlogIndex'
 import getNotionUsers from '../lib/notion/getNotionUsers'
 import { getBlogLink, getDateStr, postIsReady } from '../lib/blog-helpers'
-import { Z_DEFAULT_COMPRESSION } from 'zlib'
 import Link from 'next/link'
 import { DiscussionEmbed } from 'disqus-react'
 

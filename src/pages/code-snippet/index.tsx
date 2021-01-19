@@ -1,7 +1,6 @@
 import Header from '../../components/header'
 import React, { useRef, useEffect, useState } from 'react'
-import Link from 'next/link'
-import Envelope from '../../components/svgs/envelope'
+import blogStyles from '../../styles/blog.module.css'
 import { getDateStr, postIsReady } from '../../lib/blog-helpers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
@@ -88,14 +87,9 @@ export default ({ postPerYearMap, snippets = [] }) => {
   const getSnippetContents = targetSnippet =>
     (targetSnippet.files || []).map(snippetContent => {
       return (
-        <div>
-          <Code
-            language={snippetContent.filetype}
-            name={snippetContent.filename}
-          >
-            {snippetContent.content}
-          </Code>
-        </div>
+        <Code language={snippetContent.filetype} name={snippetContent.filename}>
+          {snippetContent.content}
+        </Code>
       )
     })
 
@@ -151,7 +145,10 @@ export default ({ postPerYearMap, snippets = [] }) => {
               </pre>
               <span className="text-xs text-gray-500">Read more</span>
             </div>
-            <div className="overflow-auto" style={{ height: '16rem' }}>
+            <div
+              className="grid grid-cols-1 overflow-y-auto"
+              style={{ height: '16rem' }}
+            >
               {getSnippetContents(snippet)}
             </div>
           </div>
@@ -189,7 +186,7 @@ export default ({ postPerYearMap, snippets = [] }) => {
               {targetSnippet.description}
             </pre>
           </div>
-          <div className="overflow-auto">
+          <div className="grid grid-cols-1 overflow-auto">
             {getSnippetContents(targetSnippet)}
           </div>
         </div>
@@ -222,11 +219,12 @@ export default ({ postPerYearMap, snippets = [] }) => {
     return tagList.map(tag => (
       <div
         className={
-          'inline-block p-2 mr-2 mt-2 text-white text-sm cursor-pointer ' +
+          'p-2 text-white text-sm cursor-pointer ' +
           (selectedTag === tag
             ? 'bg-purple-700'
             : 'bg-purple-500 hover:bg-purple-700')
         }
+        style={{ minWidth: 'fit-content' }}
         onClick={() => {
           setSelectedSnippet(null)
 
@@ -242,8 +240,8 @@ export default ({ postPerYearMap, snippets = [] }) => {
           }
         }}
       >
-        #{tag}{' '}
-        <div className="inline-block bg-purple-200 rounded-full text-purple-600 text-xs p-1 w-6 text-center">
+        #{tag}&nbsp;
+        <div className="inline-block bg-purple-200 rounded-full text-purple-600 text-xs p-1 text-center">
           {tagMap[tag]}
         </div>
       </div>
@@ -253,17 +251,19 @@ export default ({ postPerYearMap, snippets = [] }) => {
   return (
     <>
       <Header titlePre="Snippet" category="Snippet" />
-      <div className="container mx-auto max-w-screen-xl overflow-auto grid px-3 pt-12">
-        <div className="flex flex-nowrap pb-8 overflow-x-auto">
-          {getTagListDom(publicSnippets)}
-        </div>
-        {selectedSnippet == null ? (
-          <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-6 pb-8">
-            {getSnippetDoms(showTargetSnippets)}
+      <div className="container mx-auto max-w-screen-xl overflow-auto grid pt-16">
+        <div className={'break-all ' + blogStyles.postContent}>
+          <div className="flex flex-nowrap gap-2 pb-4 mb-4 overflow-x-auto">
+            {getTagListDom(publicSnippets)}
           </div>
-        ) : (
-          <div className="pb-8">{getSnippetDetailDoms(selectedSnippet)}</div>
-        )}
+          {selectedSnippet == null ? (
+            <div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-6 pb-8">
+              {getSnippetDoms(showTargetSnippets)}
+            </div>
+          ) : (
+            <div className="pb-8">{getSnippetDetailDoms(selectedSnippet)}</div>
+          )}
+        </div>
       </div>
     </>
   )
