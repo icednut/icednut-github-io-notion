@@ -75,7 +75,7 @@ const header = ({ titlePre = '', category = '' }) => {
             Icednut's Space
           </span>
         </div>
-        <div className="flex flex-nowrap gap-5 justify-center overflow-x-auto">
+        <div className="flex flex-nowrap justify-center overflow-x-auto">
           {navItems.map(({ label, page }) => {
             const menuColor =
               label === category
@@ -85,7 +85,7 @@ const header = ({ titlePre = '', category = '' }) => {
               <Link href={page} as={page}>
                 <a
                   className={
-                    'hover:text-purple-700 pb-1 text-base hover:font-bold ' +
+                    'hover:text-purple-700 px-3 pb-1 text-base hover:font-bold ' +
                     styles.header_menu +
                     menuColor
                   }
