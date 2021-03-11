@@ -70,7 +70,6 @@ function createRenderDom(
     case 'column_list':
       const columnCount =
         contentMap[value.id].length >= 12 ? 12 : contentMap[value.id].length
-      console.log('column_list columnCount', columnCount)
       resultDom = (
         <div
           className={
