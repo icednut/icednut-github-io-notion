@@ -14,8 +14,9 @@ const App = ({ Component, pageProps, tagOptions }) => {
 }
 
 App.getInitialProps = async ({ req }) => {
-  const tagOptions = await getTagIndex()
-  return { tagOptions }
+  // const tagOptions = await getTagIndex()
+  // return { tagOptions }
+  return {}
 }
 
 export default App

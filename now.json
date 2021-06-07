@@ -2,14 +2,14 @@
   "build": {
     "env": {
       "NOTION_TOKEN": "@notion-token",
-      "BLOG_INDEX_ID": "@blog-index-id",
+      "NOTION_DATABASE_ID": "@notion-database-id",
       "CACHER_API_KEY": "@cacher-api-key",
       "CACHER_API_TOKEN": "@cacher-api-token"
     }
   },
   "env": {
     "NOTION_TOKEN": "@notion-token",
-    "BLOG_INDEX_ID": "@blog-index-id",
+    "NOTION_DATABASE_ID": "@notion-database-id",
     "CACHER_API_KEY": "@cacher-api-key",
     "CACHER_API_TOKEN": "@cacher-api-token"
   },

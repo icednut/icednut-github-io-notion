@@ -6,38 +6,38 @@ import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 
 export async function getStaticProps() {
-  const postsTable = await getBlogIndex(true)
-  const authorsToGet: Set<string> = new Set()
-  const posts: any[] = Object.keys(postsTable)
-    .map(slug => {
-      const post = postsTable[slug]
-      if (!postIsReady(post)) {
-        return null
-      }
-      post.Authors = post.Authors || []
-      for (const author of post.Authors) {
-        authorsToGet.add(author)
-      }
-      return post
-    })
-    .filter(Boolean)
+  // const postsTable = await getBlogIndex(true)
+  // const authorsToGet: Set<string> = new Set()
+  // const posts: any[] = Object.keys(postsTable)
+  //   .map(slug => {
+  //     const post = postsTable[slug]
+  //     if (!postIsReady(post)) {
+  //       return null
+  //     }
+  //     post.Authors = post.Authors || []
+  //     for (const author of post.Authors) {
+  //       authorsToGet.add(author)
+  //     }
+  //     return post
+  //   })
+  //   .filter(Boolean)
 
-  const { users } = await getNotionUsers([...authorsToGet])
+  // const { users } = await getNotionUsers([...authorsToGet])
 
-  posts.map(post => {
-    post.Authors = post.Authors.map(id => users[id].full_name)
-  })
+  // posts.map(post => {
+  //   post.Authors = post.Authors.map(id => users[id].full_name)
+  // })
 
   const postPerYearMap = {}
-  posts.forEach(post => {
-    const postDate = getDateStr(post.Date).split(', ')
-    const year = parseInt(postDate[1])
+  // posts.forEach(post => {
+  //   const postDate = getDateStr(post.Date).split(', ')
+  //   const year = parseInt(postDate[1])
 
-    if (!postPerYearMap[year]) {
-      postPerYearMap[year] = []
-    }
-    postPerYearMap[year].push(post)
-  })
+  //   if (!postPerYearMap[year]) {
+  //     postPerYearMap[year] = []
+  //   }
+  //   postPerYearMap[year].push(post)
+  // })
 
   return {
     props: {
@@ -52,7 +52,7 @@ export default ({ postPerYearMap = {} }) => {
   let content = null
 
   if (!years || years.length === 0) {
-    content = <p className={blogStyles.noPosts}>There are no posts yet</p>
+    content = <p className={blogStyles.noPosts}>준비 중 입니다.</p>
   } else {
     content = years.map(year => {
       return (
@@ -64,14 +64,14 @@ export default ({ postPerYearMap = {} }) => {
               return (
                 <div className="ml-10 pl-4 border-l-2 border-gray-400 leading-loose">
                   <div className="inline mr-3">
-                    <Link
+                    {/* <Link
                       href={getBlogLink(post.Slug)}
                       as={getBlogLink(post.Slug)}
-                    >
-                      <a className="border-b-2 border-transparent hover:border-purple-400 border-dashed">
-                        {post.Page}
-                      </a>
-                    </Link>
+                    > */}
+                    <a className="border-b-2 border-transparent hover:border-purple-400 border-dashed">
+                      {post.Page}
+                    </a>
+                    {/* </Link> */}
                     <div className="inline text-xs text-gray-500 px-2">
                       {getDateStr(post.Date)}
                     </div>

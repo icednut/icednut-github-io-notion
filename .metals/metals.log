@@ -1,0 +1,8 @@
+2021.01.12 05:08:17 INFO  Started: Metals version 0.9.8 in workspace '/home/codespace/workspace/icednut-github-io-notion' for client vscode.
+2021.01.12 05:08:19 INFO  time: initialize in 1.99s
+2021.01.12 05:08:20 WARN  Build server is not auto-connectable.
+2021.01.12 05:08:20 WARN  no build tool detected in workspace '/home/codespace/workspace/icednut-github-io-notion'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2021.01.17 13:42:56 INFO  Started: Metals version 0.9.8 in workspace '/home/codespace/workspace/icednut-github-io-notion' for client vscode.
+2021.01.17 13:42:58 INFO  time: initialize in 2.28s
+2021.01.17 13:43:03 WARN  Build server is not auto-connectable.
+2021.01.17 13:43:03 WARN  no build tool detected in workspace '/home/codespace/workspace/icednut-github-io-notion'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 

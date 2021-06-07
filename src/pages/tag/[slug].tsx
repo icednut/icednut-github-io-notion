@@ -42,8 +42,9 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const tagOptions = await getTagIndex()
-  const tags = tagOptions.map(tag => '/tag/' + tag)
+  // const tagOptions = await getTagIndex()
+  // const tags = tagOptions.map(tag => '/tag/' + tag)
+  const tags = []
   return {
     paths: tags,
     fallback: false,

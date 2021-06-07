@@ -13,6 +13,7 @@
     }
   },
   "dependencies": {
+    "@notionhq/client": "^0.1.8",
     "@zeit/react-jsx-parser": "^2.0.0",
     "autoprefixer": "9.7.4",
     "disqus-react": "^1.0.10",
