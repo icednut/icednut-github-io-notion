@@ -2,7 +2,7 @@
 const uuid = require('uuid/v4')
 const fetch = require('node-fetch')
 const {
-  BLOG_INDEX_ID: pageId,
+  // BLOG_INDEX_ID: pageId,
   NOTION_TOKEN,
   API_ENDPOINT,
 } = require('./server-constants')
@@ -338,7 +338,7 @@ async function getExistingexistingBlockId() {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      pageId,
+      // pageId,
       limit: 25,
       cursor: { stack: [] },
       chunkNumber: 0,
@@ -352,10 +352,11 @@ async function getExistingexistingBlockId() {
     )
   }
   const data = await res.json()
-  const id = Object.keys(data ? data.recordMap.block : {}).find(
-    id => id !== pageId
-  )
-  return id || uuid()
+  // const id = Object.keys(data ? data.recordMap.block : {}).find(
+  //   id => id !== pageId
+  // )
+  // return id || uuid()
+  return uuid()
 }
 
 async function getUserId() {

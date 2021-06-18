@@ -2,7 +2,7 @@ import rpc, { values } from './rpc'
 import createTable from './createTable'
 import getTags from './getTags'
 // import { readFile, writeFile } from '../fs-helpers'
-import { BLOG_INDEX_ID, BLOG_INDEX_CACHE } from './server-constants'
+// import { BLOG_INDEX_ID, BLOG_INDEX_CACHE } from './server-constants'
 
 export default async function getTagIndex() {
   let tagOptions: any = null
@@ -20,7 +20,7 @@ export default async function getTagIndex() {
   if (!tagOptions) {
     try {
       const data = await rpc('loadPageChunk', {
-        pageId: BLOG_INDEX_ID,
+        // pageId: BLOG_INDEX_ID,
         limit: 100, // TODO: figure out Notion's way of handling pagination
         cursor: { stack: [] },
         chunkNumber: 0,
