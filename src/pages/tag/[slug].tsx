@@ -2,13 +2,14 @@ import Link from 'next/link'
 import Header from '../../components/header'
 import blogStyles from '../../styles/blog.module.css'
 import { getBlogLink, getDateStr, postIsReady } from '../../lib/blog-helpers'
-import getNotionUsers from '../../lib/notion/getNotionUsers'
-import getBlogIndex from '../../lib/notion/getBlogIndex'
-import getTagIndex from '../../lib/notion/getTagIndex'
+// import getNotionUsers from '../../lib/notion/getNotionUsers'
+// import getBlogIndex from '../../lib/notion/getBlogIndex'
+// import getTagIndex from '../../lib/notion/getTagIndex'
 
 export async function getStaticProps({ params }) {
   const tag = params.slug
-  const postsTable = await getBlogIndex(true, tag)
+  // const postsTable = await getBlogIndex(true, tag)
+  const postsTable = {}
 
   const authorsToGet: Set<string> = new Set()
   const posts: any[] = Object.keys(postsTable)
@@ -26,11 +27,11 @@ export async function getStaticProps({ params }) {
     })
     .filter(Boolean)
 
-  const { users } = await getNotionUsers([...authorsToGet])
+  // const { users } = await getNotionUsers([...authorsToGet])
 
-  posts.map(post => {
-    post.Authors = post.Authors.map(id => users[id].full_name)
-  })
+  // posts.map(post => {
+  //   post.Authors = post.Authors.map(id => users[id].full_name)
+  // })
 
   return {
     props: {

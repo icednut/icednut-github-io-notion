@@ -1,9 +1,9 @@
 import Header from '../../components/header'
 import React, { useRef, useEffect, useState } from 'react'
 import blogStyles from '../../styles/blog.module.css'
-import { getDateStr, postIsReady } from '../../lib/blog-helpers'
-import getNotionUsers from '../../lib/notion/getNotionUsers'
-import getBlogIndex from '../../lib/notion/getBlogIndex'
+// import { getDateStr, postIsReady } from '../../lib/blog-helpers'
+// import getNotionUsers from '../../lib/notion/getNotionUsers'
+// import getBlogIndex from '../../lib/notion/getBlogIndex'
 import getCodeSnippets from '../../lib/cacher/getCodeSnippets'
 import Code from '../../components/code'
 

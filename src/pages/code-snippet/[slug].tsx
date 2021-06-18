@@ -1,6 +1,6 @@
 import Header from '../../components/header'
 import React, { useRef, useEffect, useState } from 'react'
-import getNotionUsers from '../../lib/notion/getNotionUsers'
+// import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getCodeSnippets from '../../lib/cacher/getCodeSnippets'
 import Code from '../../components/code'
 import Link from 'next/link'
@@ -23,7 +23,7 @@ export async function getStaticProps({ params }) {
   //   })
   //   .filter(Boolean)
 
-  const { users } = await getNotionUsers([...authorsToGet])
+  // const { users } = await getNotionUsers([...authorsToGet])
 
   // posts.map(post => {
   //   post.Authors = post.Authors.map(id => users[id].full_name)

@@ -7,8 +7,8 @@ import ReactJSXParser from '@zeit/react-jsx-parser'
 import blogStyles from '../styles/blog.module.css'
 import { textBlock } from '../lib/notion/renderers'
 import getPageData from '../lib/notion/getPageData'
-import getBlogIndex from '../lib/notion/getBlogIndex'
-import getNotionUsers from '../lib/notion/getNotionUsers'
+// import getBlogIndex from '../lib/notion/getBlogIndex'
+// import getNotionUsers from '../lib/notion/getNotionUsers'
 import { getBlogLink, getDateStr, postIsReady } from '../lib/blog-helpers'
 import Link from 'next/link'
 import { DiscussionEmbed } from 'disqus-react'
@@ -434,7 +434,8 @@ function renderPostContent(contentMap, contentElements, allContentMap) {
 export async function getStaticProps({ params }) {
   const slug = getSlug(params)
   // load the postsTable so that we can get the page's ID
-  const postsTable = await getBlogIndex()
+  // const postsTable = await getBlogIndex()
+  const postsTable = {}
   const postArray = Object.keys(postsTable)
   const post = postsTable[slug]
 
@@ -460,8 +461,8 @@ export async function getStaticProps({ params }) {
   const postData = await getPageData(post.id)
   post.content = postData.blocks
 
-  const { users } = await getNotionUsers(post.Authors || [])
-  post.Authors = Object.keys(users).map(id => users[id].full_name)
+  // const { users } = await getNotionUsers(post.Authors || [])
+  // post.Authors = Object.keys(users).map(id => users[id].full_name)
 
   return {
     props: {
@@ -475,7 +476,8 @@ export async function getStaticProps({ params }) {
 
 // Return our list of blog posts to prerender
 export async function getStaticPaths() {
-  const postsTable = await getBlogIndex()
+  // const postsTable = await getBlogIndex()
+  const postsTable = {}
   const paths = Object.keys(postsTable).map(slug => getBlogLink(slug))
   return {
     paths,

@@ -6,8 +6,8 @@ import getTags from './getTags'
 
 export default async function getTagIndex() {
   let tagOptions: any = null
-  const useCache = process.env.USE_CACHE === 'true'
-  const cacheFile = `${BLOG_INDEX_CACHE}_tags}`
+  // const useCache = process.env.USE_CACHE === 'true'
+  // const cacheFile = `${BLOG_INDEX_CACHE}_tags}`
 
   // if (useCache) {
   //   try {

@@ -1,11 +1,11 @@
 import { resolve } from 'path'
 import { writeFile } from './fs-helpers'
-import { renderToStaticMarkup } from 'react-dom/server'
+// import { renderToStaticMarkup } from 'react-dom/server'
 
-import { textBlock } from './notion/renderers'
-import getBlogIndex from './notion/getBlogIndex'
-import getNotionUsers from './notion/getNotionUsers'
-import { postIsReady, getBlogLink } from './blog-helpers'
+// import { textBlock } from './notion/renderers'
+// import getBlogIndex from './notion/getBlogIndex'
+// import getNotionUsers from './notion/getNotionUsers'
+// import { postIsReady, getBlogLink } from './blog-helpers'
 
 // must use weird syntax to bypass auto replacing of NODE_ENV
 process.env['NODE' + '_ENV'] = 'production'
@@ -71,28 +71,30 @@ function createRSS(blogPosts = []) {
 }
 
 async function main() {
-  const postsTable = await getBlogIndex(true)
+  // const postsTable = await getBlogIndex(true)
+  const postsTable = {}
   const neededAuthors = new Set<string>()
 
   const blogPosts = Object.keys(postsTable)
     .map(slug => {
       const post = postsTable[slug]
-      if (!postIsReady(post)) return
+      // if (!postIsReady(post)) return
 
-      post.authors = post.Authors || []
+      // post.authors = post.Authors || []
 
-      for (const author of post.authors) {
-        neededAuthors.add(author)
-      }
+      // for (const author of post.authors) {
+      //   neededAuthors.add(author)
+      // }
       return post
     })
     .filter(Boolean)
 
-  const { users } = await getNotionUsers([...neededAuthors])
+  // const { users } = await getNotionUsers([...neededAuthors])
+  const users = {}
 
   blogPosts.forEach(post => {
     post.authors = post.authors.map(id => users[id])
-    post.link = getBlogLink(post.Slug)
+    // post.link = getBlogLink(post.Slug)
     post.title = post.Page
     post.date = post.Date
   })

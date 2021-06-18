@@ -28,13 +28,13 @@ export async function getStaticProps() {
     const posts = database.results.map(each => {
       const obj = {
         page_id: each.id,
-        title: each.properties.Page.title[0].plain_text,
-        created_at: each.properties.Date.date.start,
-        published: each.properties.Published.checkbox,
+        title: each.properties.Page['title'][0].plain_text,
+        created_at: each.properties.Date['date'].start,
+        published: each.properties.Published['checkbox'],
         thumbnail:
           '/post_thumbnail/' +
-          (each.properties.Thumbnail.rich_text.length > 0
-            ? each.properties.Thumbnail.rich_text[0].plain_text
+          (each.properties.Thumbnail['rich_text'].length > 0
+            ? each.properties.Thumbnail['rich_text'][0].plain_text
             : 'default.jpg'),
         properties: each.properties,
       }
