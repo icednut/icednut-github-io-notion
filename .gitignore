@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.yarn/install-state.gz
 
 # testing
 /coverage
@@ -17,15 +18,19 @@
 
 # misc
 .DS_Store
-.env*
+*.pem
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.blog_index_data
-.blog_index_data_previews
+# local env files
+.env*.local
 
-yarn.lock
-package-lock.json
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

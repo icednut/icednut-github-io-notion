@@ -1,86 +1,36 @@
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/icednut/icednut-github-io-notion)
-
-# Notion Blog
-
-This is an example Next.js project that shows Next.js' upcoming SSG (static-site generation) support using Notion's **private** API for a backend.
-
-**Note**: This example uses the experimental SSG hooks only available in the Next.js canary branch! The APIs used within this example will change over time. Since it is using a private API and experimental features, use at your own risk as these things could change at any moment.
-
-**Live Example hosted on ZEIT**: https://notion-blog.now.sh/
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-To view the steps to setup Notion to work with this example view the post at https://notion-blog.now.sh/blog/my-first-post or follow the steps below.
+First, run the development server:
 
-## Creating Your Pages Table
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-**Note**: this is auto run if a table isn't detected the first time visiting `/blog`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Using the Pre-Configured Script
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-1. Create a blank page in Notion
-2. Clone this repo `git clone https://github.com/ijjk/notion-blog.git`
-3. Install dependencies `cd notion-blog && yarn`
-4. Run script to create table `NOTION_TOKEN='token' BLOG_INDEX_ID='new-page-id' node scripts/create-table.js` See [here](#getting-blog-index-and-token) for finding the id for the new page
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Manually Creating the Table
+## Learn More
 
-1. Create a blank page in Notion
-2. Create a **inline** table on that page, don't use a full page table as it requires querying differently
-3. Add the below fields to the table
+To learn more about Next.js, take a look at the following resources:
 
-The table should have the following properties:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- `Page`: this the blog post's page
-- `Slug`: this is the blog post's slug relative to `/blog`, it should be a text property
-- `Published`: this filters blog posts in **production**, it should be a checkbox property
-- `Date`: this is when the blog post appears as posted, it should be a date property
-- `Authors`: this is a list of Notion users that wrote the post, it should be a person property
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-![Example Blog Posts Table](./assets/table-view.png)
+## Deploy on Vercel
 
-## Getting Blog Index and Token
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-To get your blog index value, open Notion and Navigate to the Notion page with the table you created above. While on this page you should be able to get the page id from either:
-
-- the URL, if the URL of your page is https://www.notion.so/Blog-S5qv1QbUzM1wxm3H3SZRQkupi7XjXTul then your `BLOG_INDEX_ID` is `S5qv1QbU-zM1w-xm3H-3SZR-Qkupi7XjXTul`
-- the `loadPageChunk` request, if you open your developer console and go to the network tab then reload the page you should see a request for `loadPageChunk` and in the request payload you should see a `pageId` and that is your `BLOG_INDEX_ID`
-
-To get your Notion token, open Notion and look for the `token_v2` cookie.
-
-## Creating Blog Posts
-
-1. In Notion click new on the table to add a new row
-2. Fill in the Page name, slug, Date, and Authors
-3. At the top of the content area add the content you want to show as a preview (keep this under 2 paragraphs)
-4. Add a divider block under your preview content
-5. Add the rest of your content under the divider block
-
-## Deploy Your Own
-
-Deploy your own Notion blog with ZEIT.
-
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/ijjk/notion-blog/tree/master)
-
-or
-
-1. Clone this repo `git clone https://github.com/ijjk/notion-blog.git`
-2. Add your `NOTION_TOKEN` and `BLOG_INDEX_ID` as a secret to Now `now secrets add notion-token <token> && now secrets add blog-index-id <blog-index>`. See [here](#getting-blog-index-and-token) for how to find these values
-3. Deploy with `now`
-
-Note: if redeploying with `now` locally and you haven't made any changes to the application's source and only edited in Notion you will need use `now -f` to bypass build de-duping
-
-## Running Locally
-
-To run the project locally you need to follow steps 1 and 2 of [deploying](#deploy-your-own) and then follow the below steps
-
-1. Install dependencies `yarn`
-2. Expose `NOTION_TOKEN` and `BLOG_INDEX_ID` in your environment `export NOTION_TOKEN='<your-token>'`and `export BLOG_INDEX_ID='<your-blog-index-id>'` or `set NOTION_TOKEN="<your-token>" && set BLOG_INDEX_ID="<your-blog-index-id>"` for Windows
-3. Run next in development mode `yarn dev`
-4. Build and run in production mode `yarn build && yarn start`
-
-## Credits
-
-- Guillermo Rauch [@rauchg](https://twitter.com/rauchg) for the initial idea
-- Shu Ding [@shuding\_](https://twitter.com/shuding_) for the design help
-- Luis Alvarez [@luis_fades](https://twitter.com/luis_fades) for design help and bug catching
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
